@@ -141,32 +141,4 @@ abstract class AbstractEntity
 
         return json_encode($result);
     }
-
-    /**
-     * @param $firstArray
-     * @param $secondArray
-     */
-    protected function arrayDiffRecursive($firstArray, $secondArray)
-    {
-        $difference = [];
-
-        foreach (array_keys($secondArray) as $key) {
-            $secondArray[$key] = $secondArray[$key] instanceof AbstractEntity ? $secondArray[$key]->toArray() : $secondArray[$key];
-            if (array_key_exists($key, $firstArray) && $firstArray[$key] instanceof AbstractEntity) {
-                $firstArray[$key] = $firstArray[$key]->toArray();
-            }
-
-            if (!array_key_exists($key, $firstArray)) {
-                $difference[$key] = $secondArray[$key];
-            } elseif (is_array($firstArray[$key]) && is_array($secondArray[$key])) {
-                $newDiff = $this->arrayDiffRecursive($firstArray[$key], $secondArray[$key]);
-                if (!empty($newDiff)) {
-                    $difference[$key] = $newDiff;
-                }
-            } elseif ($firstArray[$key] !== $secondArray[$key]) {
-                $difference[$key] = $secondArray[$key];
-            }
-        }
-        return $difference;
-    }
 }
