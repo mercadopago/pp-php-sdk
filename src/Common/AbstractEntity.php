@@ -12,15 +12,8 @@ use Exception;
 abstract class AbstractEntity
 {
     /**
-     * AbstractEntity constructor
+     * Getter
      * 
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @param $name
      *
      * @return mixed
@@ -31,6 +24,8 @@ abstract class AbstractEntity
     }
 
     /**
+     * Setter
+     * 
      * @param $name
      * @param $value
      *
@@ -43,6 +38,8 @@ abstract class AbstractEntity
     }
 
     /**
+     * Check if the property exists in the object
+     * 
      * @param $property
      *
      * @return bool
@@ -64,22 +61,24 @@ abstract class AbstractEntity
             foreach ($data as $key => $value) {
                 if (!is_null($value)) {
                     if (is_array($value)) {
-                        $className = 'MercadoPago\\PP\\Sdk\\' . $this->camelize($key);
+                        $className = 'MercadoPago\\PP\\Sdk\\Entity\\' . $this->camelize($key);
                         if (class_exists($className, true)) {
-                            $entity->setValue($key, new $className);
+                            $entity->set($key, new $className);
                             $entity->fillFromArray($this->{$key}, $value);
                         } else {
-                            $entity->setValue($key, json_decode(json_encode($value)));
+                            $entity->set($key, json_decode(json_encode($value)));
                         }
                         continue;
                     }
-                    $entity->setValue($key, $value);
+                    $entity->set($key, $value);
                 }
             }
         }
     }
 
     /**
+     * Camelize a string
+     * 
      * @param        $input
      * @param string $separator
      *
@@ -91,6 +90,8 @@ abstract class AbstractEntity
     }
 
     /**
+     * Get an array from an object
+     * 
      * @param null $attributes
      *
      * @return array
@@ -115,6 +116,8 @@ abstract class AbstractEntity
     }
 
     /**
+     * Get a JSON from an array or entity
+     * 
      * @param $entity
      * @param $result
      * @return mixed

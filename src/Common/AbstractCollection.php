@@ -7,22 +7,41 @@ namespace MercadoPago\PP\Sdk\Common;
  *
  * @package MercadoPago\PP\Sdk\Common
  */
-class AbstractCollection implements \JsonSerializable
+class AbstractCollection
 {
-    protected $collection = [];
+    /**
+     * @var array
+     */
+    protected $collection;
 
+    /**
+     * Add entity to collection
+     * 
+     * @param AbstractEntity $abstractEntity
+     *
+     **/
     public function add(AbstractEntity $abstractEntity)
     {
         $this->collection[] = $abstractEntity;
     }
 
     /**
+     * Get the collection array
+     *
      * @return array
-     */
-    public function jsonSerialize()
+     **/
+    public function toArray()
     {
-        $properties = get_object_vars($this);
+        $collection = array();
 
-        return $properties;
+        foreach ($this->collection as $item) {
+            if ($item instanceof AbstractEntity) {
+               array_push($collection, $item->toArray());
+            } else {
+                array_push($collection, $item);
+            }
+        }
+
+        return $collection;
     }
 }
