@@ -2,12 +2,14 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
+use Iterator;
+
 /**
  * Class AbstractCollection
  *
  * @package MercadoPago\PP\Sdk\Common
  */
-class AbstractCollection
+abstract class AbstractCollection implements \IteratorAggregate, \Countable, \JsonSerializable
 {
     /**
      * @var array
@@ -16,48 +18,42 @@ class AbstractCollection
 
     /**
      * Add entity to collection
-     *
-     * @param AbstractEntity $abstractEntity
-     *
-     **/
-    public function add(AbstractEntity $abstractEntity)
+     * 
+     * @param $entity
+     * @param null $key
+     */
+    public function add($entity, $key = null)
     {
-        $this->collection[] = $abstractEntity;
+        if (is_null($key)) {
+            $this->collection[] = $entity;
+        } else {
+            $this->collection[$key] = $entity;
+        }
     }
 
     /**
-     * Get the collection array
-     *
+     * @inheritDoc
+     */
+    public function getIterator() : Iterator
+    {
+        return new \ArrayIterator($this->collection);
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->collection);
+    }
+
+    /**
+     * JsonSerialize
+     * 
      * @return array
-     **/
-    public function toArray()
+     */
+    public function jsonSerialize()
     {
-        $collection = array();
-
-        foreach ($this->collection as $item) {
-            if ($item instanceof AbstractEntity) {
-                array_push($collection, $item->toArray());
-            } else {
-                array_push($collection, $item);
-            }
-        }
-
-        return $collection;
-    }
-
-    /**
-     * Get the collection JSON
-     *
-     * @return mixed
-     **/
-    public function toJSON()
-    {
-        $collection = array();
-
-        foreach ($this->collection as $item) {
-            array_push($collection, $item->attributesToJson());
-        }
-
-        return json_encode($collection);
+        return $this->collection;
     }
 }

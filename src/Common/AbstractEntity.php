@@ -7,11 +7,9 @@ namespace MercadoPago\PP\Sdk\Common;
  *
  * @package MercadoPago\PP\Sdk\Common
  */
-abstract class AbstractEntity
+abstract class AbstractEntity implements \JsonSerializable
 {
     /**
-     * Getter
-     *
      * @param $name
      *
      * @return mixed
@@ -22,8 +20,6 @@ abstract class AbstractEntity
     }
 
     /**
-     * Setter
-     *
      * @param $name
      * @param $value
      *
@@ -36,8 +32,6 @@ abstract class AbstractEntity
     }
 
     /**
-     * Check if the property exists in the object
-     *
      * @param $property
      *
      * @return bool
@@ -75,8 +69,6 @@ abstract class AbstractEntity
     }
 
     /**
-     * Camelize a string
-     *
      * @param        $input
      * @param string $separator
      *
@@ -104,42 +96,14 @@ abstract class AbstractEntity
             $result = array_intersect_key(get_object_vars($this), $attributes);
         }
 
-        foreach ($result as $key => $value) {
-            if (!is_bool($value) && empty($value)) {
-                unset($result[$key]);
-            }
-        }
-
         return $result;
     }
 
     /**
-     * Get a JSON from an array or entity
-     *
-     * @return mixed
+     * @return array
      */
-    public function attributesToJson()
+    public function jsonSerialize()
     {
-        $result = array();
-
-        if (is_array($this)) {
-            $attributes = array_filter($this, function ($this) {
-                return ($this !== null && $this !== false && $this !== '');
-            });
-        } else {
-            $attributes = $this->toArray();
-        }
-
-        foreach ($attributes as $key => $value) {
-            if ($value instanceof AbstractEntity || is_array($value)) {
-                $this->attributesToJson($value, $result[$key]);
-            } else {
-                if ($value != null || is_bool($value) || is_numeric($value)) {
-                    $result[$key] = $value;
-                }
-            }
-        }
-
-        return json_encode($result);
+        return $this->toArray();
     }
 }
