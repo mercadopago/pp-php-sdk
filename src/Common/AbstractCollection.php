@@ -36,12 +36,28 @@ class AbstractCollection
 
         foreach ($this->collection as $item) {
             if ($item instanceof AbstractEntity) {
-               array_push($collection, $item->toArray());
+                array_push($collection, $item->toArray());
             } else {
                 array_push($collection, $item);
             }
         }
 
         return $collection;
+    }
+
+    /**
+     * Get the collection JSON
+     *
+     * @return mixed
+     **/
+    public function toJSON()
+    {
+        $collection = array();
+
+        foreach ($this->collection as $item) {
+            array_push($collection, $item->attributesToJson($this));
+        }
+
+        return json_encode($collection);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
-use Exception;
-
 /**
  * Class AbstractEntity
  *
@@ -119,11 +117,12 @@ abstract class AbstractEntity
      * Get a JSON from an array or entity
      * 
      * @param $entity
-     * @param $result
      * @return mixed
      */
-    protected function attributesToJson($entity, $result)
+    public function attributesToJson($entity)
     {
+        $result = array();
+        
         if (is_array($entity)) {
             $attributes = array_filter($entity, function ($entity) {
                 return ($entity !== null && $entity !== false && $entity !== '');
