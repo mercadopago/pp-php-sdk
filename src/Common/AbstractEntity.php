@@ -116,19 +116,18 @@ abstract class AbstractEntity
     /**
      * Get a JSON from an array or entity
      *
-     * @param $entity
      * @return mixed
      */
-    public function attributesToJson($entity)
+    public function attributesToJson()
     {
         $result = array();
 
-        if (is_array($entity)) {
-            $attributes = array_filter($entity, function ($entity) {
-                return ($entity !== null && $entity !== false && $entity !== '');
+        if (is_array($this)) {
+            $attributes = array_filter($this, function ($this) {
+                return ($this !== null && $this !== false && $this !== '');
             });
         } else {
-            $attributes = $entity->toArray();
+            $attributes = $this->toArray();
         }
 
         foreach ($attributes as $key => $value) {

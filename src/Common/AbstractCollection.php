@@ -55,7 +55,7 @@ class AbstractCollection
         $collection = array();
 
         foreach ($this->collection as $item) {
-            array_push($collection, $item->attributesToJson($this));
+            array_push($collection, $item->attributesToJson());
         }
 
         return json_encode($collection);
