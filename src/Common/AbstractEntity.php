@@ -11,7 +11,7 @@ abstract class AbstractEntity
 {
     /**
      * Getter
-     * 
+     *
      * @param $name
      *
      * @return mixed
@@ -23,7 +23,7 @@ abstract class AbstractEntity
 
     /**
      * Setter
-     * 
+     *
      * @param $name
      * @param $value
      *
@@ -37,7 +37,7 @@ abstract class AbstractEntity
 
     /**
      * Check if the property exists in the object
-     * 
+     *
      * @param $property
      *
      * @return bool
@@ -76,7 +76,7 @@ abstract class AbstractEntity
 
     /**
      * Camelize a string
-     * 
+     *
      * @param        $input
      * @param string $separator
      *
@@ -89,7 +89,7 @@ abstract class AbstractEntity
 
     /**
      * Get an array from an object
-     * 
+     *
      * @param null $attributes
      *
      * @return array
@@ -115,14 +115,14 @@ abstract class AbstractEntity
 
     /**
      * Get a JSON from an array or entity
-     * 
+     *
      * @param $entity
      * @return mixed
      */
     public function attributesToJson($entity)
     {
         $result = array();
-        
+
         if (is_array($entity)) {
             $attributes = array_filter($entity, function ($entity) {
                 return ($entity !== null && $entity !== false && $entity !== '');

@@ -16,7 +16,7 @@ class AbstractCollection
 
     /**
      * Add entity to collection
-     * 
+     *
      * @param AbstractEntity $abstractEntity
      *
      **/
