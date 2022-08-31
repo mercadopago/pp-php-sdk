@@ -18,7 +18,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
 
     /**
      * Add entity to collection
-     * 
+     *
      * @param $entity
      * @param null $key
      */
@@ -48,8 +48,6 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     }
 
     /**
-     * JsonSerialize
-     * 
      * @return array
      */
     public function jsonSerialize()
