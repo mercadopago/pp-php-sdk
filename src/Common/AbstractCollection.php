@@ -2,18 +2,49 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
+use Iterator;
+
 /**
  * Class AbstractCollection
  *
  * @package MercadoPago\PP\Sdk\Common
  */
-class AbstractCollection implements \JsonSerializable
+abstract class AbstractCollection implements \IteratorAggregate, \Countable, \JsonSerializable
 {
-    protected $collection = [];
+    /**
+     * @var array
+     */
+    protected $collection;
 
-    public function add(AbstractEntity $abstractEntity)
+    /**
+     * Add entity to collection
+     *
+     * @param $entity
+     * @param null $key
+     */
+    public function add($entity, $key = null)
     {
-        $this->collection[] = $abstractEntity;
+        if (is_null($key)) {
+            $this->collection[] = $entity;
+        } else {
+            $this->collection[$key] = $entity;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator() : Iterator
+    {
+        return new \ArrayIterator($this->collection);
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->collection);
     }
 
     /**
@@ -21,8 +52,6 @@ class AbstractCollection implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $properties = get_object_vars($this);
-
-        return $properties;
+        return $this->collection;
     }
 }
