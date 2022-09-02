@@ -21,7 +21,12 @@ class HttpClient implements HttpClientInterface
      **/
     private $requester = null;
 
-    //RequesterInterface
+    /**
+     * Class Constructor.
+     *
+     * @param RequesterInterface $requester
+     *
+     */
     public function __construct($requester)
     {
         $this->requester = $requester;

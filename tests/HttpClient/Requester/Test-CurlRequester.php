@@ -6,7 +6,7 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\CurlRequester;
 /**
  * Class Test-HttpClient
  *
- * @package Tests
+ * @package MercadoPago\Tests\HttpClient\Requester
  */
 class CurlRequesterTest extends \PHPUnit\Framework\TestCase
 {

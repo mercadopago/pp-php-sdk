@@ -7,7 +7,7 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 /**
  * Class Test-HttpClient
  *
- * @package Tests
+ * @package MercadoPago\Tests\HttpClient
  */
 class HttpClientTest extends \PHPUnit\Framework\TestCase
 {
