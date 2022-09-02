@@ -7,7 +7,12 @@
 	>
 	<testsuites>
 		<testsuite name='pp-php-sdk'>
-			<directory prefix="test-" suffix=".php">./tests/</directory>
+			<directory prefix="Test-" suffix=".php">./tests/</directory>
 		</testsuite>
 	</testsuites>
+	<coverage>
+		<include>
+			<directory suffix=".php">src</directory>
+		</include>
+	</coverage>
 </phpunit>

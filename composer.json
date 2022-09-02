@@ -4,11 +4,14 @@
     "type": "library",
     "scripts": {
         "lint": "./vendor/bin/phpcs -q --report=checkstyle --standard=PSR2 src",
-        "test": "./vendor/bin/phpunit --testdox --colors=auto tests"
+        "test": "./vendor/bin/phpunit --coverage-html coverage --coverage-clover clover.xml --coverage-text --testdox --colors=auto"
     },
     "autoload": {
         "psr-4": {
-            "MercadoPago\\PP\\Sdk\\": "src/"
+            "MercadoPago\\": [
+                "src/",
+                "tests/"
+            ]
         }
     },
     "require": {
