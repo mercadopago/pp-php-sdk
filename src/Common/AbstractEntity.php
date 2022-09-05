@@ -9,15 +9,35 @@ namespace MercadoPago\PP\Sdk\Common;
  */
 abstract class AbstractEntity implements \JsonSerializable
 {
+
+    /**
+     * @param $name
+     *
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->{$name};
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value)
+    {
+        if (property_exists($this, $name)) {
+            $this->{$name} = $value;
+        }
+    }
+
     /**
      * @param $data
      */
     public function setData($data)
     {
         foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->{$key} = $value;
-            }
+            $this->__set($key, $value);
         }
     }
 
