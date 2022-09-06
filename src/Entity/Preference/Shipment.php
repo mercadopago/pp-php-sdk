@@ -1,54 +1,53 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Entity\Shared;
+namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
  * Class Shipment
  *
- * @package MercadoPago\PP\Sdk\Entity\Shared
+ * @package MercadoPago\PP\Sdk\Entity\Preference
  */
 class Shipment extends AbstractEntity
 {
-
     /**
      * @var float
      */
-    protected $cost;
+    public $cost;
 
     /**
      * @var string
      */
-    protected $default_shipping_method;
+    public $default_shipping_method;
 
     /**
      * @var object
      */
-    protected $dimensions;
+    public $dimensions;
 
     /**
      * @var array
      */
-    protected $free_methods;
+    public $free_methods;
 
     /**
      * @var boolean
      */
-    protected $free_shipping;
+    public $free_shipping;
 
     /**
      * @var boolean
      */
-    protected $local_pickup;
+    public $local_pickup;
 
     /**
      * @var string
      */
-    protected $mode;
+    public $mode;
 
     /**
      * @var object
      */
-    protected $receiver_address;
+    public $receiver_address;
 }

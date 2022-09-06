@@ -1,58 +1,58 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Entity\Shared;
+namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
  * Class Item
  *
- * @package MercadoPago\PP\Sdk\Entity\Shared
+ * @package MercadoPago\PP\Sdk\Entity\Preference
  */
 class Item extends AbstractEntity
 {
     /**
      * @var string
      */
-    protected $category_id;
+    public $category_id;
 
     /**
      * @var string
      */
-    protected $currency_id;
+    public $currency_id;
 
     /**
      * @var string
      */
-    protected $description;
+    public $description;
 
     /**
      * @var string
      */
-    protected $id;
+    public $id;
 
     /**
      * @var string
      */
-    protected $picture_id;
+    public $picture_id;
 
     /**
      * @var string
      */
-    protected $picture_url;
+    public $picture_url;
 
     /**
      * @var int
      */
-    protected $quantity;
+    public $quantity;
 
     /**
      * @var string
      */
-    protected $title;
+    public $title;
 
     /**
      * @var float
      */
-    protected $unit_price;
+    public $unit_price;
 }

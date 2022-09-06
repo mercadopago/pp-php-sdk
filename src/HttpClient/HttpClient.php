@@ -13,7 +13,6 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
  */
 class HttpClient implements HttpClientInterface
 {
-
     /**
      * Client implementation
      *
@@ -59,7 +58,8 @@ class HttpClient implements HttpClientInterface
             );
         }
 
-        if (null !== $body && !is_string($body) &&
+        if (
+            null !== $body && !is_string($body) &&
             !$body instanceof AbstractEntity && !$body instanceof AbstractCollection
         ) {
             throw new \TypeError(

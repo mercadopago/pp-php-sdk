@@ -1,53 +1,53 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Entity\Shared;
+namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
  * Class Payer
  *
- * @package MercadoPago\PP\Sdk\Entity\Shared
+ * @package MercadoPago\PP\Sdk\Entity\Preference
  */
 class Payer extends AbstractEntity
 {
     /**
      * @var object
      */
-    protected $address;
+    public $address;
 
     /**
      * @var \DateTime
      */
-    protected $date_created;
+    public $date_created;
 
     /**
      * @var string
      */
-    protected $email;
+    public $email;
 
     /**
      * @var object
      */
-    protected $identification;
+    public $identification;
 
     /**
      * @var \DateTime
      */
-    protected $last_purchase;
+    public $last_purchase;
 
     /**
      * @var string
      */
-    protected $name;
+    public $name;
 
     /**
      * @var object
      */
-    protected $phone;
+    public $phone;
 
     /**
      * @var string
      */
-    protected $surname;
+    public $surname;
 }

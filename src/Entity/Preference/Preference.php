@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Entity;
+namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
@@ -14,205 +14,222 @@ class Preference extends AbstractEntity
     /**
      * @var string
      */
-    protected $additional_info;
+    public $additional_info;
 
     /**
      * @var string
      */
-    protected $auto_return;
+    public $auto_return;
 
     /**
      * @var object
      */
-    protected $back_urls;
+    public $back_urls;
 
     /**
      * @var boolean
      */
-    protected $binary_mode;
+    public $binary_mode;
 
     /**
      * @var int
      */
-    protected $client_id;
+    public $client_id;
 
     /**
      * @var object
      */
-    protected $collector;
+    public $collector;
 
     /**
      * @var int
      */
-    protected $collector_id;
+    public $collector_id;
 
     /**
      * @var string
      */
-    protected $coupon_code;
+    public $coupon_code;
 
     /**
      * @var array
      */
-    protected $coupon_labels;
+    public $coupon_labels;
 
     /**
      * @var \DateTime
      */
-    protected $date_created;
+    public $date_created;
 
     /**
      * @var \DateTime
      */
-    protected $date_of_expiration;
+    public $date_of_expiration;
 
     /**
      * @var object
      */
-    protected $differential_pricing;
+    public $differential_pricing;
 
     /**
      * @var \DateTime
      */
-    protected $expiration_date_from;
+    public $expiration_date_from;
 
     /**
      * @var \DateTime
      */
-    protected $expiration_date_to;
+    public $expiration_date_to;
 
     /**
      * @var boolean
      */
-    protected $expires;
+    public $expires;
 
     /**
      * @var string
      */
-    protected $external_reference;
+    public $external_reference;
 
     /**
      * @var string
      */
-    protected $id;
+    public $id;
 
     /**
      * @var string
      */
-    protected $init_point;
+    public $init_point;
 
     /**
      * @var object
      */
-    protected $internal_metadata;
+    public $internal_metadata;
 
     /**
      * @var array
      */
-    protected $items;
+    public $items;
 
     /**
      * @var \DateTime
      */
-    protected $last_updated;
+    public $last_updated;
 
     /**
      * @var boolean
      */
-    protected $live_mode;
+    public $live_mode;
 
     /**
      * @var string
      */
-    protected $marketplace;
+    public $marketplace;
 
     /**
      * @var float
      */
-    protected $marketplace_fee;
+    public $marketplace_fee;
 
     /**
      * @var object
      */
-    protected $metadata;
+    public $metadata;
 
     /**
      * @var string
      */
-    protected $notification_url;
+    public $notification_url;
 
     /**
      * @var string
      */
-    protected $operation_type;
+    public $operation_type;
 
     /**
      * @var object
      */
-    protected $payer;
+    public $payer;
 
     /**
      * @var object
      */
-    protected $payment_methods;
+    public $payment_methods;
 
     /**
      * @var array
      */
-    protected $processing_modes;
+    public $processing_modes;
 
     /**
      * @var string
      */
-    protected $product_id;
+    public $product_id;
 
     /**
      * @var string
      */
-    protected $purpose;
+    public $purpose;
 
     /**
      * @var object
      */
-    protected $redirect_urls;
+    public $redirect_urls;
 
     /**
      * @var string
      */
-    protected $sandbox_init_point;
+    public $sandbox_init_point;
 
     /**
      * @var object
      */
-    protected $shipments;
+    public $shipments;
 
     /**
      * @var string
      */
-    protected $site_id;
+    public $site_id;
 
     /**
      * @var int
      */
-    protected $sponsor_id;
+    public $sponsor_id;
 
     /**
      * @var string
      */
-    protected $statement_descriptor;
+    public $statement_descriptor;
 
     /**
      * @var array
      */
-    protected $taxes;
+    public $taxes;
 
     /**
      * @var array
      */
-    protected $total_amount;
+    public $total_amount;
 
     /**
      * @var array
      */
-    protected $tracks;
+    public $tracks;
+
+    /**
+     * @return array
+     */
+    public function getUris()
+    {
+        $uris = array(
+            'get' => '/checkout/preferences/:id',
+            'post' => '/checkout/preferences',
+        );
+
+        return $uris;
+    }
+
+    public function getProperties() {
+        return get_object_vars($this); 
+    }
 }
