@@ -34,7 +34,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @inheritDoc
      */
-    public function getIterator() : Iterator
+    public function getIterator(): Iterator
     {
         return new \ArrayIterator($this->collection);
     }

@@ -34,8 +34,6 @@ class Manager
      */
     public function execute($entity, $uri, $method = 'get', $headers = [])
     {
-        $headers = $entity->getConfig();
-
         if ($method == 'get') {
             return $this->client->{$method}($uri, $headers);
         }

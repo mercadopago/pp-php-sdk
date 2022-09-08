@@ -217,7 +217,7 @@ class Preference extends AbstractEntity
     public $tracks;
 
     /**
-     * AbstractEntity constructor.
+     * Preference constructor.
      *
      * @param Manager $manager
      * @param Config $config
@@ -239,6 +239,9 @@ class Preference extends AbstractEntity
         return $uris;
     }
 
+    /**
+     * @return array
+     */
     public function getProperties()
     {
         return get_object_vars($this);

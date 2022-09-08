@@ -68,6 +68,9 @@ abstract class AbstractEntity implements \JsonSerializable
         }
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getProperties()
     {
         return get_object_vars($this);
@@ -99,6 +102,8 @@ abstract class AbstractEntity implements \JsonSerializable
                 }
                 continue;
             }
+
+            $data[$property] = $this->$property;
         }
 
         return $data;
@@ -121,9 +126,9 @@ abstract class AbstractEntity implements \JsonSerializable
         $entity = new $class();
         $method = 'get';
 
-        $uri = self::$manager->getEntityUri($entity, $method, $params);
+        $uri = $this->manager->getEntityUri($entity, $method, $params);
         $headers = $this->getDefaultHeader();
-        $response = self::$manager->execute($entity, $uri, $method, $headers);
+        $response = $this->manager->execute($entity, $uri, $method, $headers);
 
         return $this->handleResponse($response, $method, $entity);
     }
@@ -135,14 +140,14 @@ abstract class AbstractEntity implements \JsonSerializable
     {
         $method = 'post';
 
-        $uri = self::$manager->getEntityUri($this, $method);
+        $uri = $this->manager->getEntityUri($this, $method);
         $additionalHeaders = array(
             'x-product-id' => $this->config->__get('product_id'),
             'x-integrator-id' => $this->config->__get('integrator_id')
         );
 
         $headers = array_merge($this->getDefaultHeader(), $additionalHeaders);
-        $response = self::$manager->execute($this, $uri, $method, $headers);
+        $response = $this->manager->execute($this, $uri, $method, $headers);
 
         return $this->handleResponse($response, $method);
     }
