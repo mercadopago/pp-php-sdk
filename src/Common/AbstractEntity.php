@@ -14,12 +14,24 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * @var object
      */
-    private static $manager;
+    private $manager;
 
     /**
      * @var object
      */
-    private static $config;
+    private $config;
+
+    /**
+     * AbstractEntity constructor.
+     *
+     * @param Manager $manager
+     * @param Config $config
+     */
+    public function __construct($manager, $config)
+    {
+        $this->manager = $manager;
+        $this->config = $config;
+    }
 
     /**
      * @param $name
@@ -48,7 +60,11 @@ abstract class AbstractEntity implements \JsonSerializable
     public function setData($data)
     {
         foreach ($data as $key => $value) {
-            $this->__set($key, $value);
+            if ($value instanceof AbstractEntity || $value instanceof AbstractCollection) {
+                $this->setData($data[$key]);
+            } else {
+                $this->__set($key, $value);
+            }
         }
     }
 
@@ -107,7 +123,7 @@ abstract class AbstractEntity implements \JsonSerializable
 
         $uri = self::$manager->getEntityUri($entity, $method, $params);
         $headers = $this->getDefaultHeader();
-        $response = self::$manager->execute($entity, $method, $uri, $headers);
+        $response = self::$manager->execute($entity, $uri, $method, $headers);
 
         return $this->handleResponse($response, $method, $entity);
     }
@@ -121,12 +137,12 @@ abstract class AbstractEntity implements \JsonSerializable
 
         $uri = self::$manager->getEntityUri($this, $method);
         $additionalHeaders = array(
-            'x-product-id' => $this->config->product_id,
-            'x-integrator-id' => $this->config->integrator_id
+            'x-product-id' => $this->config->__get('product_id'),
+            'x-integrator-id' => $this->config->__get('integrator_id')
         );
 
         $headers = array_merge($this->getDefaultHeader(), $additionalHeaders);
-        $response = self::$manager->execute($this, $method, $uri, $headers);
+        $response = self::$manager->execute($this, $uri, $method, $headers);
 
         return $this->handleResponse($response, $method);
     }
@@ -137,8 +153,8 @@ abstract class AbstractEntity implements \JsonSerializable
     public function getDefaultHeader()
     {
         $headers = array(
-            'Authorization' => 'Bearer ' . $this->config->access_token,
-            'x-platform-id' => $this->config->platform_id
+            'Authorization' => 'Bearer ' . $this->config->__get('access_token'),
+            'x-platform-id' => $this->config->__get('platform_id')
         );
 
         return $headers;
@@ -147,7 +163,7 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * @param Response $response
      * @param $method
-     * 
+     *
      * @return mixed
      */
     public function handleResponse($response, $method, $entity = null)

@@ -32,7 +32,7 @@ class Manager
      *
      * @return mixed
      */
-    public function execute($entity, $method = 'get', $uri, $headers = [])
+    public function execute($entity, $uri, $method = 'get', $headers = [])
     {
         $headers = $entity->getConfig();
 
@@ -47,7 +47,7 @@ class Manager
     /**
      * @param $entity
      * @param $method
-     * 
+     *
      * @return string
      */
     public function getEntityUri($entity, $method, $params = [])

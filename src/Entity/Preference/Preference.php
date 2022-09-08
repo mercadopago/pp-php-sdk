@@ -217,19 +217,30 @@ class Preference extends AbstractEntity
     public $tracks;
 
     /**
+     * AbstractEntity constructor.
+     *
+     * @param Manager $manager
+     * @param Config $config
+     */
+    public function __construct($manager, $config)
+    {
+        parent::__construct($manager, $config);
+    }
+
+    /**
      * @return array
      */
     public function getUris()
     {
         $uris = array(
-            'get' => '/checkout/preferences/:id',
-            'post' => '/checkout/preferences',
+            'post' => '/preferences',
         );
 
         return $uris;
     }
 
-    public function getProperties() {
-        return get_object_vars($this); 
+    public function getProperties()
+    {
+        return get_object_vars($this);
     }
 }
