@@ -9,11 +9,11 @@ namespace MercadoPago\PP\Sdk\Common;
  */
 class Config
 {
-    protected string $api_key;
-    protected string $access_token;
-    protected string $platform_id;
-    protected string $product_id;
-    protected string $integrator_id;
+    protected $api_key;
+    protected $access_token;
+    protected $platform_id;
+    protected $product_id;
+    protected $integrator_id;
 
     /**
      * @param $name
