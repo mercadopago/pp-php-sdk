@@ -11,11 +11,23 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  */
 class Refund extends AbstractEntity
 {
-    public float $id;
+    /**
+     * @var float
+     */
+    public $id;
 
-    public string $status;
+    /**
+     * @var string
+     */
+    public $status;
 
-    public bool $notifying;
+    /**
+     * @var bool
+     */
+    public $notifying;
 
-    public object $metadata;
+    /**
+     * @var object
+     */
+    public $metadata;
 }

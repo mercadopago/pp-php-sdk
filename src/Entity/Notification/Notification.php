@@ -11,35 +11,80 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  */
 class Notification extends AbstractEntity
 {
-    public string $notification_id;
+    /**
+     * @var string
+     */
+    public $notification_id;
 
-    public string $notification_url;
+    /**
+     * @var string
+     */
+    public $notification_url;
 
-    public string $status;
+    /**
+     * @var string
+     */
+    public $status;
 
-    public float $transaction_id;
+    /**
+     * @var float
+     */
+    public $transaction_id;
 
-    public string $transaction_type;
+    /**
+     * @var string
+     */
+    public $transaction_type;
 
-    public float $transaction_amount;
+    /**
+     * @var float
+     */
+    public $transaction_amount;
 
-    public float $total_pending;
+    /**
+     * @var float
+     */
+    public $total_pending;
 
-    public float $total_approved;
+    /**
+     * @var float
+     */
+    public $total_approved;
 
-    public float $total_paid;
+    /**
+     * @var float
+     */
+    public $total_paid;
 
-    public float $total_rejected;
+    /**
+     * @var float
+     */
+    public $total_rejected;
 
-    public float $total_refunded;
+    /**
+     * @var float
+     */
+    public $total_refunded;
 
-    public float $total_cancelled;
+    /**
+     * @var float
+     */
+    public $total_cancelled;
 
-    public float $total_charged_back;
+    /**
+     * @var float
+     */
+    public $total_charged_back;
 
-    public array $payments_metadata;
+    /**
+     * @var array
+     */
+    public $payments_metadata;
 
-    public array $payments_details;
+    /**
+     * @var array
+     */
+    public $payments_details;
 
     /**
      * @codeCoverageIgnore

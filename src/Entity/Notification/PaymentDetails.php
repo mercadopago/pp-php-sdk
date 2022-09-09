@@ -11,23 +11,53 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  */
 class PaymentDetails extends AbstractEntity
 {
-    public float $id;
+    /**
+     * @var float
+     */
+    public $id;
 
-    public string $status;
+    /**
+     * @var string
+     */
+    public $status;
 
-    public string $status_detail;
+    /**
+     * @var string
+     */
+    public $status_detail;
 
-    public string $payment_type_id;
+    /**
+     * @var string
+     */
+    public $payment_type_id;
 
-    public string $payment_method_id;
+    /**
+     * @var string
+     */
+    public $payment_method_id;
 
-    public float $total_amount;
+    /**
+     * @var float
+     */
+    public $total_amount;
 
-    public float $paid_amount;
+    /**
+     * @var float
+     */
+    public $paid_amount;
 
-    public float $coupon_amount;
+    /**
+     * @var float
+     */
+    public $coupon_amount;
 
-    public float $shipping_cost;
+    /**
+     * @var float
+     */
+    public $shipping_cost;
 
-    public object $refunds;
+    /**
+     * @var object
+     */
+    public $refunds;
 }
