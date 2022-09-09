@@ -38,7 +38,8 @@ class Manager
             return $this->client->{$method}($uri, $headers);
         }
 
-        return $this->client->{$method}($uri, $headers, $entity);
+        $body = $entity->jsonSerialize();
+        return $this->client->{$method}($uri, $headers, $body);
     }
 
     /**

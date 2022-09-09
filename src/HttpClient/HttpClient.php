@@ -14,6 +14,13 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 class HttpClient implements HttpClientInterface
 {
     /**
+     * Base Url
+     *
+     * @var string
+     **/
+    private $baseUrl = null;
+
+    /**
      * Client implementation
      *
      * @var ImplementationInterface
@@ -26,8 +33,9 @@ class HttpClient implements HttpClientInterface
      * @param RequesterInterface $requester
      *
      */
-    public function __construct($requester)
+    public function __construct($baseUrl, $requester)
     {
+        $this->baseUrl = $baseUrl;
         $this->requester = $requester;
     }
 
@@ -84,7 +92,8 @@ class HttpClient implements HttpClientInterface
      */
     private function createRequest(string $method, string $uri, array $headers = [], $body = null)
     {
-        $request = $this->requester->createRequest($method, $uri, $headers, $body);
+        $url = $this->baseUrl . $uri;
+        $request = $this->requester->createRequest($method, $url, $headers, $body);
 
         return $request;
     }

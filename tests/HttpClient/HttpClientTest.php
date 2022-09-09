@@ -35,10 +35,10 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         $mockResponse->setStatus(200);
         $mockResponse->setData('teste');
 
-        $client = new HttpClient($this->getRequesterInterfaceMock($mockResponse));
+        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
 
         // act
-        $response = $client->get('https://some-url.com');
+        $response = $client->get('/');
 
         // assert
         $this->assertEquals($mockResponse, $response);
@@ -54,10 +54,10 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         $mockResponse->setStatus(200);
         $mockResponse->setData('teste');
 
-        $client = new HttpClient($this->getRequesterInterfaceMock($mockResponse));
+        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
         
         // act
-        $response = $client->put('https://some-url.com');
+        $response = $client->put('/');
 
         // assert
         $this->assertEquals($mockResponse, $response);
@@ -73,10 +73,10 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         $mockResponse->setStatus(200);
         $mockResponse->setData('teste');
 
-        $client = new HttpClient($this->getRequesterInterfaceMock($mockResponse));
+        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
         
         // act
-        $response = $client->post('https://some-url.com');
+        $response = $client->post('/');
 
         $this->assertEquals($mockResponse, $response);
     }
@@ -89,7 +89,7 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         // arrange
         $mockResponse = new Response();
 
-        $client = new HttpClient($this->getRequesterInterfaceMock($mockResponse));
+        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
 
         // assert + act
         $this->expectException(\TypeError::class);
@@ -104,7 +104,7 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         // arrange
         $mockResponse = new Response();
 
-        $client = new HttpClient($this->getRequesterInterfaceMock($mockResponse));
+        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
 
         // assert + act
         $this->expectException(\TypeError::class);

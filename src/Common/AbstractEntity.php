@@ -60,11 +60,7 @@ abstract class AbstractEntity implements \JsonSerializable
     public function setData($data)
     {
         foreach ($data as $key => $value) {
-            if ($value instanceof AbstractEntity || $value instanceof AbstractCollection) {
-                $this->setData($data[$key]);
-            } else {
-                $this->__set($key, $value);
-            }
+            $this->__set($key, $value);
         }
     }
 
@@ -119,12 +115,13 @@ abstract class AbstractEntity implements \JsonSerializable
 
     /**
      * @return mixed
+     *
      * @throws Exception
      */
     public function read($params = [])
     {
         $class = get_called_class();
-        $entity = new $class();
+        $entity = new $class($this->manager, $this->config);
         $method = 'get';
 
         $uri = $this->manager->getEntityUri($entity, $method, $params);
@@ -171,12 +168,15 @@ abstract class AbstractEntity implements \JsonSerializable
      * @param $method
      *
      * @return mixed
+     *
      * @throws Exception
      */
     public function handleResponse($response, $method, $entity = null)
     {
         if ($response->getStatus() == "200" || $response->getStatus() == "201") {
-            $this->setData($response->getData());
+            if ($entity) {
+                $entity->setData($response->getData());
+            }
             return $method == 'get' ? $entity : true;
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
             throw new Exception($response->getData()['message']);
