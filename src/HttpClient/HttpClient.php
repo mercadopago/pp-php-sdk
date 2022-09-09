@@ -13,7 +13,6 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
  */
 class HttpClient implements HttpClientInterface
 {
-
     /**
      * Client implementation
      *
