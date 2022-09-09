@@ -233,7 +233,7 @@ class Preference extends AbstractEntity
     public function getUris()
     {
         $uris = array(
-            'post' => '/preferences',
+            'post' => '/v1/asgard/preferences',
         );
 
         return $uris;

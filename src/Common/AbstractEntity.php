@@ -119,6 +119,7 @@ abstract class AbstractEntity implements \JsonSerializable
 
     /**
      * @return mixed
+     * @throws Exception
      */
     public function read($params = [])
     {
@@ -170,6 +171,7 @@ abstract class AbstractEntity implements \JsonSerializable
      * @param $method
      *
      * @return mixed
+     * @throws Exception
      */
     public function handleResponse($response, $method, $entity = null)
     {
