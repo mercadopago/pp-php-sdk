@@ -115,6 +115,8 @@ abstract class AbstractEntity implements \JsonSerializable
 
     /**
      * @return mixed
+     *
+     * @throws Exception
      */
     public function read($params = [])
     {
@@ -166,11 +168,15 @@ abstract class AbstractEntity implements \JsonSerializable
      * @param $method
      *
      * @return mixed
+     *
+     * @throws Exception
      */
     public function handleResponse($response, $method, $entity = null)
     {
         if ($response->getStatus() == "200" || $response->getStatus() == "201") {
-            $entity->setData($response->getData());
+            if ($entity) {
+                $entity->setData($response->getData());
+            }
             return $method == 'get' ? $entity : true;
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
             throw new Exception($response->getData()['message']);
