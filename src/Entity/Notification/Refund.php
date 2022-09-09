@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Entity;
+namespace MercadoPago\PP\Sdk\Entity\Notification;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
@@ -11,4 +11,11 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  */
 class Refund extends AbstractEntity
 {
+    public float $id;
+
+    public string $status;
+
+    public bool $notifying;
+
+    public object $metadata;
 }

@@ -14,7 +14,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @var array
      */
-    protected $collection;
+    public $collection;
 
     /**
      * Add entity to collection
@@ -22,7 +22,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
      * @param $entity
      * @param null $key
      */
-    public function add($entity, $key = null)
+    public function add(AbstractEntity $entity, $key = null)
     {
         if (is_null($key)) {
             $this->collection[] = $entity;
@@ -34,7 +34,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @inheritDoc
      */
-    public function getIterator() : Iterator
+    public function getIterator(): Iterator
     {
         return new \ArrayIterator($this->collection);
     }
