@@ -1,5 +1,7 @@
 <?php
 
+namespace MercadoPago\PP\Sdk\Tests;
+
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\HttpClient\HttpClientInterface;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
