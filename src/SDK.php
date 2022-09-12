@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\PP\Sdk;
+namespace MercadoPago\PP\Sdk\Sdk;
 
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Constants;
