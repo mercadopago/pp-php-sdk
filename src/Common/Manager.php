@@ -13,7 +13,7 @@ use Exception;
 class Manager
 {
     /**
-     * @var HttpClient
+     * @var HttpClientInterface
      */
     private $client;
 
@@ -25,8 +25,8 @@ class Manager
     /**
      * Manager constructor.
      *
-     * @param HttpClient $client
-     * @param Config     $config
+     * @param HttpClientInterface $client
+     * @param Config              $config
      */
     public function __construct($client, $config)
     {
@@ -128,7 +128,7 @@ class Manager
     public function handleResponse($response, $method, $entity = null)
     {
         if ($response->getStatus() == "200" || $response->getStatus() == "201") {
-            if ($entity) {
+            if ($entity && $method == 'get') {
                 $entity->setEntity($response->getData());
                 return $entity;
             }
