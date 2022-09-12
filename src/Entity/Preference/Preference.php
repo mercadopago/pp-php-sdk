@@ -217,17 +217,6 @@ class Preference extends AbstractEntity
     public $tracks;
 
     /**
-     * Preference constructor.
-     *
-     * @param Manager $manager
-     * @param Config $config
-     */
-    public function __construct($manager, $config)
-    {
-        parent::__construct($manager, $config);
-    }
-
-    /**
      * @return array
      */
     public function getUris()
@@ -240,7 +229,10 @@ class Preference extends AbstractEntity
     }
 
     /**
-     * @return array
+     * @codeCoverageIgnore
+     * Get the properties of the given object.
+     *
+     * @return mixed
      */
     public function getProperties()
     {

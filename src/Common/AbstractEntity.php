@@ -2,8 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
-use Exception;
-
 /**
  * Class AbstractEntity
  *
@@ -12,29 +10,22 @@ use Exception;
 abstract class AbstractEntity implements \JsonSerializable
 {
     /**
-     * @var object
+     * @var Manager
      */
     private $manager;
-
-    /**
-     * @var object
-     */
-    private $config;
 
     /**
      * AbstractEntity constructor.
      *
      * @param Manager $manager
-     * @param Config $config
      */
-    public function __construct($manager, $config)
+    public function __construct($manager)
     {
         $this->manager = $manager;
-        $this->config = $config;
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return mixed
      */
@@ -44,8 +35,8 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param        $value
      */
     public function __set($name, $value)
     {
@@ -55,9 +46,11 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * @param $data
+     * Set values for an entity's attributes.
+     *
+     * @param array $data
      */
-    public function setData($data)
+    public function setEntity($data)
     {
         foreach ($data as $key => $value) {
             $this->__set($key, $value);
@@ -66,6 +59,9 @@ abstract class AbstractEntity implements \JsonSerializable
 
     /**
      * @codeCoverageIgnore
+     * Get the properties of the given object.
+     *
+     * @return mixed
      */
     public function getProperties()
     {
@@ -73,7 +69,7 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * Get an array from an object
+     * Get an array from an object.
      *
      * @return array
      */
@@ -106,32 +102,28 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return $this->toArray();
-    }
-
-    /**
-     * @return mixed
+     * Read method (GET).
      *
-     * @throws Exception
+     * @param array $params
+     *
+     * @return mixed
      */
     public function read($params = [])
     {
-        $class = get_called_class();
-        $entity = new $class($this->manager, $this->config);
         $method = 'get';
+        $class = get_called_class();
+        $entity = new $class($this->manager);
 
         $uri = $this->manager->getEntityUri($entity, $method, $params);
-        $headers = $this->getDefaultHeader();
-        $response = $this->manager->execute($entity, $uri, $method, $headers);
+        $header = $this->manager->getHeader();
+        $response = $this->manager->execute($entity, $uri, $method, $header);
 
-        return $this->handleResponse($response, $method, $entity);
+        return $this->manager->handleResponse($response, $method, $entity);
     }
 
     /**
+     * Save method (POST).
+     *
      * @return mixed
      */
     public function save()
@@ -139,49 +131,17 @@ abstract class AbstractEntity implements \JsonSerializable
         $method = 'post';
 
         $uri = $this->manager->getEntityUri($this, $method);
-        $additionalHeaders = array(
-            'x-product-id' => $this->config->__get('product_id'),
-            'x-integrator-id' => $this->config->__get('integrator_id')
-        );
+        $header = $this->manager->getHeader();
+        $response = $this->manager->execute($this, $uri, $method, $header);
 
-        $headers = array_merge($this->getDefaultHeader(), $additionalHeaders);
-        $response = $this->manager->execute($this, $uri, $method, $headers);
-
-        return $this->handleResponse($response, $method);
+        return $this->manager->handleResponse($response, $method);
     }
 
     /**
      * @return array
      */
-    public function getDefaultHeader()
+    public function jsonSerialize()
     {
-        $headers = array(
-            'Authorization' => 'Bearer ' . $this->config->__get('access_token'),
-            'x-platform-id' => $this->config->__get('platform_id')
-        );
-
-        return $headers;
-    }
-
-    /**
-     * @param Response $response
-     * @param $method
-     *
-     * @return mixed
-     *
-     * @throws Exception
-     */
-    public function handleResponse($response, $method, $entity = null)
-    {
-        if ($response->getStatus() == "200" || $response->getStatus() == "201") {
-            if ($entity) {
-                $entity->setData($response->getData());
-            }
-            return $method == 'get' ? $entity : true;
-        } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
-            throw new Exception($response->getData()['message']);
-        } else {
-            throw new Exception("Internal API Error");
-        }
+        return $this->toArray();
     }
 }
