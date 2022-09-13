@@ -12,9 +12,6 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
  */
 class CurlRequester implements RequesterInterface
 {
-
-    private $base_url = 'internal-api.mercadopago.com';
-
     public function __construct()
     {
         if (!extension_loaded('curl')) {
@@ -56,7 +53,7 @@ class CurlRequester implements RequesterInterface
         // $this->setOption( $connect, CURLOPT_CAINFO, $GLOBALS['LIB_LOCATION'] . '/cacert.pem' );
         $this->setOption($connect, CURLOPT_CUSTOMREQUEST, $method);
         $this->setOption($connect, CURLOPT_HTTPHEADER, $headers);
-        $this->setOption($connect, CURLOPT_URL, $this->base_url . $uri);
+        $this->setOption($connect, CURLOPT_URL, $uri);
 
         if (isset($body)) {
             if ($json_content) {

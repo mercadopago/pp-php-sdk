@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Tests\Common;
 
 use MercadoPago\PP\Sdk\Common\Manager;
+use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Response;
@@ -28,7 +29,17 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
     /**
      * @var MockObject
      */
+    protected $configMock;
+
+    /**
+     * @var MockObject
+     */
     protected $preferenceMock;
+
+    /**
+     * @var MockObject
+     */
+    protected $responseMock;
 
     /**
      * @inheritdoc
@@ -39,64 +50,82 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->configMock = $this->getMockBuilder(Config::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->preferenceMock = $this->getMockBuilder(Preference::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->manager = new Manager($this->clientMock);
+        $this->responseMock = $this->getMockBuilder(Response::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->manager = new Manager($this->clientMock, $this->configMock);
     }
 
-    function testExecutePostSuccess()
+    function testExecuteWithGetMethodSuccess()
     {
-        $headers = array('x-product-id' => 'product_id', 'x-integrator-id' => 'integrator_id');
-        $expected = new Response();
+        $header = array('x-product-id' => 'product_id', 'x-integrator-id' => 'integrator_id');
 
-        $this->preferenceMock->expects(self::any())->method('jsonSerialize')->willReturn('teste');
-        $this->clientMock->expects(self::any())->method('post')->willReturn($expected);
+        $this->clientMock->expects(self::any())->method('get')->willReturn($this->responseMock);
 
-        $actual = $this->manager->execute($this->preferenceMock, '/preference', 'post', $headers);
+        $actual = $this->manager->execute($this->preferenceMock, '/preference/123', 'get', $header);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($this->responseMock, $actual);
     }
 
-    function testExecuteGetSuccess()
+    function testExecuteWithPostMethodSuccess()
     {
-        $headers = array('x-product-id' => 'product_id', 'x-integrator-id' => 'integrator_id');
-        $expected = new Response();
+        $header = array('x-product-id' => 'product_id', 'x-integrator-id' => 'integrator_id');
 
-        $this->clientMock->expects(self::any())->method('get')->willReturn($expected);
+        $this->clientMock->expects(self::any())->method('post')->willReturn($this->responseMock);
 
-        $actual = $this->manager->execute($this->preferenceMock, '/preference', 'get', $headers);
+        $actual = $this->manager->execute($this->preferenceMock, '/preference', 'post', $header);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($this->responseMock, $actual);
     }
 
-    function testGetEntityUrlWithoutParamsSuccess()
+    function testGetEntityUriWithoutParamsSuccess()
     {
-        $uris = array('post' => '/preferences');
+        $uris = array('post' => '/preference');
 
         $this->preferenceMock->expects(self::any())->method('getUris')->willReturn($uris);
 
         $actual = $this->manager->getEntityUri($this->preferenceMock, 'post');
-        $expected = '/preferences';
+        $expected = '/preference';
 
         $this->assertEquals($expected, $actual);
     }
 
-    function testGetEntityUrlWithParamsSuccess()
+    function testGetEntityUriWithParamsSuccess()
     {
-        $uris = array('get' => '/preferences/:id');
+        $uris = array('get' => '/preference/:id');
         $params = array('id' => '123');
 
         $this->preferenceMock->expects(self::any())->method('getUris')->willReturn($uris);
 
         $actual = $this->manager->getEntityUri($this->preferenceMock, 'get', $params);
-        $expected = '/preferences/123';
+        $expected = '/preference/123';
 
         $this->assertEquals($expected, $actual);
     }
 
-    function testGetEntityUrlFailure()
+    function testGetEntityUriWithParamsFailure()
+    {
+        $uris = array('get' => '/preference/:id');
+        $params = array('client_id' => '123');
+
+        $this->preferenceMock->expects(self::any())->method('getUris')->willReturn($uris);
+
+        $actual = $this->manager->getEntityUri($this->preferenceMock, 'get', $params);
+        $expected = '/preference/';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    function testGetEntityUriFailure()
     {
         $entity = new stdClass();
 
@@ -104,16 +133,48 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->manager->getEntityUri($entity, 'post');
     }
 
-    function testGetEntityUrlWithParamsFailure()
+    function testGetDefaultHeaderSuccess()
     {
-        $uris = array('get' => '/preferences/:id');
-        $params = array('client_id' => '123');
+        $this->configMock->expects(self::exactly(4))->method('__get')->willReturn('XXX');
 
-        $this->preferenceMock->expects(self::any())->method('getUris')->willReturn($uris);
+        $actual = $this->manager->getDefaultHeader();
+        $this->assertTrue(is_array($actual));
+    }
 
-        $actual = $this->manager->getEntityUri($this->preferenceMock, 'get', $params);
-        $expected = '/preferences/';
+    function testGetHeaderSuccess()
+    {
+        $this->configMock->expects(self::exactly(4))->method('__get')->willReturn('XXX');
 
-        $this->assertEquals($expected, $actual);
+        $actual = $this->manager->getHeader();
+        $this->assertTrue(is_array($actual));
+    }
+
+    function testHandleResponseGetMethodSuccess()
+    {
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(200);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn(new stdClass());
+
+        $actual = $this->manager->handleResponse($this->responseMock, 'get');
+        $this->assertTrue($actual);
+    }
+
+    function testHandleResponseFailure()
+    {
+        $data = array('message' => 'Error');
+
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(400);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($data);
+
+        $this->expectExceptionMessage('Error');
+        $this->manager->handleResponse($this->responseMock, 'get');
+    }
+
+    function testHandleResponseFailureInternalApiError()
+    {
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(500);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn(null);
+
+        $this->expectExceptionMessage('Internal API Error');
+        $this->manager->handleResponse($this->responseMock, 'get');
     }
 }

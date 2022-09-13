@@ -3,7 +3,6 @@
 namespace MercadoPago\PP\Sdk\Tests\Entity\Preference;
 
 use MercadoPago\PP\Sdk\HttpClient\Response;
-use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\Tests\Mock\PreferenceMock;
@@ -33,7 +32,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
     /**
      * @var MockObject
      */
-    protected $configMock;
+    protected $responseMock;
 
     /**
      * @inheritdoc
@@ -46,12 +45,12 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->configMock = $this->getMockBuilder(Config::class)
+        $this->responseMock = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->preference = new Preference($this->managerMock, $this->configMock);
-        $this->preference->setData($this->preferenceMock);
+        $this->preference = new Preference($this->managerMock);
+        $this->preference->setEntity($this->preferenceMock);
     }
 
     function testGetAndSetSuccess()
@@ -64,13 +63,6 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    function testGetPropertiesSuccess()
-    {
-        $actual = $this->preference->getProperties();
-
-        $this->assertTrue(is_array($actual));
-    }
-
     function testGetUriSuccess()
     {
         $actual = $this->preference->getUris();
@@ -78,37 +70,18 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_array($actual));
     }
 
-    function testHandleResponseSuccess()
+    function testSaveSuccess()
     {
-        $response = new Response();
-        $response->setStatus(201);
-        $response->setData($this->preference);
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(201);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($this->preferenceMock);
+        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/v1/asgard/preferences');
+        $this->managerMock->expects(self::any())->method('getHeader')->willReturn([]);
+        $this->managerMock->expects(self::any())->method('execute')->willReturn($this->responseMock);
+        $this->managerMock->expects(self::any())->method('handleResponse')->willReturn(true);
 
-        $actual = $this->preference->handleResponse($response, 'post');
+        $actual = $this->preference->save();
 
         $this->assertTrue($actual);
-    }
-
-    function testHandleResponseFailure()
-    {
-        $data = array('message' => 'Error');
-
-        $response = new Response();
-        $response->setStatus(400);
-        $response->setData($data);
-
-        $this->expectExceptionMessage('Error');
-        $this->preference->handleResponse($response, 'post');
-    }
-
-    function testHandleResponseFailureInternalApiError()
-    {
-        $response = new Response();
-        $response->setStatus(500);
-        $response->setData(null);
-
-        $this->expectExceptionMessage('Internal API Error');
-        $this->preference->handleResponse($response, 'post');
     }
 
     function testJsonSerializeSuccess()
@@ -118,20 +91,5 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_array($actual));
         $this->assertEquals($expected, $actual['id']);
-    }
-
-    function testSaveSuccess()
-    {
-        $response = new Response();
-        $response->setStatus(201);
-        $response->setData($this->preferenceMock);
-
-        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/preferences');
-        $this->configMock->expects(self::exactly(4))->method('__get')->willReturn('XXX');
-        $this->managerMock->expects(self::any())->method('execute')->willReturn($response);
-
-        $actual = $this->preference->save();
-
-        $this->assertTrue($actual);
     }
 }
