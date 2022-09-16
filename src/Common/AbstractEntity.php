@@ -49,7 +49,16 @@ abstract class AbstractEntity implements \JsonSerializable
      */
     public function __set($name, $value)
     {
-        if (property_exists($this, $name)) {
+        if (!property_exists($this, $name)) {
+            return;
+        }
+
+        if (
+            is_subclass_of($this->{$name}, AbstractEntity::class)
+            || is_subclass_of($this->{$name}, AbstractCollection::class)
+        ) {
+            $this->{$name}->setData($value);
+        } else {
             $this->{$name} = $value;
         }
     }
@@ -140,8 +149,8 @@ abstract class AbstractEntity implements \JsonSerializable
 
         $uri = $this->manager->getEntityUri($this, $method);
         $additionalHeaders = array(
-            'x-product-id' => $this->config->__get('product_id'),
-            'x-integrator-id' => $this->config->__get('integrator_id')
+            'x-product-id: ' . $this->config->__get('product_id'),
+            'x-integrator-id: ' . $this->config->__get('integrator_id')
         );
 
         $headers = array_merge($this->getDefaultHeader(), $additionalHeaders);
@@ -156,8 +165,8 @@ abstract class AbstractEntity implements \JsonSerializable
     public function getDefaultHeader()
     {
         $headers = array(
-            'Authorization' => 'Bearer ' . $this->config->__get('access_token'),
-            'x-platform-id' => $this->config->__get('platform_id')
+            'Authorization: Bearer ' . $this->config->__get('access_token'),
+            'x-platform-id: ' . $this->config->__get('platform_id')
         );
 
         return $headers;
@@ -181,6 +190,7 @@ abstract class AbstractEntity implements \JsonSerializable
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
             throw new Exception($response->getData()['message']);
         } else {
+            echo var_dump($response);
             throw new Exception("Internal API Error");
         }
     }

@@ -12,7 +12,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 class Preference extends AbstractEntity
 {
     /**
-     * @var string
+     * @var object
      */
     public $additional_info;
 

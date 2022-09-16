@@ -3,7 +3,7 @@
 namespace MercadoPago\PP\Sdk\Tests\Mock;
 
 /**
- * Class Mock-Preference
+ * Class PreferenceMock
  */
 class PreferenceMock
 {
