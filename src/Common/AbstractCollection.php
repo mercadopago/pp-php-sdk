@@ -14,7 +14,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @var array
      */
-    public $collection;
+    public $collection = [];
 
     /**
      * Add entity to collection
@@ -60,8 +60,9 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     }
 
     /**
-     * @return array
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->collection;

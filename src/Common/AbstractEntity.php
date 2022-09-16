@@ -145,8 +145,9 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();
