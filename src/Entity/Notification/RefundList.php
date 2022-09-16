@@ -19,7 +19,7 @@ class RefundList extends AbstractCollection
         parent::add($refund, $key);
     }
 
-    public function __construct() 
+    public function __construct()
     {
     }
 

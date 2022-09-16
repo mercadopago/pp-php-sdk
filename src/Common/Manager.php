@@ -76,7 +76,7 @@ class Manager
 
                 if (array_key_exists($key, $params)) {
                     $uri = str_replace($match, $params[$key], $uri);
-                } else if (property_exists($entity, $key) && !is_null($entity->{$key})) {
+                } elseif (property_exists($entity, $key) && !is_null($entity->{$key})) {
                     $uri = str_replace($match, $entity->{$key}, $uri);
                 } else {
                     $uri = str_replace($match, '', $uri);
