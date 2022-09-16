@@ -55,6 +55,7 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
+        echo json_encode($this->notification);
         $this->notification->__set('notification_id', 'XXX');
 
         $actual = $this->notification->__get('notification_id');

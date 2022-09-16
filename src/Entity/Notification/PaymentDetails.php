@@ -57,7 +57,20 @@ class PaymentDetails extends AbstractEntity
     public $shipping_cost;
 
     /**
-     * @var object
+     * @var PaymentDetailsRefund
      */
     public $refunds;
+
+    public function __construct()
+    {
+        $this->refunds = new RefundList();
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getProperties()
+    {
+        return get_object_vars($this);
+    }
 }
