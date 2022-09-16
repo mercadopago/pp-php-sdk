@@ -11,5 +11,4 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  */
 class PaymentDetailsRefund extends AbstractEntity
 {
-
 }

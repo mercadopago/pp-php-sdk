@@ -11,7 +11,6 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
  */
 interface RequesterInterface
 {
-
     /**
      * @param string|AbstractEntity|AbstractCollection|null $body
      *

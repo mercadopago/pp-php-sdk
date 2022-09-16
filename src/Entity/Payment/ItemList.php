@@ -15,7 +15,7 @@ class ItemList extends AbstractCollection
     public function add($entity, $key = null)
     {
         $item = new Item();
-        $item->setData($entity);
+        $item->setEntity($entity);
         parent::add($item, $key);
     }
 

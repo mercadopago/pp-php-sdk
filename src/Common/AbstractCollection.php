@@ -36,7 +36,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
      *
      * @param mixed $entity
      */
-    public function setData($entityArray)
+    public function setEntity($entityArray)
     {
         foreach ($entityArray as $value) {
             $this->add($value);

@@ -111,9 +111,9 @@ class Payment extends AbstractEntity
     */
    public $metadata;
 
-   public function __construct($manager, $config)
+   public function __construct($manager)
    {
-      parent::__construct($manager, $config);
+      parent::__construct($manager);
       $this->payer = new Payer();
       $this->additional_info = new AdditionalInfo();
       $this->transaction_details = new TransactionDetails();

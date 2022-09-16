@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Common;
 
 use MercadoPago\PP\Sdk\HttpClient;
+use Exception;
 
 /**
  * Class Manager
@@ -12,23 +13,34 @@ use MercadoPago\PP\Sdk\HttpClient;
 class Manager
 {
     /**
-     * @var HttpClient
+     * @var HttpClientInterface
      */
     private $client;
 
     /**
+     * @var Config
+     */
+    private $config;
+
+    /**
      * Manager constructor.
      *
-     * @param HttpClient $client
+     * @param HttpClientInterface $client
+     * @param Config              $config
      */
-    public function __construct($client)
+    public function __construct($client, $config)
     {
         $this->client = $client;
+        $this->config = $config;
     }
 
     /**
-     * @param        $entity
-     * @param string $uri
+     * Unifies method call that makes request to any HTTP method.
+     *
+     * @param object|AbstractEntity|null $entity
+     * @param string|UriInterface        $uri
+     * @param string                     $method
+     * @param array                      $headers
      *
      * @return mixed
      */
@@ -43,31 +55,90 @@ class Manager
     }
 
     /**
-     * @param $entity
-     * @param $method
+     * Get entity uri by performing assignments based on params.
      *
-     * @return string
+     * @param object|AbstractEntity|null $entity
+     * @param string                     $method
+     * @param array                      $params
+     *
+     * @return mixed
+     * @throws Exception
      */
     public function getEntityUri($entity, $method, $params = [])
     {
-        if (!method_exists($entity, 'getUris')) {
+        if (method_exists($entity, 'getUris')) {
+            $uri = $entity->getUris()[$method];
+            $matches = [];
+            preg_match_all('/\\:\\w+/', $uri, $matches);
+
+            foreach ($matches[0] as $match) {
+                $key = substr($match, 1);
+
+                if (array_key_exists($key, $params)) {
+                    $uri = str_replace($match, $params[$key], $uri);
+                } else {
+                    $uri = str_replace($match, $entity->{$key}, $uri);
+                }
+            }
+
+            return $uri;
+        } else {
             throw new \Exception('Method not available for ' . get_class($entity) . ' entity');
         }
+    }
 
-        $uri = $entity->getUris()[$method];
-        $matches = [];
-        preg_match_all('/\\:\\w+/', $uri, $matches);
+    /**
+     * Get default header
+     *
+     * @return array
+     */
+    public function getDefaultHeader()
+    {
+        $headers = [
+            'Authorization: Bearer ' . $this->config->__get('access_token'),
+            'x-platform-id: ' . $this->config->__get('platform_id'),
+            'x-product-id: ' . $this->config->__get('product_id'),
+            'x-integrator-id: ' . $this->config->__get('integrator_id')
+        ];
 
-        foreach ($matches[0] as $match) {
-            $key = substr($match, 1);
+        return $headers;
+    }
 
-            if (array_key_exists($key, $params)) {
-                $uri = str_replace($match, $params[$key], $uri);
-            } else {
-                $uri = str_replace($match, $entity->{$key}, $uri);
+    /**
+     * Get header
+     * @param array $customHeaders
+     *
+     * @return array
+     */
+    public function getHeader($customHeaders = [])
+    {
+        $defaultHeaders = $this->getDefaultHeader();
+        $headers = array_merge($defaultHeaders, $customHeaders);
+
+        return $headers;
+    }
+
+    /**
+     * Handle response
+     *
+     * @param Response $response
+     * @param          $method
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function handleResponse($response, $method, $entity = null)
+    {
+        if ($response->getStatus() == "200" || $response->getStatus() == "201") {
+            if ($entity && $method == 'get') {
+                $entity->setEntity($response->getData());
+                return $entity;
             }
+            return true;
+        } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
+            throw new Exception($response->getData()['message']);
+        } else {
+            throw new Exception("Internal API Error");
         }
-
-        return $uri;
     }
 }

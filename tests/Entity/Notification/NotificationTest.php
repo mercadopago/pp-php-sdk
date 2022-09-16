@@ -3,7 +3,6 @@
 namespace MercadoPago\PP\Sdk\Tests\Entity\Notification;
 
 use MercadoPago\PP\Sdk\HttpClient\Response;
-use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Notification\Notification;
 use MercadoPago\PP\Sdk\Tests\Mock\NotificationMock;
@@ -33,7 +32,7 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
     /**
      * @var MockObject
      */
-    protected $configMock;
+    protected $responseMock;
 
     /**
      * @inheritdoc
@@ -46,12 +45,12 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->configMock = $this->getMockBuilder(Config::class)
+        $this->responseMock = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->notification = new Notification($this->managerMock, $this->configMock);
-        $this->notification->setData($this->notificationMock);
+        $this->notification = new Notification($this->managerMock);
+        $this->notification->setEntity($this->notificationMock);
     }
 
     function testGetAndSetSuccess()
@@ -64,13 +63,6 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    function testGetPropertiesSuccess()
-    {
-        $actual = $this->notification->getProperties();
-
-        $this->assertTrue(is_array($actual));
-    }
-
     function testGetUriSuccess()
     {
         $actual = $this->notification->getUris();
@@ -78,38 +70,19 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_array($actual));
     }
 
-    function testHandleResponseSuccess()
+    function testReadSuccess()
     {
-        $response = new Response();
-        $response->setStatus(200);
-        $response->setData($this->notificationMock);
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(200);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($this->notificationMock);
 
-        $expected = $this->notification;
-        $actual = $this->notification->handleResponse($response, 'get', $expected);
+        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/bifrost/notification/status/:id');
+        $this->managerMock->expects(self::any())->method('getHeader')->willReturn([]);
+        $this->managerMock->expects(self::any())->method('execute')->willReturn($this->responseMock);
+        $this->managerMock->expects(self::any())->method('handleResponse')->willReturn($this->notificationMock);
 
-        $this->assertEquals($expected, $actual);
-    }
+        $actual = $this->notification->read(array("id" => "P-25604645467"));
 
-    function testHandleResponseFailure()
-    {
-        $data = array('message' => 'Error');
-
-        $response = new Response();
-        $response->setStatus(400);
-        $response->setData($data);
-
-        $this->expectExceptionMessage('Error');
-        $this->notification->handleResponse($response, 'get');
-    }
-
-    function testHandleResponseFailureInternalApiError()
-    {
-        $response = new Response();
-        $response->setStatus(500);
-        $response->setData(null);
-
-        $this->expectExceptionMessage('Internal API Error');
-        $this->notification->handleResponse($response, 'get');
+        $this->assertEquals(json_encode($this->responseMock->getData()), json_encode($actual));
     }
 
     function testJsonSerializeSuccess()
@@ -119,20 +92,5 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_array($actual));
         $this->assertEquals($expected, $actual['notification_id']);
-    }
-
-    function testReadSuccess()
-    {
-        $response = new Response();
-        $response->setStatus(200);
-        $response->setData($this->notificationMock);
-
-        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/bifrost/notification/status/:id');
-        $this->configMock->expects(self::any())->method('__get')->willReturn('XXX');
-        $this->managerMock->expects(self::any())->method('execute')->willReturn($response);
-
-        $actual = $this->notification->read( array("id" => "P-25604645467") );
-
-        $this->assertEquals(json_encode($response->getData()), json_encode($actual));
     }
 }
