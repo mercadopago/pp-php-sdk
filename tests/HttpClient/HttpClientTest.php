@@ -5,7 +5,7 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 
 /**
- * Class Test-HttpClient
+ * Class HttpClientTest
  *
  * @package MercadoPago\Tests\HttpClient
  */

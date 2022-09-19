@@ -23,9 +23,9 @@ class Response
     /**
      * Response constructor.
      *
-     * @param null|int                               $status
-     * @param null|AbstractEntity|AbstractCollection $data
-     * @param null|string                            $message
+     * @param null|int    $status
+     * @param null|object $data
+     * @param null|string $message
      */
     public function __construct(
         $status = null,
@@ -60,7 +60,7 @@ class Response
     /**
      * Return the data of response
      *
-     * @return AbstractEntity|AbstractCollection|null
+     * @return object|null
      **/
     public function getData()
     {
@@ -70,7 +70,7 @@ class Response
     /**
      * Set the data of response
      *
-     * @param AbstractEntity|AbstractCollection $data
+     * @param object $data
      *
      * @return void
      **/

@@ -14,20 +14,32 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @var array
      */
-    public $collection;
+    public $collection = [];
 
     /**
      * Add entity to collection
      *
-     * @param $entity
-     * @param null $key
+     * @param mixed $entity
+     * @param string|null $key
      */
-    public function add(AbstractEntity $entity, $key = null)
+    public function add($entity, $key = null)
     {
         if (is_null($key)) {
             $this->collection[] = $entity;
         } else {
             $this->collection[$key] = $entity;
+        }
+    }
+
+    /**
+     * Add multiple entities to collection
+     *
+     * @param mixed $entity
+     */
+    public function setEntity($entityArray)
+    {
+        foreach ($entityArray as $value) {
+            $this->add($value);
         }
     }
 
@@ -48,8 +60,9 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     }
 
     /**
-     * @return array
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->collection;

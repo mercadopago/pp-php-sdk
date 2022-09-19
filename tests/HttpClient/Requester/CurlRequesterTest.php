@@ -4,7 +4,7 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\HttpClient\Requester\CurlRequester;
 
 /**
- * Class Test-HttpClient
+ * Class CurlRequesterTest
  *
  * @package MercadoPago\Tests\HttpClient\Requester
  */

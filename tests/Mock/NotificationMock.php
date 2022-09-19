@@ -45,7 +45,26 @@ class NotificationMock
         "paid_amount" => 51.99,
         "coupon_amount" => 0,
         "shipping_cost" => 0,
-        "refunds" => []
+        "refunds" => [
+          "1129288350" => [
+            "id" => "1129288350",
+            "status" => "approved",
+            "notifying" => true,
+            "metadata" => [
+              "uuid" => "c9b70cc3-dd29-4c28-acb3-94f3632f3dd1",
+              "order_id" => "4ED8296AB28F47C6AF3FFFBA558F2EDD"
+            ]
+          ],
+          "1129288351" => [
+            "id" => "1129288351",
+            "status" => "approved",
+            "notifying" => true,
+            "metadata" => [
+              "uuid" => "c9b70cc3-dd29-4c28-acb3-94f3632f3dd2",
+              "order_id" => "4ED8296AB28F47C6AF3FFFBA558F2EDD"
+            ]
+          ]
+        ]
       ]
     ]
   ];

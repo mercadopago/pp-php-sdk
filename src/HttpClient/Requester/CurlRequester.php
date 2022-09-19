@@ -12,6 +12,7 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
  */
 class CurlRequester implements RequesterInterface
 {
+
     public function __construct()
     {
         if (!extension_loaded('curl')) {

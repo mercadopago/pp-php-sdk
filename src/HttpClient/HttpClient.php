@@ -67,7 +67,7 @@ class HttpClient implements HttpClientInterface
         }
 
         if (null !== $body && !is_string($body) &&
-            !$body instanceof AbstractEntity && !$body instanceof AbstractCollection
+            !is_subclass_of($body, AbstractEntity::class) && !is_subclass_of($body, AbstractCollection::class)
         ) {
             throw new \TypeError(
                 sprintf(

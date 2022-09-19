@@ -49,7 +49,9 @@ class Manager
         if ($method == 'get') {
             return $this->client->{$method}($uri, $headers);
         }
-        return $this->client->{$method}($uri, $headers, $entity);
+
+        $body = json_encode($entity);
+        return $this->client->{$method}($uri, $headers, $body);
     }
 
     /**
@@ -74,8 +76,10 @@ class Manager
 
                 if (array_key_exists($key, $params)) {
                     $uri = str_replace($match, $params[$key], $uri);
-                } else {
+                } elseif (property_exists($entity, $key) && !is_null($entity->{$key})) {
                     $uri = str_replace($match, $entity->{$key}, $uri);
+                } else {
+                    $uri = str_replace($match, '', $uri);
                 }
             }
 
@@ -93,10 +97,10 @@ class Manager
     public function getDefaultHeader()
     {
         $headers = [
-            'Authorization' => 'Bearer ' . $this->config->__get('access_token'),
-            'x-platform-id' => $this->config->__get('platform_id'),
-            'x-product-id' => $this->config->__get('product_id'),
-            'x-integrator-id' => $this->config->__get('integrator_id')
+            'Authorization: Bearer ' . $this->config->__get('access_token'),
+            'x-platform-id: ' . $this->config->__get('platform_id'),
+            'x-product-id: ' . $this->config->__get('product_id'),
+            'x-integrator-id: ' . $this->config->__get('integrator_id')
         ];
 
         return $headers;

@@ -40,7 +40,14 @@ abstract class AbstractEntity implements \JsonSerializable
      */
     public function __set($name, $value)
     {
-        if (property_exists($this, $name)) {
+        if (!property_exists($this, $name)) {
+            return;
+        }
+
+        if (is_subclass_of($this->{$name}, AbstractEntity::class)
+            || is_subclass_of($this->{$name}, AbstractCollection::class)) {
+            $this->{$name}->setEntity($value);
+        } else {
             $this->{$name} = $value;
         }
     }
@@ -138,8 +145,9 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

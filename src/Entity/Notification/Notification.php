@@ -82,9 +82,15 @@ class Notification extends AbstractEntity
     public $payments_metadata;
 
     /**
-     * @var array
+     * @var PaymentDetails
      */
     public $payments_details;
+
+    public function __construct($manager)
+    {
+        parent::__construct($manager);
+        $this->payments_details = new PaymentDetailsList();
+    }
 
     /**
      * @codeCoverageIgnore
