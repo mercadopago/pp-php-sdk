@@ -5,51 +5,26 @@ namespace MercadoPago\PP\Sdk\Entity\Preference;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
- * Class Item
+ * Class BackUrl
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
  */
-class Item extends AbstractEntity
+class BackUrl extends AbstractEntity
 {
     /**
      * @var string
      */
-    public $category_id;
+    public $failure;
 
     /**
      * @var string
      */
-    public $currency_id;
+    public $pending;
 
     /**
      * @var string
      */
-    public $description;
-
-    /**
-     * @var string
-     */
-    public $id;
-
-    /**
-     * @var string
-     */
-    public $picture_url;
-
-    /**
-     * @var int
-     */
-    public $quantity;
-
-    /**
-     * @var string
-     */
-    public $title;
-
-    /**
-     * @var float
-     */
-    public $unit_price;
+    public $success;
 
     public function __construct()
     {

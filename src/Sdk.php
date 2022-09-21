@@ -26,14 +26,12 @@ class Sdk
     private $requester;
 
     /**
-     * @param String $api_key
      * @param String $access_token
      * @param String $platform_id
      * @param String $product_id
      * @param String $integrator_id
      */
     public function __construct(
-        string $api_key,
         string $access_token,
         string $platform_id,
         string $product_id,
@@ -41,7 +39,6 @@ class Sdk
     ) {
         $this->requester = new CurlRequester();
         $this->config = new Config();
-        $this->config->__set('api_key', $api_key);
         $this->config->__set('access_token', $access_token);
         $this->config->__set('platform_id', $platform_id);
         $this->config->__set('product_id', $product_id);
@@ -66,7 +63,7 @@ class Sdk
     /**
      * @return Preference
      */
-    public function getPreference()
+    public function getPreferenceInstance()
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Preference\Preference', Constants::BASEURL_MP);
     }
@@ -74,7 +71,7 @@ class Sdk
     /**
      * @return Notification
      */
-    public function getNotification()
+    public function getNotificationInstance()
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Notification\Notification', Constants::BASEURL_MP);
     }
@@ -82,7 +79,7 @@ class Sdk
     /**
      * @return Payment
      */
-    public function getPayment()
+    public function getPaymentInstance()
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\Payment', Constants::BASEURL_MP);
     }

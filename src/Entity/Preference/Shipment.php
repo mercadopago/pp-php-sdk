@@ -17,17 +17,17 @@ class Shipment extends AbstractEntity
     public $cost;
 
     /**
-     * @var string
+     * @var int
      */
     public $default_shipping_method;
 
     /**
-     * @var object
+     * @var string
      */
     public $dimensions;
 
     /**
-     * @var array
+     * @var FreeMethodList
      */
     public $free_methods;
 
@@ -47,7 +47,21 @@ class Shipment extends AbstractEntity
     public $mode;
 
     /**
-     * @var object
+     * @var ReceiverAddress
      */
     public $receiver_address;
+
+    public function __construct()
+    {
+        $this->free_methods = new FreeMethodList();
+        $this->receiver_address = new ReceiverAddress();
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getProperties()
+    {
+        return get_object_vars($this);
+    }
 }

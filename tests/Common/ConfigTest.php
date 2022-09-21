@@ -26,9 +26,9 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->config->__set('api_key', 'XXX');
+        $this->config->__set('access_token', 'XXX');
 
-        $actual = $this->config->__get('api_key');
+        $actual = $this->config->__get('access_token');
         $expected = 'XXX';
 
         $this->assertEquals($expected, $actual);

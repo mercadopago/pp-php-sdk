@@ -5,51 +5,46 @@ namespace MercadoPago\PP\Sdk\Entity\Preference;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
- * Class Item
+ * Class ReceiverAddress
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
  */
-class Item extends AbstractEntity
+class ReceiverAddress extends AbstractEntity
 {
     /**
      * @var string
      */
-    public $category_id;
+    public $apartment;
 
     /**
      * @var string
      */
-    public $currency_id;
+    public $city_name;
 
     /**
      * @var string
      */
-    public $description;
+    public $floor;
 
     /**
      * @var string
      */
-    public $id;
+    public $state_name;
 
     /**
      * @var string
      */
-    public $picture_url;
+    public $street_name;
 
     /**
      * @var int
      */
-    public $quantity;
+    public $street_number;
 
     /**
      * @var string
      */
-    public $title;
-
-    /**
-     * @var float
-     */
-    public $unit_price;
+    public $zip_code;
 
     public function __construct()
     {

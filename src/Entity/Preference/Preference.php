@@ -12,7 +12,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 class Preference extends AbstractEntity
 {
     /**
-     * @var object
+     * @var string
      */
     public $additional_info;
 
@@ -22,7 +22,7 @@ class Preference extends AbstractEntity
     public $auto_return;
 
     /**
-     * @var object
+     * @var BackUrl
      */
     public $back_urls;
 
@@ -32,42 +32,12 @@ class Preference extends AbstractEntity
     public $binary_mode;
 
     /**
-     * @var int
-     */
-    public $client_id;
-
-    /**
-     * @var object
-     */
-    public $collector;
-
-    /**
-     * @var int
-     */
-    public $collector_id;
-
-    /**
-     * @var string
-     */
-    public $coupon_code;
-
-    /**
-     * @var array
-     */
-    public $coupon_labels;
-
-    /**
-     * @var \DateTime
-     */
-    public $date_created;
-
-    /**
      * @var \DateTime
      */
     public $date_of_expiration;
 
     /**
-     * @var object
+     * @var DifferentialPricing
      */
     public $differential_pricing;
 
@@ -92,34 +62,9 @@ class Preference extends AbstractEntity
     public $external_reference;
 
     /**
-     * @var string
-     */
-    public $id;
-
-    /**
-     * @var string
-     */
-    public $init_point;
-
-    /**
-     * @var object
-     */
-    public $internal_metadata;
-
-    /**
-     * @var array
+     * @var ItemList
      */
     public $items;
-
-    /**
-     * @var \DateTime
-     */
-    public $last_updated;
-
-    /**
-     * @var boolean
-     */
-    public $live_mode;
 
     /**
      * @var string
@@ -142,29 +87,14 @@ class Preference extends AbstractEntity
     public $notification_url;
 
     /**
-     * @var string
-     */
-    public $operation_type;
-
-    /**
-     * @var object
+     * @var Payer
      */
     public $payer;
 
     /**
-     * @var object
+     * @var PaymentMethod
      */
     public $payment_methods;
-
-    /**
-     * @var array
-     */
-    public $processing_modes;
-
-    /**
-     * @var string
-     */
-    public $product_id;
 
     /**
      * @var string
@@ -172,27 +102,12 @@ class Preference extends AbstractEntity
     public $purpose;
 
     /**
-     * @var object
-     */
-    public $redirect_urls;
-
-    /**
-     * @var string
-     */
-    public $sandbox_init_point;
-
-    /**
-     * @var object
+     * @var Shipment
      */
     public $shipments;
 
     /**
      * @var string
-     */
-    public $site_id;
-
-    /**
-     * @var int
      */
     public $sponsor_id;
 
@@ -202,19 +117,29 @@ class Preference extends AbstractEntity
     public $statement_descriptor;
 
     /**
-     * @var array
-     */
-    public $taxes;
-
-    /**
-     * @var array
-     */
-    public $total_amount;
-
-    /**
-     * @var array
+     * @var TrackList
      */
     public $tracks;
+
+    public function __construct($manager)
+    {
+        parent::__construct($manager);
+        $this->back_urls            = new BackUrl();
+        $this->differential_pricing = new DifferentialPricing();
+        $this->items                = new ItemList();
+        $this->payer                = new Payer();
+        $this->payment_methods      = new PaymentMethod();
+        $this->shipments            = new Shipment();
+        $this->tracks               = new TrackList();
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getProperties()
+    {
+        return get_object_vars($this);
+    }
 
     /**
      * @return array
@@ -226,16 +151,5 @@ class Preference extends AbstractEntity
         );
 
         return $uris;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * Get the properties of the given object.
-     *
-     * @return mixed
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
     }
 }

@@ -134,7 +134,7 @@ class Payment extends AbstractEntity
     public function getUris()
     {
         $uris = array(
-            'post' => '/beta/asgard/payments',
+            'post' => '/v1/asgard/payments',
         );
 
         return $uris;

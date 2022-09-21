@@ -55,9 +55,9 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->preference->__set('id', 'XXX');
+        $this->preference->__set('external_reference', 'XXX');
 
-        $actual = $this->preference->__get('id');
+        $actual = $this->preference->__get('external_reference');
         $expected = 'XXX';
 
         $this->assertEquals($expected, $actual);
@@ -74,6 +74,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
     {
         $this->responseMock->expects(self::any())->method('getStatus')->willReturn(201);
         $this->responseMock->expects(self::any())->method('getData')->willReturn($this->preferenceMock);
+
         $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/v1/asgard/preferences');
         $this->managerMock->expects(self::any())->method('getHeader')->willReturn([]);
         $this->managerMock->expects(self::any())->method('execute')->willReturn($this->responseMock);
@@ -87,9 +88,9 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
     function testJsonSerializeSuccess()
     {
         $actual = $this->preference->jsonSerialize();
-        $expected = 'X123X-X123X-X123X-X123X';
+        $expected = 'WC-XX';
 
         $this->assertTrue(is_array($actual));
-        $this->assertEquals($expected, $actual['id']);
+        $this->assertEquals($expected, $actual['external_reference']);
     }
 }

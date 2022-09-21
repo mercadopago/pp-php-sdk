@@ -12,7 +12,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 class Payer extends AbstractEntity
 {
     /**
-     * @var object
+     * @var Address
      */
     public $address;
 
@@ -27,14 +27,9 @@ class Payer extends AbstractEntity
     public $email;
 
     /**
-     * @var object
+     * @var PayerIdentification
      */
     public $identification;
-
-    /**
-     * @var \DateTime
-     */
-    public $last_purchase;
 
     /**
      * @var string
@@ -42,7 +37,7 @@ class Payer extends AbstractEntity
     public $name;
 
     /**
-     * @var object
+     * @var Phone
      */
     public $phone;
 
@@ -50,4 +45,19 @@ class Payer extends AbstractEntity
      * @var string
      */
     public $surname;
+
+    public function __construct()
+    {
+        $this->address        = new Address();
+        $this->identification = new PayerIdentification();
+        $this->phone          = new Phone();
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getProperties()
+    {
+        return get_object_vars($this);
+    }
 }
