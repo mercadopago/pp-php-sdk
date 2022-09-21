@@ -16,6 +16,9 @@ class PreferenceMock
       "success" => "http://www.myapp.com/finalizar-compra/order-received/XX/?key=wc_order"
     ],
     "binary_mode" => false,
+    "differential_pricing" => [
+      "id"  => ""
+    ],
     "external_reference" => "WC-XX",
     "items" => [
       [

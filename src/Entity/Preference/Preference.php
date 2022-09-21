@@ -32,7 +32,7 @@ class Preference extends AbstractEntity
     public $binary_mode;
 
     /**
-     * @var \DateTime
+     * @var Date|string
      */
     public $date_of_expiration;
 
@@ -42,12 +42,12 @@ class Preference extends AbstractEntity
     public $differential_pricing;
 
     /**
-     * @var \DateTime
+     * @var Date|string
      */
     public $expiration_date_from;
 
     /**
-     * @var \DateTime
+     * @var Date|string
      */
     public $expiration_date_to;
 
