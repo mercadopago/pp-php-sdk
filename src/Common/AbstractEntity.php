@@ -86,7 +86,7 @@ abstract class AbstractEntity implements \JsonSerializable
 
         $data = [];
         foreach ($properties as $property => $value) {
-            if($property === 'manager') {
+            if ($property === 'manager') {
                 continue;
             }
 
