@@ -14,40 +14,40 @@ class Item extends AbstractEntity
     /**
      * @var string
      */
-    public $category_id;
+    protected $category_id;
 
     /**
      * @var string
      */
-    public $currency_id;
+    protected $currency_id;
 
     /**
      * @var string
      */
-    public $description;
+    protected $description;
 
     /**
      * @var string
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      */
-    public $picture_url;
+    protected $picture_url;
 
     /**
      * @var int
      */
-    public $quantity;
+    protected $quantity;
 
     /**
      * @var string
      */
-    public $title;
+    protected $title;
 
     /**
      * @var float
      */
-    public $unit_price;
+    protected $unit_price;
 }

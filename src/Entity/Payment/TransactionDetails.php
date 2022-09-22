@@ -14,5 +14,5 @@ class TransactionDetails extends AbstractEntity
     /**
      * @var string
      */
-    public $financial_institution;
+    protected $financial_institution;
 }

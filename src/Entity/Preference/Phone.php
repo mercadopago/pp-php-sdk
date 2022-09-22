@@ -14,10 +14,10 @@ class Phone extends AbstractEntity
     /**
      * @var string
      */
-    public $area_code;
+    protected $area_code;
 
     /**
      * @var string
      */
-    public $number;
+    protected $number;
 }

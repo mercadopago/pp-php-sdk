@@ -14,5 +14,5 @@ class ExcludedPaymentMethod extends AbstractEntity
     /**
      * @var string
      */
-    public $id;
+    protected $id;
 }

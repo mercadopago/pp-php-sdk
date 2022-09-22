@@ -14,15 +14,15 @@ class Address extends AbstractEntity
     /**
      * @var string
      */
-    public $street_name;
+    protected $street_name;
 
     /**
      * @var int
      */
-    public $street_number;
+    protected $street_number;
 
     /**
      * @var string
      */
-    public $zip_code;
+    protected $zip_code;
 }

@@ -14,5 +14,5 @@ class FreeMethod extends AbstractEntity
     /**
      * @var int
      */
-    public $id;
+    protected $id;
 }

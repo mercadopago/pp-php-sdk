@@ -14,15 +14,15 @@ class BackUrl extends AbstractEntity
     /**
      * @var string
      */
-    public $failure;
+    protected $failure;
 
     /**
      * @var string
      */
-    public $pending;
+    protected $pending;
 
     /**
      * @var string
      */
-    public $success;
+    protected $success;
 }

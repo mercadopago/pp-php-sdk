@@ -14,5 +14,5 @@ class DifferentialPricing extends AbstractEntity
     /**
      * @var int
      */
-    public $id;
+    protected $id;
 }

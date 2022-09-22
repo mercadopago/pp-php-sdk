@@ -14,27 +14,27 @@ class PaymentMethod extends AbstractEntity
     /**
      * @var int
      */
-    public $default_installments;
+    protected $default_installments;
 
     /**
      * @var string
      */
-    public $default_payment_method_id;
+    protected $default_payment_method_id;
 
     /**
      * @var ExcludedPaymentMethodList
      */
-    public $excluded_payment_methods;
+    protected $excluded_payment_methods;
 
     /**
      * @var ExcludedPaymentTypeList
      */
-    public $excluded_payment_types;
+    protected $excluded_payment_types;
 
     /**
      * @var int
      */
-    public $installments;
+    protected $installments;
 
     public function __construct()
     {

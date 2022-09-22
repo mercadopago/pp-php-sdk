@@ -39,10 +39,10 @@ class Sdk
     ) {
         $this->requester = new CurlRequester();
         $this->config = new Config();
-        $this->config->__set('access_token', $access_token);
-        $this->config->__set('platform_id', $platform_id);
-        $this->config->__set('product_id', $product_id);
-        $this->config->__set('integrator_id', $integrator_id);
+        $this->config->access_token = $access_token;
+        $this->config->platform_id = $platform_id;
+        $this->config->product_id = $product_id;
+        $this->config->integrator_id = $integrator_id;
     }
 
     /**

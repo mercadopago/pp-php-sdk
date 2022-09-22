@@ -14,7 +14,7 @@ class Shipments extends AbstractEntity
     /**
      * @var ReceiverAddress
      */
-    public $receiver_address;
+    protected $receiver_address;
 
     public function __construct()
     {

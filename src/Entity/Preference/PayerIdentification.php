@@ -14,10 +14,10 @@ class PayerIdentification extends AbstractEntity
     /**
      * @var string
      */
-    public $number;
+    protected $number;
 
     /**
      * @var string
      */
-    public $type;
+    protected $type;
 }

@@ -14,37 +14,37 @@ class Payer extends AbstractEntity
     /**
      * @var Address
      */
-    public $address;
+    protected $address;
 
     /**
      * @var Date|string
      */
-    public $date_created;
+    protected $date_created;
 
     /**
      * @var string
      */
-    public $email;
+    protected $email;
 
     /**
      * @var PayerIdentification
      */
-    public $identification;
+    protected $identification;
 
     /**
      * @var string
      */
-    public $name;
+    protected $name;
 
     /**
      * @var Phone
      */
-    public $phone;
+    protected $phone;
 
     /**
      * @var string
      */
-    public $surname;
+    protected $surname;
 
     public function __construct()
     {

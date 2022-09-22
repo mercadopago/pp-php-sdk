@@ -14,112 +14,112 @@ class Preference extends AbstractEntity
     /**
      * @var string
      */
-    public $additional_info;
+    protected $additional_info;
 
     /**
      * @var string
      */
-    public $auto_return;
+    protected $auto_return;
 
     /**
      * @var BackUrl
      */
-    public $back_urls;
+    protected $back_urls;
 
     /**
      * @var boolean
      */
-    public $binary_mode;
+    protected $binary_mode;
 
     /**
      * @var Date|string
      */
-    public $date_of_expiration;
+    protected $date_of_expiration;
 
     /**
      * @var DifferentialPricing
      */
-    public $differential_pricing;
+    protected $differential_pricing;
 
     /**
      * @var Date|string
      */
-    public $expiration_date_from;
+    protected $expiration_date_from;
 
     /**
      * @var Date|string
      */
-    public $expiration_date_to;
+    protected $expiration_date_to;
 
     /**
      * @var boolean
      */
-    public $expires;
+    protected $expires;
 
     /**
      * @var string
      */
-    public $external_reference;
+    protected $external_reference;
 
     /**
      * @var ItemList
      */
-    public $items;
+    protected $items;
 
     /**
      * @var string
      */
-    public $marketplace;
+    protected $marketplace;
 
     /**
      * @var float
      */
-    public $marketplace_fee;
+    protected $marketplace_fee;
 
     /**
      * @var object
      */
-    public $metadata;
+    protected $metadata;
 
     /**
      * @var string
      */
-    public $notification_url;
+    protected $notification_url;
 
     /**
      * @var Payer
      */
-    public $payer;
+    protected $payer;
 
     /**
      * @var PaymentMethod
      */
-    public $payment_methods;
+    protected $payment_methods;
 
     /**
      * @var string
      */
-    public $purpose;
+    protected $purpose;
 
     /**
      * @var Shipment
      */
-    public $shipments;
+    protected $shipments;
 
     /**
      * @var string
      */
-    public $sponsor_id;
+    protected $sponsor_id;
 
     /**
      * @var string
      */
-    public $statement_descriptor;
+    protected $statement_descriptor;
 
     /**
      * @var TrackList
      */
-    public $tracks;
+    protected $tracks;
 
     public function __construct($manager)
     {

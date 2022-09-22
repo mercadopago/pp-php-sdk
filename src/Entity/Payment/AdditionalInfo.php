@@ -14,22 +14,22 @@ class AdditionalInfo extends AbstractEntity
     /**
      * @var string
      */
-    public $ip_address;
+    protected $ip_address;
 
     /**
      * @var ItemList
      */
-    public $items;
+    protected $items;
 
     /**
      * @var AdditionalInfoPayer
      */
-    public $payer;
+    protected $payer;
 
     /**
      * @var Shipments
      */
-    public $shipments;
+    protected $shipments;
 
     public function __construct()
     {

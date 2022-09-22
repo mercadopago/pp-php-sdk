@@ -14,5 +14,5 @@ class PointOfInteraction extends AbstractEntity
     /**
      * @var string
      */
-    public $type;
+    protected $type;
 }

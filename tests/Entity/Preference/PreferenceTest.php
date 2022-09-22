@@ -106,7 +106,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->preference->__set('external_reference', 'XXX');
+        $this->preference->external_reference = 'XXX';
 
         $actual = $this->preference->__get('external_reference');
         $expected = 'XXX';

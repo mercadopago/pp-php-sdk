@@ -14,52 +14,52 @@ class PaymentDetails extends AbstractEntity
     /**
      * @var float
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      */
-    public $status;
+    protected $status;
 
     /**
      * @var string
      */
-    public $status_detail;
+    protected $status_detail;
 
     /**
      * @var string
      */
-    public $payment_type_id;
+    protected $payment_type_id;
 
     /**
      * @var string
      */
-    public $payment_method_id;
+    protected $payment_method_id;
 
     /**
      * @var float
      */
-    public $total_amount;
+    protected $total_amount;
 
     /**
      * @var float
      */
-    public $paid_amount;
+    protected $paid_amount;
 
     /**
      * @var float
      */
-    public $coupon_amount;
+    protected $coupon_amount;
 
     /**
      * @var float
      */
-    public $shipping_cost;
+    protected $shipping_cost;
 
     /**
      * @var PaymentDetailsRefund
      */
-    public $refunds;
+    protected $refunds;
 
     public function __construct()
     {

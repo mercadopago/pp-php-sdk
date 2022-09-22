@@ -14,5 +14,5 @@ class Phone extends AbstractEntity
     /**
      * @var string
      */
-    public $number;
+    protected $number;
 }

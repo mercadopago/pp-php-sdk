@@ -14,25 +14,25 @@ class ReceiverAddress extends AbstractEntity
     /**
      * @var string
      */
-    public $zip_code;
+    protected $zip_code;
 
     /**
      * @var string
      */
-    public $state_name;
+    protected $state_name;
 
     /**
      * @var string
      */
-    public $city_name;
+    protected $city_name;
 
     /**
      * @var string
      */
-    public $street_name;
+    protected $street_name;
 
     /**
      * @var string
      */
-    public $apartment;
+    protected $apartment;
 }

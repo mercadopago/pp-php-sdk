@@ -55,7 +55,7 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->notification->__set('notification_id', 'XXX');
+        $this->notification->notification_id = 'XXX';
 
         $actual = $this->notification->__get('notification_id');
         $expected = 'XXX';

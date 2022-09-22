@@ -14,10 +14,10 @@ class Track extends AbstractEntity
     /**
      * @var string
      */
-    public $type;
+    protected $type;
 
     /**
      * @var string
      */
-    public $values;
+    protected $values;
 }
