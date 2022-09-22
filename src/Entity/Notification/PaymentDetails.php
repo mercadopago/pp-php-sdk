@@ -65,12 +65,4 @@ class PaymentDetails extends AbstractEntity
     {
         $this->refunds = new RefundList();
     }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

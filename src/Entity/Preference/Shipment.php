@@ -56,12 +56,4 @@ class Shipment extends AbstractEntity
         $this->free_methods = new FreeMethodList();
         $this->receiver_address = new ReceiverAddress();
     }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

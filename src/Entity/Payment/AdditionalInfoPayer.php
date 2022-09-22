@@ -36,12 +36,4 @@ class AdditionalInfoPayer extends AbstractEntity
         $this->phone   = new Phone();
         $this->address = new AdditionalInfoPayerAddress();
     }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

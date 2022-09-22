@@ -93,14 +93,6 @@ class Notification extends AbstractEntity
     }
 
     /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
-
-    /**
      * @return array
      */
     public function getUris()

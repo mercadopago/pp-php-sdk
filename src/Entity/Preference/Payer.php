@@ -52,12 +52,4 @@ class Payer extends AbstractEntity
         $this->identification = new PayerIdentification();
         $this->phone          = new Phone();
     }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

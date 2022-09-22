@@ -19,7 +19,7 @@ abstract class AbstractEntity implements \JsonSerializable
      *
      * @param Manager $manager
      */
-    public function __construct($manager)
+    public function __construct($manager = null)
     {
         $this->manager = $manager;
     }
@@ -86,6 +86,10 @@ abstract class AbstractEntity implements \JsonSerializable
 
         $data = [];
         foreach ($properties as $property => $value) {
+            if($property === 'manager') {
+                continue;
+            }
+
             if ($value instanceof self) {
                 $data[$property] = $value->toArray();
                 continue;

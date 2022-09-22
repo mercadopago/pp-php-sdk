@@ -45,16 +45,4 @@ class ReceiverAddress extends AbstractEntity
      * @var string
      */
     public $zip_code;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

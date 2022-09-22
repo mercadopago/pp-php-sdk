@@ -41,12 +41,4 @@ class PaymentMethod extends AbstractEntity
         $this->excluded_payment_methods = new ExcludedPaymentMethodList();
         $this->excluded_payment_types = new ExcludedPaymentTypeList();
     }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

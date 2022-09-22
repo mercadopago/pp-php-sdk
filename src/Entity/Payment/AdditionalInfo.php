@@ -37,12 +37,4 @@ class AdditionalInfo extends AbstractEntity
         $this->payer     = new AdditionalInfoPayer();
         $this->shipments = new Shipments();
     }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

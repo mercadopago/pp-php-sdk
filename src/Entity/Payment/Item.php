@@ -45,16 +45,4 @@ class Item extends AbstractEntity
      * @var float
      */
     public $unit_price;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

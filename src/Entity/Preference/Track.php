@@ -20,16 +20,4 @@ class Track extends AbstractEntity
      * @var string
      */
     public $values;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

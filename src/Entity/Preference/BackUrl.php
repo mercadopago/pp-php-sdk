@@ -25,16 +25,4 @@ class BackUrl extends AbstractEntity
      * @var string
      */
     public $success;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }

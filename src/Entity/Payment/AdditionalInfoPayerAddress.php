@@ -20,16 +20,4 @@ class AdditionalInfoPayerAddress extends AbstractEntity
      * @var string
      */
     public $street_name;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
 }
