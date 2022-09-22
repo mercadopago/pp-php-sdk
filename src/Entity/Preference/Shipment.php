@@ -14,40 +14,46 @@ class Shipment extends AbstractEntity
     /**
      * @var float
      */
-    public $cost;
+    protected $cost;
+
+    /**
+     * @var int
+     */
+    protected $default_shipping_method;
 
     /**
      * @var string
      */
-    public $default_shipping_method;
+    protected $dimensions;
 
     /**
-     * @var object
+     * @var FreeMethodList
      */
-    public $dimensions;
-
-    /**
-     * @var array
-     */
-    public $free_methods;
+    protected $free_methods;
 
     /**
      * @var boolean
      */
-    public $free_shipping;
+    protected $free_shipping;
 
     /**
      * @var boolean
      */
-    public $local_pickup;
+    protected $local_pickup;
 
     /**
      * @var string
      */
-    public $mode;
+    protected $mode;
 
     /**
-     * @var object
+     * @var ReceiverAddress
      */
-    public $receiver_address;
+    protected $receiver_address;
+
+    public function __construct()
+    {
+        $this->free_methods = new FreeMethodList();
+        $this->receiver_address = new ReceiverAddress();
+    }
 }

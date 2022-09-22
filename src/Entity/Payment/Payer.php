@@ -14,49 +14,41 @@ class Payer extends AbstractEntity
     /**
      * @var string
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      */
-    public $entity_type;
+    protected $entity_type;
 
     /**
      * @var string
      */
-    public $email;
+    protected $email;
 
     /**
      * @var string
      */
-    public $first_name;
+    protected $first_name;
 
     /**
      * @var string
      */
-    public $last_name;
+    protected $last_name;
 
     /**
      * @var PayerIdentification
      */
-    public $identification;
+    protected $identification;
 
     /**
      * @var Address
      */
-    public $address;
+    protected $address;
 
     public function __construct()
     {
         $this->identification = new PayerIdentification();
         $this->address        = new Address();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
     }
 }

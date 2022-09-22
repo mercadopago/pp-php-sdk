@@ -88,7 +88,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->payment->__set('external_reference', 'XXX');
+        $this->payment->external_reference = 'XXX';
 
         $actual = $this->payment->__get('external_reference');
         $expected = 'XXX';

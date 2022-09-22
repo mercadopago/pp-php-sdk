@@ -12,209 +12,126 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 class Preference extends AbstractEntity
 {
     /**
-     * @var object
+     * @var string
      */
-    public $additional_info;
+    protected $additional_info;
 
     /**
      * @var string
      */
-    public $auto_return;
+    protected $auto_return;
 
     /**
-     * @var object
+     * @var BackUrl
      */
-    public $back_urls;
+    protected $back_urls;
 
     /**
      * @var boolean
      */
-    public $binary_mode;
+    protected $binary_mode;
 
     /**
-     * @var int
+     * @var Date|string
      */
-    public $client_id;
+    protected $date_of_expiration;
 
     /**
-     * @var object
+     * @var DifferentialPricing
      */
-    public $collector;
+    protected $differential_pricing;
 
     /**
-     * @var int
+     * @var Date|string
      */
-    public $collector_id;
+    protected $expiration_date_from;
 
     /**
-     * @var string
+     * @var Date|string
      */
-    public $coupon_code;
-
-    /**
-     * @var array
-     */
-    public $coupon_labels;
-
-    /**
-     * @var \DateTime
-     */
-    public $date_created;
-
-    /**
-     * @var \DateTime
-     */
-    public $date_of_expiration;
-
-    /**
-     * @var object
-     */
-    public $differential_pricing;
-
-    /**
-     * @var \DateTime
-     */
-    public $expiration_date_from;
-
-    /**
-     * @var \DateTime
-     */
-    public $expiration_date_to;
+    protected $expiration_date_to;
 
     /**
      * @var boolean
      */
-    public $expires;
+    protected $expires;
 
     /**
      * @var string
      */
-    public $external_reference;
+    protected $external_reference;
+
+    /**
+     * @var ItemList
+     */
+    protected $items;
 
     /**
      * @var string
      */
-    public $id;
-
-    /**
-     * @var string
-     */
-    public $init_point;
-
-    /**
-     * @var object
-     */
-    public $internal_metadata;
-
-    /**
-     * @var array
-     */
-    public $items;
-
-    /**
-     * @var \DateTime
-     */
-    public $last_updated;
-
-    /**
-     * @var boolean
-     */
-    public $live_mode;
-
-    /**
-     * @var string
-     */
-    public $marketplace;
+    protected $marketplace;
 
     /**
      * @var float
      */
-    public $marketplace_fee;
+    protected $marketplace_fee;
 
     /**
      * @var object
      */
-    public $metadata;
+    protected $metadata;
 
     /**
      * @var string
      */
-    public $notification_url;
+    protected $notification_url;
+
+    /**
+     * @var Payer
+     */
+    protected $payer;
+
+    /**
+     * @var PaymentMethod
+     */
+    protected $payment_methods;
 
     /**
      * @var string
      */
-    public $operation_type;
+    protected $purpose;
 
     /**
-     * @var object
+     * @var Shipment
      */
-    public $payer;
-
-    /**
-     * @var object
-     */
-    public $payment_methods;
-
-    /**
-     * @var array
-     */
-    public $processing_modes;
+    protected $shipments;
 
     /**
      * @var string
      */
-    public $product_id;
+    protected $sponsor_id;
 
     /**
      * @var string
      */
-    public $purpose;
+    protected $statement_descriptor;
 
     /**
-     * @var object
+     * @var TrackList
      */
-    public $redirect_urls;
+    protected $tracks;
 
-    /**
-     * @var string
-     */
-    public $sandbox_init_point;
-
-    /**
-     * @var object
-     */
-    public $shipments;
-
-    /**
-     * @var string
-     */
-    public $site_id;
-
-    /**
-     * @var int
-     */
-    public $sponsor_id;
-
-    /**
-     * @var string
-     */
-    public $statement_descriptor;
-
-    /**
-     * @var array
-     */
-    public $taxes;
-
-    /**
-     * @var array
-     */
-    public $total_amount;
-
-    /**
-     * @var array
-     */
-    public $tracks;
+    public function __construct($manager)
+    {
+        parent::__construct($manager);
+        $this->back_urls            = new BackUrl();
+        $this->differential_pricing = new DifferentialPricing();
+        $this->items                = new ItemList();
+        $this->payer                = new Payer();
+        $this->payment_methods      = new PaymentMethod();
+        $this->shipments            = new Shipment();
+        $this->tracks               = new TrackList();
+    }
 
     /**
      * @return array
@@ -226,16 +143,5 @@ class Preference extends AbstractEntity
         );
 
         return $uris;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * Get the properties of the given object.
-     *
-     * @return mixed
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
     }
 }

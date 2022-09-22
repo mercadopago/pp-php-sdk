@@ -14,32 +14,20 @@ class Refund extends AbstractEntity
     /**
      * @var float
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      */
-    public $status;
+    protected $status;
 
     /**
      * @var bool
      */
-    public $notifying;
+    protected $notifying;
 
     /**
      * @var object
      */
-    public $metadata;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
+    protected $metadata;
 }

@@ -60,26 +60,26 @@ class SdkTest extends \PHPUnit\Framework\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->sdk = new Sdk('api_key', 'access_token', 'platform_id', 'product_id', 'integrator_id');
+        $this->sdk = new Sdk('access_token', 'platform_id', 'product_id', 'integrator_id');
     }
 
     function testGetPreferenceSuccess()
     {
-        $actual = $this->sdk->getPreference();
+        $actual = $this->sdk->getPreferenceInstance();
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Preference\Preference', $actual);
     }
 
     function testGetNotificationSuccess()
     {
-        $actual = $this->sdk->getNotification();
+        $actual = $this->sdk->getNotificationInstance();
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Notification\Notification', $actual);
     }
 
     function testGetPaymentSuccess()
     {
-        $actual = $this->sdk->getPayment();
+        $actual = $this->sdk->getPaymentInstance();
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\Payment', $actual);
     }

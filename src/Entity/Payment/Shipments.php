@@ -14,18 +14,10 @@ class Shipments extends AbstractEntity
     /**
      * @var ReceiverAddress
      */
-    public $receiver_address;
+    protected $receiver_address;
 
     public function __construct()
     {
         $this->receiver_address = new ReceiverAddress();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
     }
 }

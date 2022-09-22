@@ -14,90 +14,82 @@ class Notification extends AbstractEntity
     /**
      * @var string
      */
-    public $notification_id;
+    protected $notification_id;
 
     /**
      * @var string
      */
-    public $notification_url;
+    protected $notification_url;
 
     /**
      * @var string
      */
-    public $status;
+    protected $status;
 
     /**
      * @var float
      */
-    public $transaction_id;
+    protected $transaction_id;
 
     /**
      * @var string
      */
-    public $transaction_type;
+    protected $transaction_type;
 
     /**
      * @var float
      */
-    public $transaction_amount;
+    protected $transaction_amount;
 
     /**
      * @var float
      */
-    public $total_pending;
+    protected $total_pending;
 
     /**
      * @var float
      */
-    public $total_approved;
+    protected $total_approved;
 
     /**
      * @var float
      */
-    public $total_paid;
+    protected $total_paid;
 
     /**
      * @var float
      */
-    public $total_rejected;
+    protected $total_rejected;
 
     /**
      * @var float
      */
-    public $total_refunded;
+    protected $total_refunded;
 
     /**
      * @var float
      */
-    public $total_cancelled;
+    protected $total_cancelled;
 
     /**
      * @var float
      */
-    public $total_charged_back;
+    protected $total_charged_back;
 
     /**
      * @var array
      */
-    public $payments_metadata;
+    protected $payments_metadata;
 
     /**
      * @var PaymentDetails
      */
-    public $payments_details;
+    protected $payments_details;
 
     public function __construct($manager)
     {
         parent::__construct($manager);
         $this->payments_details = new PaymentDetailsList();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
     }
 
     /**
