@@ -155,7 +155,9 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->responseMock->expects(self::any())->method('getData')->willReturn(new stdClass());
 
         $actual = $this->manager->handleResponse($this->responseMock, 'get');
-        $this->assertTrue($actual);
+        $expected = new stdClass();
+
+        $this->assertEquals($expected, $actual);
     }
 
     function testHandleResponseFailure()

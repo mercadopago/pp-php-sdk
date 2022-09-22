@@ -14,102 +14,102 @@ class Payment extends AbstractEntity
     /**
      * @var string
      */
-    public $description;
+    protected $description;
 
     /**
      * @var string
      */
-    public $external_reference;
+    protected $external_reference;
 
     /**
      * @var string
      */
-    public $notification_url;
+    protected $notification_url;
 
     /**
      * @var int
      */
-    public $installments;
+    protected $installments;
 
     /**
      * @var double
      */
-    public $transaction_amount;
+    protected $transaction_amount;
 
     /**
      * @var string
      */
-    public $payment_method_id;
+    protected $payment_method_id;
 
     /**
      * @var string
      */
-    public $statement_descriptor;
+    protected $statement_descriptor;
 
     /**
      * @var boolean
      */
-    public $binary_mode;
+    protected $binary_mode;
 
     /**
      * @var Date|string
      */
-    public $date_of_expiration;
+    protected $date_of_expiration;
 
     /**
      * @var string
      */
-    public $callback_url;
+    protected $callback_url;
 
     /**
      * @var string
      */
-    public $token;
+    protected $token;
 
     /**
      * @var string
      */
-    public $issuer_id;
+    protected $issuer_id;
 
     /**
      * @var string
      */
-    public $campaign_id;
+    protected $campaign_id;
 
     /**
      * @var double
      */
-    public $coupon_amount;
+    protected $coupon_amount;
 
     /**
      * @var string
      */
-    public $coupon_code;
+    protected $coupon_code;
 
     /**
      * @var Payer
      */
-    public $payer;
+    protected $payer;
 
     /**
      * @var AdditionalInfo
      */
-    public $additional_info;
+    protected $additional_info;
 
     /**
      * @var TransactionDetails
      */
-    public $transaction_details;
+    protected $transaction_details;
 
     /**
      * @var PointOfInteraction
      */
-    public $point_of_interaction;
+    protected $point_of_interaction;
 
     /**
      * @var object
      */
-    public $metadata;
+    protected $metadata;
 
     public function __construct($manager)
     {
@@ -121,20 +121,12 @@ class Payment extends AbstractEntity
     }
 
     /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
-
-    /**
      * @return array
      */
     public function getUris()
     {
         $uris = array(
-            'post' => '/beta/asgard/payments',
+            'post' => '/v1/asgard/payments',
         );
 
         return $uris;

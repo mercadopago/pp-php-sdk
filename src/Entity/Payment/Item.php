@@ -14,47 +14,35 @@ class Item extends AbstractEntity
     /**
      * @var int
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      */
-    public $title;
+    protected $title;
 
     /**
      * @var string
      */
-    public $description;
+    protected $description;
 
     /**
      * @var string
      */
-    public $picture_url;
+    protected $picture_url;
 
     /**
      * @var string
      */
-    public $category_id;
+    protected $category_id;
 
     /**
      * @var int
      */
-    public $quantity;
+    protected $quantity;
 
     /**
      * @var float
      */
-    public $unit_price;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
+    protected $unit_price;
 }

@@ -14,22 +14,10 @@ class AdditionalInfoPayerAddress extends AbstractEntity
     /**
      * @var string
      */
-    public $zip_code;
+    protected $zip_code;
     
     /**
      * @var string
      */
-    public $street_name;
-
-    public function __construct()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
-    }
+    protected $street_name;
 }

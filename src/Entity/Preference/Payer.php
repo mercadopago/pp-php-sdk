@@ -12,42 +12,44 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 class Payer extends AbstractEntity
 {
     /**
-     * @var object
+     * @var Address
      */
-    public $address;
+    protected $address;
 
     /**
-     * @var \DateTime
+     * @var Date|string
      */
-    public $date_created;
-
-    /**
-     * @var string
-     */
-    public $email;
-
-    /**
-     * @var object
-     */
-    public $identification;
-
-    /**
-     * @var \DateTime
-     */
-    public $last_purchase;
+    protected $date_created;
 
     /**
      * @var string
      */
-    public $name;
+    protected $email;
 
     /**
-     * @var object
+     * @var PayerIdentification
      */
-    public $phone;
+    protected $identification;
 
     /**
      * @var string
      */
-    public $surname;
+    protected $name;
+
+    /**
+     * @var Phone
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     */
+    protected $surname;
+
+    public function __construct()
+    {
+        $this->address        = new Address();
+        $this->identification = new PayerIdentification();
+        $this->phone          = new Phone();
+    }
 }

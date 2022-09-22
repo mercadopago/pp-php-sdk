@@ -14,34 +14,26 @@ class AdditionalInfoPayer extends AbstractEntity
     /**
      * @var string
      */
-    public $first_name;
+    protected $first_name;
     
     /**
      * @var string
      */
-    public $last_name;
+    protected $last_name;
 
     /**
      * @var Phone
      */
-    public $phone;
+    protected $phone;
 
     /**
      * @var AdditionalInfoPayerAddress
      */
-    public $address;
+    protected $address;
 
     public function __construct()
     {
         $this->phone   = new Phone();
         $this->address = new AdditionalInfoPayerAddress();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getProperties()
-    {
-        return get_object_vars($this);
     }
 }

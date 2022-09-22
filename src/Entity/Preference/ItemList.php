@@ -1,13 +1,13 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Entity\Payment;
+namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractCollection;
 
 /**
  * Class ItemList
  *
- * @package MercadoPago\PP\Sdk\Entity\Payment
+ * @package MercadoPago\PP\Sdk\Entity\Preference
  */
 class ItemList extends AbstractCollection
 {
