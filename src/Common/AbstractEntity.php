@@ -59,8 +59,10 @@ abstract class AbstractEntity implements \JsonSerializable
      */
     public function setEntity($data)
     {
-        foreach ($data as $key => $value) {
-            $this->__set($key, $value);
+        if (is_array($data) || is_object($data)) {
+            foreach ($data as $key => $value) {
+                $this->__set($key, $value);
+            }
         }
     }
 
