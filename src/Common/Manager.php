@@ -124,13 +124,18 @@ class Manager
      * Handle response
      *
      * @param Response $response
+     * @param $method
      *
      * @return mixed
      * @throws Exception
      */
-    public function handleResponse($response)
+    public function handleResponse($response, $method, $entity = null)
     {
         if ($response->getStatus() == "200" || $response->getStatus() == "201") {
+            if ($entity && $method == 'get') {
+                $entity->setEntity($response->getData());
+                return $entity;
+            }
             return $response->getData();
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
             throw new Exception($response->getData()['message']);
