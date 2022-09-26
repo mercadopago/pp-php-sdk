@@ -56,7 +56,6 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
     function testSubclassesTypes()
     {
         $backUrl = $this->preference->back_urls;
-        $differentialPricing = $this->preference->differential_pricing;
         $items = $this->preference->items;
         $item = $items->getIterator()[0];
 
@@ -80,7 +79,6 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $receiverAddress = $shipment->receiver_address;
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\BackUrl", $backUrl);
-        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\DifferentialPricing", $differentialPricing);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\Item", $item);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\ItemList", $items);
 

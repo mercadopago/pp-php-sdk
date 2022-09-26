@@ -59,8 +59,10 @@ abstract class AbstractEntity implements \JsonSerializable
      */
     public function setEntity($data)
     {
-        foreach ($data as $key => $value) {
-            $this->__set($key, $value);
+        if (is_array($data) || is_object($data)) {
+            foreach ($data as $key => $value) {
+                $this->__set($key, $value);
+            }
         }
     }
 
@@ -122,12 +124,14 @@ abstract class AbstractEntity implements \JsonSerializable
     public function read($params = [])
     {
         $method = 'get';
+        $class = get_called_class();
+        $entity = new $class($this->manager);
 
-        $uri = $this->manager->getEntityUri($this, $method, $params);
+        $uri = $this->manager->getEntityUri($entity, $method, $params);
         $header = $this->manager->getHeader();
-        $response = $this->manager->execute($this, $uri, $method, $header);
+        $response = $this->manager->execute($entity, $uri, $method, $header);
 
-        return $this->manager->handleResponse($response);
+        return $this->manager->handleResponse($response, $method, $entity);
     }
 
     /**
@@ -143,7 +147,7 @@ abstract class AbstractEntity implements \JsonSerializable
         $header = $this->manager->getHeader();
         $response = $this->manager->execute($this, $uri, $method, $header);
 
-        return $this->manager->handleResponse($response);
+        return $this->manager->handleResponse($response, $method);
     }
 
     /**
