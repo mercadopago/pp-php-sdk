@@ -37,7 +37,7 @@ class Preference extends AbstractEntity
     protected $date_of_expiration;
 
     /**
-     * @var DifferentialPricing
+     * @var object
      */
     protected $differential_pricing;
 
@@ -125,7 +125,6 @@ class Preference extends AbstractEntity
     {
         parent::__construct($manager);
         $this->back_urls            = new BackUrl();
-        $this->differential_pricing = new DifferentialPricing();
         $this->items                = new ItemList();
         $this->payer                = new Payer();
         $this->payment_methods      = new PaymentMethod();
