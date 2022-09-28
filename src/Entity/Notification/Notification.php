@@ -27,6 +27,11 @@ class Notification extends AbstractEntity
     protected $status;
 
     /**
+     * @var string
+     */
+    protected $external_reference;
+
+    /**
      * @var float
      */
     protected $transaction_id;
@@ -98,7 +103,7 @@ class Notification extends AbstractEntity
     public function getUris()
     {
         $uris = array(
-            'get' => '/bifrost/notification/status/:id',
+            'get' => '/v1/bifrost/notification/status/:id',
         );
 
         return $uris;
