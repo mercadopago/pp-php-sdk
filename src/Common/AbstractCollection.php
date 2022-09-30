@@ -38,8 +38,10 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
      */
     public function setEntity($entityArray)
     {
-        foreach ($entityArray as $value) {
-            $this->add($value);
+        if (is_array($entityArray) || is_object($entityArray)) {
+            foreach ($entityArray as $value) {
+                $this->add($value);
+            }
         }
     }
 
