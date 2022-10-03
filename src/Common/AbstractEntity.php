@@ -53,6 +53,25 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function __isset($name)
+    {
+        return isset($this->{$name});
+    }
+
+    /**
+     * @param string $name
+     */
+    public function __unset($name)
+    {
+        unset($this->{$name});
+    }
+
+
+    /**
      * Set values for an entity's attributes.
      *
      * @param array $data
