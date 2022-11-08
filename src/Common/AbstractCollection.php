@@ -34,7 +34,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * Add multiple entities to collection
      *
-     * @param mixed $entity
+     * @param $entityArray
      */
     public function setEntity($entityArray)
     {
@@ -48,7 +48,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @inheritDoc
      */
-    public function getIterator(): Iterator
+    public function getIterator()
     {
         return new \ArrayIterator($this->collection);
     }
@@ -56,15 +56,14 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         return count($this->collection);
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->collection;

@@ -2,6 +2,7 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient;
 
+use Exception;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
@@ -14,7 +15,7 @@ interface HttpClientInterface
     /**
      * Sends a GET request.
      *
-     * @param string|UriInterface $uri
+     * @param string $uri
      *
      * @throws Exception
      */
@@ -23,7 +24,7 @@ interface HttpClientInterface
     /**
      * Sends a PUT request.
      *
-     * @param string|UriInterface        $uri
+     * @param string                     $uri
      * @param string|AbstractEntity|null $body
      *
      * @throws Exception
@@ -33,7 +34,7 @@ interface HttpClientInterface
     /**
      * Sends a POST request.
      *
-     * @param string|UriInterface        $uri
+     * @param string                     $uri
      * @param string|AbstractEntity|null $body
      *
      * @throws Exception
@@ -44,7 +45,7 @@ interface HttpClientInterface
      * Sends a request with any HTTP method.
      *
      * @param string                     $method HTTP method to use
-     * @param string|UriInterface        $uri
+     * @param string                     $uri
      * @param string|AbstractEntity|null $body
      *
      * @throws Exception

@@ -102,10 +102,8 @@ class Notification extends AbstractEntity
      */
     public function getUris()
     {
-        $uris = array(
+        return array(
             'get' => '/v1/bifrost/notification/status/:id',
         );
-
-        return $uris;
     }
 }

@@ -57,7 +57,7 @@ class PaymentDetails extends AbstractEntity
     protected $shipping_cost;
 
     /**
-     * @var PaymentDetailsRefund
+     * @var RefundList
      */
     protected $refunds;
 

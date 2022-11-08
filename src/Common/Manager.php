@@ -2,8 +2,9 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
-use MercadoPago\PP\Sdk\HttpClient;
 use Exception;
+use MercadoPago\PP\Sdk\HttpClient\HttpClientInterface;
+use MercadoPago\PP\Sdk\HttpClient\Response;
 
 /**
  * Class Manager
@@ -38,7 +39,7 @@ class Manager
      * Unifies method call that makes request to any HTTP method.
      *
      * @param object|AbstractEntity|null $entity
-     * @param string|UriInterface        $uri
+     * @param string                     $uri
      * @param string                     $method
      * @param array                      $headers
      *
@@ -96,14 +97,12 @@ class Manager
      */
     public function getDefaultHeader()
     {
-        $headers = [
+          return [
             'Authorization: Bearer ' . $this->config->__get('access_token'),
             'x-platform-id: ' . $this->config->__get('platform_id'),
             'x-product-id: ' . $this->config->__get('product_id'),
             'x-integrator-id: ' . $this->config->__get('integrator_id')
-        ];
-
-        return $headers;
+          ];
     }
 
     /**
@@ -115,16 +114,15 @@ class Manager
     public function getHeader($customHeaders = [])
     {
         $defaultHeaders = $this->getDefaultHeader();
-        $headers = array_merge($defaultHeaders, $customHeaders);
-
-        return $headers;
+        return array_merge($defaultHeaders, $customHeaders);
     }
 
     /**
      * Handle response
      *
      * @param Response $response
-     * @param $method
+     * @param          $method
+     * @param          $entity
      *
      * @return mixed
      * @throws Exception

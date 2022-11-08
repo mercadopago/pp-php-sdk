@@ -32,7 +32,7 @@ class Preference extends AbstractEntity
     protected $binary_mode;
 
     /**
-     * @var Date|string
+     * @var string
      */
     protected $date_of_expiration;
 
@@ -42,12 +42,12 @@ class Preference extends AbstractEntity
     protected $differential_pricing;
 
     /**
-     * @var Date|string
+     * @var string
      */
     protected $expiration_date_from;
 
     /**
-     * @var Date|string
+     * @var string
      */
     protected $expiration_date_to;
 
@@ -137,10 +137,8 @@ class Preference extends AbstractEntity
      */
     public function getUris()
     {
-        $uris = array(
+        return array(
             'post' => '/v1/asgard/preferences',
         );
-
-        return $uris;
     }
 }

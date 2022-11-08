@@ -3,13 +3,14 @@
 namespace MercadoPago\PP\Sdk\HttpClient;
 
 use MercadoPago\PP\Sdk\Common\AbstractCollection;
+use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 class Response
 {
     /**
      * Response status
      *
-     * @var boolean
+     * @var int
      **/
     protected $status;
 
@@ -23,9 +24,8 @@ class Response
     /**
      * Response constructor.
      *
-     * @param null|int    $status
+     * @param null|int $status
      * @param null|object $data
-     * @param null|string $message
      */
     public function __construct(
         $status = null,
@@ -48,7 +48,7 @@ class Response
     /**
      * Set the status of response
      *
-     * @param boolean|null $status
+     * @param int|null $status
      *
      * @return void
      **/

@@ -52,7 +52,7 @@ class Payment extends AbstractEntity
     protected $binary_mode;
 
     /**
-     * @var Date|string
+     * @var string
      */
     protected $date_of_expiration;
 
@@ -125,10 +125,8 @@ class Payment extends AbstractEntity
      */
     public function getUris()
     {
-        $uris = array(
+        return array(
             'post' => '/v1/asgard/payments',
         );
-
-        return $uris;
     }
 }

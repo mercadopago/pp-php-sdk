@@ -2,6 +2,8 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
+use Exception;
+
 /**
  * Class AbstractEntity
  *
@@ -55,7 +57,7 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * @param string $name
      *
-     * @return mixed
+     * @return bool
      */
     public function __isset($name)
     {
@@ -89,7 +91,7 @@ abstract class AbstractEntity implements \JsonSerializable
      * @codeCoverageIgnore
      * Get the properties of the given object.
      *
-     * @return mixed
+     * @return array
      */
     public function getProperties()
     {
@@ -139,6 +141,7 @@ abstract class AbstractEntity implements \JsonSerializable
      * @param array $params
      *
      * @return mixed
+     * @throws Exception
      */
     public function read($params = [])
     {
@@ -157,6 +160,7 @@ abstract class AbstractEntity implements \JsonSerializable
      * Save method (POST).
      *
      * @return mixed
+     * @throws Exception
      */
     public function save()
     {
@@ -170,9 +174,8 @@ abstract class AbstractEntity implements \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

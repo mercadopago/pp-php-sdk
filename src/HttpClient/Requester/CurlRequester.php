@@ -2,8 +2,10 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient\Requester;
 
+use Exception;
+use MercadoPago\PP\Sdk\Common\AbstractCollection;
+use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\HttpClient\Response;
-use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 
 /**
  * Class CurlRequester
@@ -24,7 +26,8 @@ class CurlRequester implements RequesterInterface
     /**
      * @param string|AbstractEntity|AbstractCollection|null $body
      *
-     * @return \CurlHandle|resource
+     * @return resource
+     * @throws Exception
      */
     public function createRequest(string $method, string $uri, array $headers = [], $body = null)
     {
@@ -66,7 +69,7 @@ class CurlRequester implements RequesterInterface
                 if (function_exists('json_last_error')) {
                     $json_error = json_last_error();
                     if (JSON_ERROR_NONE !== $json_error) {
-                        throw new \TypeError("JSON Error [{$json_error}] - Data: " . $body);
+                        throw new Exception("JSON Error [{$json_error}] - Data: " . $body);
                     }
                 }
             } elseif ($form_content) {
@@ -79,7 +82,9 @@ class CurlRequester implements RequesterInterface
     }
 
     /**
-     * @param \CurlHandle|resource $request
+     * @param resource $request
+     *
+     * @throws Exception
      */
     public function sendRequest($request): Response
     {
@@ -87,7 +92,7 @@ class CurlRequester implements RequesterInterface
         $api_result = $this->curlExec($request);
 
         if ($this->curlErrno($request)) {
-            throw new \TypeError($this->curlError($request));
+            throw new Exception($this->curlError($request));
         }
 
         $info          = $this->curlGetInfo($request);

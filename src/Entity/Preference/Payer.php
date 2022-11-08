@@ -17,7 +17,7 @@ class Payer extends AbstractEntity
     protected $address;
 
     /**
-     * @var Date|string
+     * @var string
      */
     protected $date_created;
 
