@@ -8,7 +8,7 @@ namespace MercadoPago\PP\Sdk\Tests\Mock;
 class PaymentMock
 {
 
-  public const COMPLETE_PAYMENT = [
+  const COMPLETE_PAYMENT = [
     "binary_mode" => false,
     "external_reference" => "WC-105",
     "notification_url" => "https://pyppayments.requestcatcher.com/notification",

@@ -7,6 +7,8 @@ use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Response;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
 /**
@@ -14,7 +16,7 @@ use stdClass;
  *
  * @package MercadoPago\PP\Sdk\Tests\Common\Manager
  */
-class ManagerTest extends \PHPUnit\Framework\TestCase
+class ManagerTest extends TestCase
 {
     /**
      * @var Manager
@@ -87,7 +89,7 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->responseMock, $actual);
     }
 
-    function testGetEntityUriWithoutParamsSuccess()
+	function testGetEntityUriWithoutParamsSuccess()
     {
         $uris = array('post' => '/preference');
 

@@ -6,13 +6,15 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Notification\Notification;
 use MercadoPago\PP\Sdk\Tests\Mock\NotificationMock;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class NotificationTest
  *
  * @package MercadoPago\PP\Sdk\Tests\Entity\Notification
  */
-class NotificationTest extends \PHPUnit\Framework\TestCase
+class NotificationTest extends TestCase
 {
     /**
      * @var Notification
@@ -55,7 +57,7 @@ class NotificationTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->notification->notification_id = 'XXX';
+        $this->notification->__set('notification_id', 'XXX');
 
         $actual = $this->notification->__get('notification_id');
         $expected = 'XXX';

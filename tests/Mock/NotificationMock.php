@@ -8,7 +8,7 @@ namespace MercadoPago\PP\Sdk\Tests\Mock;
 class NotificationMock
 {
 
-  public const COMPLETE_NOTIFICATION = [
+  const COMPLETE_NOTIFICATION = [
     "notification_id" => "P-25604645467",
     "notification_url" => "https://mercadopago.vtexpayments.com.br/api/pvt/payment-provider/transactions/4ED8296AB28F47C6AF3FFFBA558F2EDD/payments/9A5431CE81A44DBA8C76268BBD7F6781/callback?accountName=paguemenos01040",
     "status" => "approved",
