@@ -52,14 +52,14 @@ class Sdk
     /**
      * @param string $entityName
      * @param string $baseUrl
-	 *
-	 * @return mixed
+     *
+     * @return mixed
      */
     public function getEntityInstance($entityName, $baseUrl)
     {
         $client = new HttpClient($baseUrl, $this->requester);
         $manager = new Manager($client, $this->config);
-		return new $entityName($manager);
+        return new $entityName($manager);
     }
 
     /**
