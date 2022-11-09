@@ -2,8 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
-use Iterator;
-
 /**
  * Class AbstractCollection
  *

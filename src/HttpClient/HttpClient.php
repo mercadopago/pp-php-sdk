@@ -2,7 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient;
 
-use Exception;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\AbstractCollection;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
@@ -58,7 +57,7 @@ class HttpClient implements HttpClientInterface
     public function send(string $method, $uri, array $headers = [], $body = null): Response
     {
         if (!is_string($uri)) {
-            throw new Exception(
+            throw new \Exception(
                 sprintf(
                     '%s::send(): Argument #2 ($uri) must be of type string, %s given',
                     self::class,
@@ -70,7 +69,7 @@ class HttpClient implements HttpClientInterface
         if (null !== $body && !is_string($body) &&
             !is_subclass_of($body, AbstractEntity::class) && !is_subclass_of($body, AbstractCollection::class)
         ) {
-            throw new Exception(
+            throw new \Exception(
                 sprintf(
                     '%s::send(): Argument #4 ($body) must be of type string|%s|%snull, %s given',
                     self::class,

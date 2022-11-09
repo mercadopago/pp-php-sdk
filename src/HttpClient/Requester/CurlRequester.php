@@ -2,7 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient\Requester;
 
-use Exception;
 use MercadoPago\PP\Sdk\Common\AbstractCollection;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\HttpClient\Response;
@@ -18,7 +17,7 @@ class CurlRequester implements RequesterInterface
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            throw new \TypeError('cURL extension not found.' .
+            throw new \Exception('cURL extension not found.' .
                 'You need to enable cURL in your php.ini or another configuration you have.');
         }
     }
@@ -27,7 +26,7 @@ class CurlRequester implements RequesterInterface
      * @param string|AbstractEntity|AbstractCollection|null $body
      *
      * @return resource
-     * @throws Exception
+     * @throws \Exception
      */
     public function createRequest(string $method, string $uri, array $headers = [], $body = null)
     {
@@ -69,7 +68,7 @@ class CurlRequester implements RequesterInterface
                 if (function_exists('json_last_error')) {
                     $json_error = json_last_error();
                     if (JSON_ERROR_NONE !== $json_error) {
-                        throw new Exception("JSON Error [{$json_error}] - Data: " . $body);
+                        throw new \Exception("JSON Error [{$json_error}] - Data: " . $body);
                     }
                 }
             } elseif ($form_content) {
@@ -84,7 +83,7 @@ class CurlRequester implements RequesterInterface
     /**
      * @param resource $request
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function sendRequest($request): Response
     {
@@ -92,7 +91,7 @@ class CurlRequester implements RequesterInterface
         $api_result = $this->curlExec($request);
 
         if ($this->curlErrno($request)) {
-            throw new Exception($this->curlError($request));
+            throw new \Exception($this->curlError($request));
         }
 
         $info          = $this->curlGetInfo($request);

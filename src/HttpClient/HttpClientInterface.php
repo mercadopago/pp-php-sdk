@@ -2,7 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient;
 
-use Exception;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
 /**
@@ -17,7 +16,7 @@ interface HttpClientInterface
      *
      * @param string $uri
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function get($uri, array $headers = []): Response;
 
@@ -27,7 +26,7 @@ interface HttpClientInterface
      * @param string                     $uri
      * @param string|AbstractEntity|null $body
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function put($uri, array $headers = [], $body = null): Response;
 
@@ -37,7 +36,7 @@ interface HttpClientInterface
      * @param string                     $uri
      * @param string|AbstractEntity|null $body
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function post($uri, array $headers = [], $body = null): Response;
 
@@ -48,7 +47,7 @@ interface HttpClientInterface
      * @param string                     $uri
      * @param string|AbstractEntity|null $body
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function send(string $method, $uri, array $headers = [], $body = null): Response;
 }

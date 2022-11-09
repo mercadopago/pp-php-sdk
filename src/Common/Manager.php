@@ -2,7 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
-use Exception;
 use MercadoPago\PP\Sdk\HttpClient\HttpClientInterface;
 use MercadoPago\PP\Sdk\HttpClient\Response;
 
@@ -63,7 +62,7 @@ class Manager
      * @param array                      $params
      *
      * @return mixed
-     * @throws Exception
+     * @throws \Exception
      */
     public function getEntityUri($entity, $method, $params = [])
     {
@@ -125,7 +124,7 @@ class Manager
      * @param          $entity
      *
      * @return mixed
-     * @throws Exception
+     * @throws \Exception
      */
     public function handleResponse($response, $method, $entity = null)
     {
@@ -136,9 +135,9 @@ class Manager
             }
             return $response->getData();
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
-            throw new Exception($response->getData()['message']);
+            throw new \Exception($response->getData()['message']);
         } else {
-            throw new Exception("Internal API Error");
+            throw new \Exception("Internal API Error");
         }
     }
 }
