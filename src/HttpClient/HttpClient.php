@@ -7,7 +7,7 @@ use MercadoPago\PP\Sdk\Common\AbstractCollection;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 
 /**
- * Class CurlHttpClient
+ * Class HttpClient
  *
  * @package MercadoPago\PP\Sdk\HttpClient
  */
@@ -28,44 +28,34 @@ class HttpClient implements HttpClientInterface
     private $requester = null;
 
     /**
-     * Class Constructor.
+     * HttpClient constructor.
      *
+     * @param string $baseUrl
      * @param RequesterInterface $requester
-     *
      */
-    public function __construct($baseUrl, $requester)
+    public function __construct(string $baseUrl, RequesterInterface $requester)
     {
         $this->baseUrl = $baseUrl;
         $this->requester = $requester;
     }
 
-    public function get($uri, array $headers = []): Response
+    public function get(string $uri, array $headers = []): Response
     {
         return $this->send('GET', $uri, $headers, null);
     }
 
-    public function put($uri, array $headers = [], $body = null): Response
+    public function put(string $uri, array $headers = [], $body = null): Response
     {
         return $this->send('PUT', $uri, $headers, $body);
     }
 
-    public function post($uri, array $headers = [], $body = null): Response
+    public function post(string $uri, array $headers = [], $body = null): Response
     {
         return $this->send('POST', $uri, $headers, $body);
     }
 
-    public function send(string $method, $uri, array $headers = [], $body = null): Response
+    public function send(string $method, string $uri, array $headers = [], $body = null): Response
     {
-        if (!is_string($uri)) {
-            throw new \Exception(
-                sprintf(
-                    '%s::send(): Argument #2 ($uri) must be of type string, %s given',
-                    self::class,
-                    gettype($uri)
-                )
-            );
-        }
-
         if (null !== $body && !is_string($body) &&
             !is_subclass_of($body, AbstractEntity::class) && !is_subclass_of($body, AbstractCollection::class)
         ) {

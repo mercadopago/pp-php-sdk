@@ -5,6 +5,11 @@ namespace MercadoPago\PP\Sdk\HttpClient;
 use MercadoPago\PP\Sdk\Common\AbstractCollection;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 
+/**
+ * Class Response
+ *
+ * @package MercadoPago\PP\Sdk\HttpClient
+ */
 class Response
 {
     /**
@@ -12,27 +17,20 @@ class Response
      *
      * @var int
      **/
-    protected $status;
+    private $status;
 
     /**
      * Response data
      *
      * @var AbstractEntity|AbstractCollection
      **/
-    protected $data;
+    private $data;
 
     /**
      * Response constructor.
-     *
-     * @param null|int $status
-     * @param null|object $data
      */
-    public function __construct(
-        $status = null,
-        $data = null
-    ) {
-        $this->setStatus($status);
-        $this->setData($data);
+    public function __construct()
+    {
     }
 
     /**
@@ -40,7 +38,7 @@ class Response
      *
      * @return int
      **/
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->status;
     }
@@ -52,7 +50,7 @@ class Response
      *
      * @return void
      **/
-    public function setStatus($status)
+    public function setStatus(int $status)
     {
         $this->status = $status;
     }

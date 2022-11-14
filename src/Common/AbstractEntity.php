@@ -17,9 +17,9 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * AbstractEntity constructor.
      *
-     * @param Manager $manager
+     * @param Manager|null $manager
      */
-    public function __construct($manager = null)
+    public function __construct(Manager $manager = null)
     {
         $this->manager = $manager;
     }
@@ -29,7 +29,7 @@ abstract class AbstractEntity implements \JsonSerializable
      *
      * @return mixed
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->{$name};
     }
@@ -38,7 +38,7 @@ abstract class AbstractEntity implements \JsonSerializable
      * @param string $name
      * @param        $value
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         if (!property_exists($this, $name)) {
             return;
@@ -57,7 +57,7 @@ abstract class AbstractEntity implements \JsonSerializable
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name)
     {
         return isset($this->{$name});
     }
@@ -65,7 +65,7 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * @param string $name
      */
-    public function __unset($name)
+    public function __unset(string $name)
     {
         unset($this->{$name});
     }
@@ -74,7 +74,7 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * Set values for an entity's attributes.
      *
-     * @param array $data
+     * @param $data
      */
     public function setEntity($data)
     {
@@ -91,7 +91,7 @@ abstract class AbstractEntity implements \JsonSerializable
      *
      * @return array
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return get_object_vars($this);
     }
@@ -101,7 +101,7 @@ abstract class AbstractEntity implements \JsonSerializable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $properties = $this->getProperties();
 
@@ -141,7 +141,7 @@ abstract class AbstractEntity implements \JsonSerializable
      * @return mixed
      * @throws \Exception
      */
-    public function read($params = [])
+    public function read(array $params = [])
     {
         $method = 'get';
         $class = get_called_class();
@@ -174,7 +174,7 @@ abstract class AbstractEntity implements \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

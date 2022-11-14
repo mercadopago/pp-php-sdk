@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class Payer
@@ -46,10 +47,16 @@ class Payer extends AbstractEntity
      */
     protected $surname;
 
-    public function __construct()
+    /**
+     * Payer constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct($manager)
     {
-        $this->address        = new Address();
-        $this->identification = new PayerIdentification();
-        $this->phone          = new Phone();
+        parent::__construct($manager);
+        $this->address        = new Address($manager);
+        $this->identification = new PayerIdentification($manager);
+        $this->phone          = new Phone($manager);
     }
 }

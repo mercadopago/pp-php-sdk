@@ -3,11 +3,12 @@
 namespace MercadoPago\PP\Sdk\Entity\Notification;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class Notification
  *
- * @package MercadoPago\PP\Sdk\Entity
+ * @package MercadoPago\PP\Sdk\Entity\Notification
  */
 class Notification extends AbstractEntity
 {
@@ -91,16 +92,23 @@ class Notification extends AbstractEntity
      */
     protected $payments_details;
 
+    /**
+     * Notification constructor.
+     *
+     * @param Manager|null $manager
+     */
     public function __construct($manager)
     {
         parent::__construct($manager);
-        $this->payments_details = new PaymentDetailsList();
+        $this->payments_details = new PaymentDetailsList($manager);
     }
 
     /**
+     * Get uris
+     *
      * @return array
      */
-    public function getUris()
+    public function getUris(): array
     {
         return array(
             'get' => '/v1/bifrost/notification/status/:id',

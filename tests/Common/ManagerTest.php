@@ -4,6 +4,7 @@ namespace MercadoPago\PP\Sdk\Tests\Common;
 
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Common\Config;
+use MercadoPago\PP\Sdk\Entity\Payment\Payer;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Response;
@@ -129,9 +130,9 @@ class ManagerTest extends TestCase
 
     function testGetEntityUriFailure()
     {
-        $entity = new stdClass();
+        $entity = new Payer(null);
 
-        $this->expectExceptionMessage('Method not available for stdClass entity');
+        $this->expectExceptionMessage('Method not available for MercadoPago\PP\Sdk\Entity\Payment\Payer entity');
         $this->manager->getEntityUri($entity, 'post');
     }
 

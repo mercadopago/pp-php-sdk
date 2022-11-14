@@ -7,9 +7,9 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\HttpClient\Response;
 
 /**
- * Class RequesterInterface
+ * Interface RequesterInterface
  *
- * @package MercadoPago\PP\Sdk\HttpClient\Curl;
+ * @package MercadoPago\PP\Sdk\HttpClient\Requester
  */
 interface RequesterInterface
 {

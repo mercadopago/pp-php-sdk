@@ -7,14 +7,20 @@ use MercadoPago\PP\Sdk\Common\AbstractCollection;
 /**
  * Class RefundList
  *
- * @package MercadoPago\PP\Sdk\Entity
+ * @package MercadoPago\PP\Sdk\Entity\Notification
  */
 class RefundList extends AbstractCollection
 {
-    public function add($entity, $key = null)
+    /**
+     * Add entity to collection
+     *
+     * @param array $entity
+     * @param string|null $key
+     */
+    public function add(array $entity, string $key = null)
     {
-        $refund = new Refund();
+        $refund = new Refund($this->manager);
         $refund->setEntity($entity);
-        parent::add($refund, $key);
+        parent::addEntity($refund, $key);
     }
 }

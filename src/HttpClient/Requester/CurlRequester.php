@@ -13,7 +13,11 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
  */
 class CurlRequester implements RequesterInterface
 {
-
+    /**
+     * CurlRequester constructor.
+     *
+     * @throws \Exception
+     */
     public function __construct()
     {
         if (!extension_loaded('curl')) {
@@ -23,7 +27,10 @@ class CurlRequester implements RequesterInterface
     }
 
     /**
-     * @param string|AbstractEntity|AbstractCollection|null $body
+     * @param string $method
+     * @param string $uri
+     * @param array $headers
+     * @param string|AbstractEntity|AbstractCollection|array|null $body
      *
      * @return resource
      * @throws \Exception
@@ -72,7 +79,7 @@ class CurlRequester implements RequesterInterface
                     }
                 }
             } elseif ($form_content) {
-                $body = self::buildFormdata($body);
+                $body = self::buildFormData($body);
             }
             $this->setOption($connect, CURLOPT_POSTFIELDS, $body);
         }
@@ -112,15 +119,17 @@ class CurlRequester implements RequesterInterface
     /**
      * Build query
      *
-     * @param array $params Params.
+     * @param array|object $params Params.
      *
      * @return string
      */
-    public static function buildFormdata($params)
+    public static function buildFormData(array $params): string
     {
         if (function_exists('http_build_query')) {
             return http_build_query($params, '', '&');
         } else {
+            $elements = [];
+
             foreach ($params as $name => $value) {
                 $elements[] = "{$name}=" . rawurldecode($value);
             }
@@ -131,6 +140,8 @@ class CurlRequester implements RequesterInterface
 
     /**
      * @codeCoverageIgnore
+     *
+     * @return resource
      */
     protected function curlInit()
     {
@@ -164,7 +175,7 @@ class CurlRequester implements RequesterInterface
     /**
      * @codeCoverageIgnore
      */
-    protected function curlErrno($request)
+    protected function curlErrno($request): int
     {
         return curl_errno($request);
     }
@@ -172,7 +183,7 @@ class CurlRequester implements RequesterInterface
     /**
      * @codeCoverageIgnore
      */
-    protected function curlError($request)
+    protected function curlError($request): string
     {
         return curl_error($request);
     }

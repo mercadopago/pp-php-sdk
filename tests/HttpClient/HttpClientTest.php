@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
  */
 class HttpClientTest extends TestCase
 {
-
     function getRequesterInterfaceMock($response)
     {
         $mock = $this->getMockBuilder(RequesterInterface::class)
@@ -26,9 +25,6 @@ class HttpClientTest extends TestCase
         return $mock;
     }
 
-    /**
-     * A single example test.
-     */
     function testHttpGetSuccess()
     {
         // arrange
@@ -45,9 +41,6 @@ class HttpClientTest extends TestCase
         $this->assertEquals($mockResponse, $response);
     }
 
-    /**
-     * A single example test.
-     */
     function testHttpPutSuccess()
     {
         // arrange
@@ -64,9 +57,6 @@ class HttpClientTest extends TestCase
         $this->assertEquals($mockResponse, $response);
     }
 
-    /**
-     * A single example test.
-     */
     function testHttpPostSuccess()
     {
         // arrange
@@ -82,24 +72,6 @@ class HttpClientTest extends TestCase
         $this->assertEquals($mockResponse, $response);
     }
 
-    /**
-     * A single example test.
-     */
-    function testHttpSendUriError()
-    {
-        // arrange
-        $mockResponse = new Response();
-
-        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
-
-        // assert + act
-        $this->expectException(Exception::class);
-        $client->send('get', 100);
-    }
-
-    /**
-     * A single example test.
-     */
     function testHttpSendBodyError()
     {
         // arrange

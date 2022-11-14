@@ -3,11 +3,12 @@
 namespace MercadoPago\PP\Sdk\Entity\Payment;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class Payment
  *
- * @package MercadoPago\PP\Sdk\Entity
+ * @package MercadoPago\PP\Sdk\Entity\Payment
  */
 class Payment extends AbstractEntity
 {
@@ -111,19 +112,26 @@ class Payment extends AbstractEntity
      */
     protected $metadata;
 
+    /**
+     * Payment constructor.
+     *
+     * @param Manager|null $manager
+     */
     public function __construct($manager)
     {
         parent::__construct($manager);
-        $this->payer = new Payer();
-        $this->additional_info = new AdditionalInfo();
-        $this->transaction_details = new TransactionDetails();
-        $this->point_of_interaction = new PointOfInteraction();
+        $this->payer = new Payer($manager);
+        $this->additional_info = new AdditionalInfo($manager);
+        $this->transaction_details = new TransactionDetails($manager);
+        $this->point_of_interaction = new PointOfInteraction($manager);
     }
 
     /**
+     * Get uris
+     *
      * @return array
      */
-    public function getUris()
+    public function getUris(): array
     {
         return array(
             'post' => '/v1/asgard/payments',

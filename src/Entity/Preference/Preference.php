@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class Preference
@@ -121,21 +122,28 @@ class Preference extends AbstractEntity
      */
     protected $tracks;
 
+    /**
+     * Preference constructor.
+     *
+     * @param Manager|null $manager
+     */
     public function __construct($manager)
     {
         parent::__construct($manager);
-        $this->back_urls            = new BackUrl();
-        $this->items                = new ItemList();
-        $this->payer                = new Payer();
-        $this->payment_methods      = new PaymentMethod();
-        $this->shipments            = new Shipment();
-        $this->tracks               = new TrackList();
+        $this->back_urls            = new BackUrl($manager);
+        $this->items                = new ItemList($manager);
+        $this->payer                = new Payer($manager);
+        $this->payment_methods      = new PaymentMethod($manager);
+        $this->shipments            = new Shipment($manager);
+        $this->tracks               = new TrackList($manager);
     }
 
     /**
+     * Get uris
+     *
      * @return array
      */
-    public function getUris()
+    public function getUris(): array
     {
         return array(
             'post' => '/v1/asgard/preferences',

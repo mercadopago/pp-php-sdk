@@ -2,6 +2,7 @@
 
 namespace MercadoPago\PP\Sdk;
 
+use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Constants;
 use MercadoPago\PP\Sdk\Common\Manager;
@@ -53,11 +54,11 @@ class Sdk
      * @param string $entityName
      * @param string $baseUrl
      *
-     * @return mixed
+     * @return AbstractEntity
      */
-    public function getEntityInstance($entityName, $baseUrl)
+    public function getEntityInstance(string $entityName, string $baseUrl)
     {
-        $client = new HttpClient($baseUrl, $this->requester);
+        $client  = new HttpClient($baseUrl, $this->requester);
         $manager = new Manager($client, $this->config);
         return new $entityName($manager);
     }

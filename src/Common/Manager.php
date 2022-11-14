@@ -26,9 +26,9 @@ class Manager
      * Manager constructor.
      *
      * @param HttpClientInterface $client
-     * @param Config              $config
+     * @param Config $config
      */
-    public function __construct($client, $config)
+    public function __construct(HttpClientInterface $client, Config $config)
     {
         $this->client = $client;
         $this->config = $config;
@@ -38,13 +38,13 @@ class Manager
      * Unifies method call that makes request to any HTTP method.
      *
      * @param object|AbstractEntity|null $entity
-     * @param string                     $uri
-     * @param string                     $method
-     * @param array                      $headers
+     * @param string $uri
+     * @param string $method
+     * @param array $headers
      *
      * @return mixed
      */
-    public function execute($entity, $uri, $method = 'get', $headers = [])
+    public function execute(AbstractEntity $entity, string $uri, string $method = 'get', array $headers = [])
     {
         if ($method == 'get') {
             return $this->client->{$method}($uri, $headers);
@@ -57,14 +57,14 @@ class Manager
     /**
      * Get entity uri by performing assignments based on params.
      *
-     * @param object|AbstractEntity|null $entity
-     * @param string                     $method
-     * @param array                      $params
+     * @param AbstractEntity|null $entity
+     * @param string $method
+     * @param array $params
      *
      * @return mixed
      * @throws \Exception
      */
-    public function getEntityUri($entity, $method, $params = [])
+    public function getEntityUri(AbstractEntity $entity, string $method, array $params = [])
     {
         if (method_exists($entity, 'getUris')) {
             $uri = $entity->getUris()[$method];
@@ -94,7 +94,7 @@ class Manager
      *
      * @return array
      */
-    public function getDefaultHeader()
+    public function getDefaultHeader(): array
     {
           return [
             'Authorization: Bearer ' . $this->config->__get('access_token'),
@@ -110,7 +110,7 @@ class Manager
      *
      * @return array
      */
-    public function getHeader($customHeaders = [])
+    public function getHeader(array $customHeaders = []): array
     {
         $defaultHeaders = $this->getDefaultHeader();
         return array_merge($defaultHeaders, $customHeaders);
@@ -120,13 +120,13 @@ class Manager
      * Handle response
      *
      * @param Response $response
-     * @param          $method
-     * @param          $entity
+     * @param string $method
+     * @param AbstractEntity|null $entity
      *
      * @return mixed
      * @throws \Exception
      */
-    public function handleResponse($response, $method, $entity = null)
+    public function handleResponse(Response $response, string $method, AbstractEntity $entity = null)
     {
         if ($response->getStatus() == "200" || $response->getStatus() == "201") {
             if ($entity && $method == 'get') {
