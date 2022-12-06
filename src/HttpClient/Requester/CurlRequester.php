@@ -2,8 +2,9 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient\Requester;
 
+use MercadoPago\PP\Sdk\Common\AbstractCollection;
+use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\HttpClient\Response;
-use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 
 /**
  * Class CurlRequester
@@ -12,19 +13,27 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
  */
 class CurlRequester implements RequesterInterface
 {
-
+    /**
+     * CurlRequester constructor.
+     *
+     * @throws \Exception
+     */
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            throw new \TypeError('cURL extension not found.' .
+            throw new \Exception('cURL extension not found.' .
                 'You need to enable cURL in your php.ini or another configuration you have.');
         }
     }
 
     /**
-     * @param string|AbstractEntity|AbstractCollection|null $body
+     * @param string $method
+     * @param string $uri
+     * @param array $headers
+     * @param string|AbstractEntity|AbstractCollection|array|null $body
      *
-     * @return \CurlHandle|resource
+     * @return resource
+     * @throws \Exception
      */
     public function createRequest(string $method, string $uri, array $headers = [], $body = null)
     {
@@ -66,11 +75,11 @@ class CurlRequester implements RequesterInterface
                 if (function_exists('json_last_error')) {
                     $json_error = json_last_error();
                     if (JSON_ERROR_NONE !== $json_error) {
-                        throw new \TypeError("JSON Error [{$json_error}] - Data: " . $body);
+                        throw new \Exception("JSON Error [{$json_error}] - Data: " . $body);
                     }
                 }
             } elseif ($form_content) {
-                $body = self::buildFormdata($body);
+                $body = self::buildFormData($body);
             }
             $this->setOption($connect, CURLOPT_POSTFIELDS, $body);
         }
@@ -79,7 +88,9 @@ class CurlRequester implements RequesterInterface
     }
 
     /**
-     * @param \CurlHandle|resource $request
+     * @param resource $request
+     *
+     * @throws \Exception
      */
     public function sendRequest($request): Response
     {
@@ -87,7 +98,7 @@ class CurlRequester implements RequesterInterface
         $api_result = $this->curlExec($request);
 
         if ($this->curlErrno($request)) {
-            throw new \TypeError($this->curlError($request));
+            throw new \Exception($this->curlError($request));
         }
 
         $info          = $this->curlGetInfo($request);
@@ -108,15 +119,17 @@ class CurlRequester implements RequesterInterface
     /**
      * Build query
      *
-     * @param array $params Params.
+     * @param array|object $params Params.
      *
      * @return string
      */
-    public static function buildFormdata($params)
+    public static function buildFormData(array $params): string
     {
         if (function_exists('http_build_query')) {
             return http_build_query($params, '', '&');
         } else {
+            $elements = [];
+
             foreach ($params as $name => $value) {
                 $elements[] = "{$name}=" . rawurldecode($value);
             }
@@ -127,6 +140,8 @@ class CurlRequester implements RequesterInterface
 
     /**
      * @codeCoverageIgnore
+     *
+     * @return resource
      */
     protected function curlInit()
     {
@@ -160,7 +175,7 @@ class CurlRequester implements RequesterInterface
     /**
      * @codeCoverageIgnore
      */
-    protected function curlErrno($request)
+    protected function curlErrno($request): int
     {
         return curl_errno($request);
     }
@@ -168,7 +183,7 @@ class CurlRequester implements RequesterInterface
     /**
      * @codeCoverageIgnore
      */
-    protected function curlError($request)
+    protected function curlError($request): string
     {
         return curl_error($request);
     }

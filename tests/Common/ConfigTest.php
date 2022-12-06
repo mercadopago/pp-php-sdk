@@ -3,30 +3,31 @@
 namespace MercadoPago\PP\Sdk\Tests\Common;
 
 use MercadoPago\PP\Sdk\Common\Config;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ConfigTest
  *
  * @package MercadoPago\PP\Sdk\Tests\Common\Config
  */
-class ConfigTest extends \PHPUnit\Framework\TestCase
+class ConfigTest extends TestCase
 {
     /**
      * @var Config
      */
     private $config;
 
-    /**
-     * @inheritdoc
-     */
-    protected function setUp(): void
-    {
+	/**
+	 * @inheritdoc
+	 */
+	protected function setUp(): void
+	{
         $this->config = new Config();
     }
 
     function testGetAndSetSuccess()
     {
-        $this->config->access_token = 'XXX';
+        $this->config->__set('access_token', 'XXX');
 
         $actual = $this->config->__get('access_token');
         $expected = 'XXX';

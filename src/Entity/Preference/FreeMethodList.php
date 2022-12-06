@@ -11,10 +11,16 @@ use MercadoPago\PP\Sdk\Common\AbstractCollection;
  */
 class FreeMethodList extends AbstractCollection
 {
-    public function add($entity, $key = null)
+    /**
+     * Add entity to collection
+     *
+     * @param array $entity
+     * @param string|null $key
+     */
+    public function add(array $entity, string $key = null)
     {
-        $freeMethod = new FreeMethod();
+        $freeMethod = new FreeMethod($this->manager);
         $freeMethod->setEntity($entity);
-        parent::add($freeMethod, $key);
+        parent::addEntity($freeMethod, $key);
     }
 }

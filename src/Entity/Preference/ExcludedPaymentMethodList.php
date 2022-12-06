@@ -11,10 +11,16 @@ use MercadoPago\PP\Sdk\Common\AbstractCollection;
  */
 class ExcludedPaymentMethodList extends AbstractCollection
 {
-    public function add($entity, $key = null)
+    /**
+     * Add entity to collection
+     *
+     * @param array $entity
+     * @param string|null $key
+     */
+    public function add(array $entity, string $key = null)
     {
-        $excludedPaymentMethod = new ExcludedPaymentMethod();
+        $excludedPaymentMethod = new ExcludedPaymentMethod($this->manager);
         $excludedPaymentMethod->setEntity($entity);
-        parent::add($excludedPaymentMethod, $key);
+        parent::addEntity($excludedPaymentMethod, $key);
     }
 }

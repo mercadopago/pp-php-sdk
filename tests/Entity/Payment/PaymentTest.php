@@ -6,13 +6,15 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Payment\Payment;
 use MercadoPago\PP\Sdk\Tests\Mock\PaymentMock;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class PaymentTest
  *
  * @package MercadoPago\PP\Sdk\Tests\Entity\Notification
  */
-class PaymentTest extends \PHPUnit\Framework\TestCase
+class PaymentTest extends TestCase
 {
     /**
      * @var Payment
@@ -55,20 +57,20 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
 
     function testSubclassesTypes()
     {
-        $additionalInfo = $this->payment->additional_info;
-        $additionalInfoPayer = $additionalInfo->payer;
-        $additionalInfoPayerAddress = $additionalInfoPayer->address;
-        $phone = $additionalInfoPayer->phone;
+        $additionalInfo = $this->payment->__get('additional_info');
+        $additionalInfoPayer = $additionalInfo->__get('payer');
+        $additionalInfoPayerAddress = $additionalInfoPayer->__get('address');
+        $phone = $additionalInfoPayer->__get('phone');
 
-        $shipments = $additionalInfo->shipments;
-        $receiverAddress = $shipments->receiver_address;
+        $shipments = $additionalInfo->__get('shipments');
+        $receiverAddress = $shipments->__get('receiver_address');
 
-        $items = $additionalInfo->items;
+        $items = $additionalInfo->__get('items');
         $item = $items->getIterator()[0];
 
-        $payer = $this->payment->payer;
-        $identification = $payer->identification;
-        $payerAddress = $payer->address;
+        $payer = $this->payment->__get('payer');
+        $identification = $payer->__get('identification');
+        $payerAddress = $payer->__get('address');
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfo", $additionalInfo);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoPayer", $additionalInfoPayer);
@@ -88,7 +90,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->payment->external_reference = 'XXX';
+        $this->payment->__set('external_reference', 'XXX');
 
         $actual = $this->payment->__get('external_reference');
         $expected = 'XXX';

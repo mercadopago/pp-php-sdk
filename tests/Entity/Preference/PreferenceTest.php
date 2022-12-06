@@ -6,13 +6,15 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\Tests\Mock\PreferenceMock;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class PreferenceTest
  *
  * @package MercadoPago\PP\Sdk\Tests\Entity\Preference
  */
-class PreferenceTest extends \PHPUnit\Framework\TestCase
+class PreferenceTest extends TestCase
 {
     /**
      * @var Preference
@@ -55,28 +57,28 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
     function testSubclassesTypes()
     {
-        $backUrl = $this->preference->back_urls;
-        $items = $this->preference->items;
+        $backUrl = $this->preference->__get('back_urls');
+        $items = $this->preference->__get('items');
         $item = $items->getIterator()[0];
 
-        $payer = $this->preference->payer;
-        $address = $payer->address;
-        $payerIdentification = $payer->identification;
-        $phone = $payer->phone;
+        $payer = $this->preference->__get('payer');
+        $address = $payer->__get('address');
+        $payerIdentification = $payer->__get('identification');
+        $phone = $payer->__get('phone');
 
-        $tracks = $this->preference->tracks;
+        $tracks = $this->preference->__get('tracks');
         $track = $tracks->getIterator()[0];
 
-        $paymentMethod = $this->preference->payment_methods;
-        $excludedPaymentMethods = $paymentMethod->excluded_payment_methods;
+        $paymentMethod = $this->preference->__get('payment_methods');
+        $excludedPaymentMethods = $paymentMethod->__get('excluded_payment_methods');
         $excludedPaymentMethod = $excludedPaymentMethods->getIterator()[0];
-        $excludedPaymentTypes = $paymentMethod->excluded_payment_types;
+        $excludedPaymentTypes = $paymentMethod->__get('excluded_payment_types');
         $excludedPaymentType = $excludedPaymentTypes->getIterator()[0];
 
-        $shipment = $this->preference->shipments;
-        $freeMethods = $shipment->free_methods;
+        $shipment = $this->preference->__get('shipments');
+        $freeMethods = $shipment->__get('free_methods');
         $freeMethod = $freeMethods->getIterator()[0];
-        $receiverAddress = $shipment->receiver_address;
+        $receiverAddress = $shipment->__get('receiver_address');
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\BackUrl", $backUrl);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\Item", $item);
@@ -104,7 +106,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
     function testGetAndSetSuccess()
     {
-        $this->preference->external_reference = 'XXX';
+        $this->preference->__set('external_reference', 'XXX');
 
         $actual = $this->preference->__get('external_reference');
         $expected = 'XXX';

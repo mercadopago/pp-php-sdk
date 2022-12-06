@@ -7,7 +7,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 /**
  * Class Refund
  *
- * @package MercadoPago\PP\Sdk\Entity
+ * @package MercadoPago\PP\Sdk\Entity\Notification
  */
 class Refund extends AbstractEntity
 {

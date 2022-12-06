@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class Shipment
@@ -51,9 +52,15 @@ class Shipment extends AbstractEntity
      */
     protected $receiver_address;
 
-    public function __construct()
+    /**
+     * Shipment constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct($manager)
     {
-        $this->free_methods = new FreeMethodList();
-        $this->receiver_address = new ReceiverAddress();
+        parent::__construct($manager);
+        $this->free_methods = new FreeMethodList($manager);
+        $this->receiver_address = new ReceiverAddress($manager);
     }
 }

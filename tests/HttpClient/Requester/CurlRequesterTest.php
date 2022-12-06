@@ -2,13 +2,14 @@
 
 use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\HttpClient\Requester\CurlRequester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CurlRequesterTest
  *
  * @package MercadoPago\Tests\HttpClient\Requester
  */
-class CurlRequesterTest extends \PHPUnit\Framework\TestCase
+class CurlRequesterTest extends TestCase
 {
 
     function getPartialCurlRequesterMock($responseCode, $errno, $error)
@@ -122,12 +123,12 @@ class CurlRequesterTest extends \PHPUnit\Framework\TestCase
     {
         $mockResponse = new Response();
         $mockResponse->setStatus(200);
-        $mockResponse->setData('{"test":"123"}');
+        $mockResponse->setData(new stdClass());
 
         $requester = $this->getPartialCurlRequesterMock(200, 1, 'some_error');
 
         // assert + act
-        $this->expectException(\TypeError::class);
+        $this->expectException(Exception::class);
         $requester->sendRequest('');
     }
 }

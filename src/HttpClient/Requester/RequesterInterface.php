@@ -2,24 +2,26 @@
 
 namespace MercadoPago\PP\Sdk\HttpClient\Requester;
 
+use MercadoPago\PP\Sdk\Common\AbstractCollection;
+use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\HttpClient\Response;
 
 /**
- * Class RequesterInterface
+ * Interface RequesterInterface
  *
- * @package MercadoPago\PP\Sdk\HttpClient\Curl;
+ * @package MercadoPago\PP\Sdk\HttpClient\Requester
  */
 interface RequesterInterface
 {
     /**
      * @param string|AbstractEntity|AbstractCollection|null $body
      *
-     * @return \CurlHandle|resource
+     * @return resource
      */
     public function createRequest(string $method, string $uri, array $headers = [], $body = null);
 
     /**
-     * @param \CurlHandle|resource $request
+     * @param resource $request
      */
     public function sendRequest($request): Response;
 }

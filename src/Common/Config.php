@@ -38,10 +38,10 @@ class Config
      * @param string|null $integrator_id
      */
     public function __construct(
-        $access_token = null,
-        $platform_id = null,
-        $product_id = null,
-        $integrator_id = null
+        string $access_token = null,
+        string $platform_id = null,
+        string $product_id = null,
+        string $integrator_id = null
     ) {
         $this->access_token = $access_token;
         $this->platform_id = $platform_id;
@@ -54,7 +54,7 @@ class Config
      *
      * @return mixed
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->{$name};
     }
@@ -63,7 +63,7 @@ class Config
      * @param string $name
      * @param string $value
      */
-    public function __set($name, $value)
+    public function __set(string $name, string $value)
     {
         if (property_exists($this, $name)) {
             $this->{$name} = $value;

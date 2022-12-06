@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Entity\Payment;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class AdditionalInfo
@@ -31,10 +32,16 @@ class AdditionalInfo extends AbstractEntity
      */
     protected $shipments;
 
-    public function __construct()
+    /**
+     * AdditionalInfo constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct($manager)
     {
-        $this->items     = new ItemList();
-        $this->payer     = new AdditionalInfoPayer();
-        $this->shipments = new Shipments();
+        parent::__construct($manager);
+        $this->items     = new ItemList($manager);
+        $this->payer     = new AdditionalInfoPayer($manager);
+        $this->shipments = new Shipments($manager);
     }
 }
