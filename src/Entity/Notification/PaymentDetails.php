@@ -3,11 +3,12 @@
 namespace MercadoPago\PP\Sdk\Entity\Notification;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class PaymentDetails
  *
- * @package MercadoPago\PP\Sdk\Entity
+ * @package MercadoPago\PP\Sdk\Entity\Notification
  */
 class PaymentDetails extends AbstractEntity
 {
@@ -57,12 +58,18 @@ class PaymentDetails extends AbstractEntity
     protected $shipping_cost;
 
     /**
-     * @var PaymentDetailsRefund
+     * @var RefundList
      */
     protected $refunds;
 
-    public function __construct()
+    /**
+     * PaymentDetails constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct($manager)
     {
-        $this->refunds = new RefundList();
+        parent::__construct($manager);
+        $this->refunds = new RefundList($manager);
     }
 }

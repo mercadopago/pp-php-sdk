@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class PaymentMethod
@@ -36,9 +37,15 @@ class PaymentMethod extends AbstractEntity
      */
     protected $installments;
 
-    public function __construct()
+    /**
+     * PaymentMethod constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct($manager)
     {
-        $this->excluded_payment_methods = new ExcludedPaymentMethodList();
-        $this->excluded_payment_types = new ExcludedPaymentTypeList();
+        parent::__construct($manager);
+        $this->excluded_payment_methods = new ExcludedPaymentMethodList($manager);
+        $this->excluded_payment_types = new ExcludedPaymentTypeList($manager);
     }
 }

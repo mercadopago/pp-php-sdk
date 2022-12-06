@@ -3,16 +3,19 @@
 namespace MercadoPago\PP\Sdk\Tests;
 
 use MercadoPago\PP\Sdk\Common\Config;
+use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\HttpClient\HttpClientInterface;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
 use MercadoPago\PP\Sdk\Sdk;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SdkTest
  *
  * @package MercadoPago\PP\Sdk\Tests\Sdk
  */
-class SdkTest extends \PHPUnit\Framework\TestCase
+class SdkTest extends TestCase
 {
     /**
      * @var Sdk

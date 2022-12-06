@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Entity\Payment;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Manager;
 
 /**
  * Class AdditionalInfoPayer
@@ -15,7 +16,7 @@ class AdditionalInfoPayer extends AbstractEntity
      * @var string
      */
     protected $first_name;
-    
+
     /**
      * @var string
      */
@@ -31,9 +32,15 @@ class AdditionalInfoPayer extends AbstractEntity
      */
     protected $address;
 
-    public function __construct()
+    /**
+     * AdditionalInfoPayer constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct($manager)
     {
-        $this->phone   = new Phone();
-        $this->address = new AdditionalInfoPayerAddress();
+        parent::__construct($manager);
+        $this->phone   = new Phone($manager);
+        $this->address = new AdditionalInfoPayerAddress($manager);
     }
 }

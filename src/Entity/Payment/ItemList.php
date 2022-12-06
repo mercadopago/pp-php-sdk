@@ -11,10 +11,16 @@ use MercadoPago\PP\Sdk\Common\AbstractCollection;
  */
 class ItemList extends AbstractCollection
 {
-    public function add($entity, $key = null)
+    /**
+     * Add entity to collection
+     *
+     * @param array $entity
+     * @param string|null $key
+     */
+    public function add(array $entity, string $key = null)
     {
-        $item = new Item();
+        $item = new Item($this->manager);
         $item->setEntity($entity);
-        parent::add($item, $key);
+        parent::addEntity($item, $key);
     }
 }

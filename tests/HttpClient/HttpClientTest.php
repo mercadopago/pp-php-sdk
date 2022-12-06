@@ -3,15 +3,15 @@
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class HttpClientTest
  *
  * @package MercadoPago\Tests\HttpClient
  */
-class HttpClientTest extends \PHPUnit\Framework\TestCase
+class HttpClientTest extends TestCase
 {
-
     function getRequesterInterfaceMock($response)
     {
         $mock = $this->getMockBuilder(RequesterInterface::class)
@@ -25,15 +25,12 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         return $mock;
     }
 
-    /**
-     * A single example test.
-     */
     function testHttpGetSuccess()
     {
         // arrange
         $mockResponse = new Response();
         $mockResponse->setStatus(200);
-        $mockResponse->setData('teste');
+        $mockResponse->setData(new stdClass());
 
         $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
 
@@ -44,18 +41,15 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($mockResponse, $response);
     }
 
-    /**
-     * A single example test.
-     */
     function testHttpPutSuccess()
     {
         // arrange
         $mockResponse = new Response();
         $mockResponse->setStatus(200);
-        $mockResponse->setData('teste');
+        $mockResponse->setData(new stdClass());
 
         $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
-        
+
         // act
         $response = $client->put('/');
 
@@ -63,42 +57,21 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($mockResponse, $response);
     }
 
-    /**
-     * A single example test.
-     */
     function testHttpPostSuccess()
     {
         // arrange
         $mockResponse = new Response();
         $mockResponse->setStatus(200);
-        $mockResponse->setData('teste');
+        $mockResponse->setData(new stdClass());
 
         $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
-        
+
         // act
         $response = $client->post('/');
 
         $this->assertEquals($mockResponse, $response);
     }
 
-    /**
-     * A single example test.
-     */
-    function testHttpSendUriError()
-    {
-        // arrange
-        $mockResponse = new Response();
-
-        $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
-
-        // assert + act
-        $this->expectException(\TypeError::class);
-        $client->send('get', 100);
-    }
-
-    /**
-     * A single example test.
-     */
     function testHttpSendBodyError()
     {
         // arrange
@@ -107,7 +80,7 @@ class HttpClientTest extends \PHPUnit\Framework\TestCase
         $client = new HttpClient('https://some-url.com', $this->getRequesterInterfaceMock($mockResponse));
 
         // assert + act
-        $this->expectException(\TypeError::class);
+        $this->expectException(Exception::class);
         $client->send('get', 'https://some-url.com', [], 100);
     }
 }

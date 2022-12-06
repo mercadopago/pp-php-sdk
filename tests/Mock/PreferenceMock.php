@@ -8,7 +8,7 @@ namespace MercadoPago\PP\Sdk\Tests\Mock;
 class PreferenceMock
 {
 
-  public const COMPLETE_PREFERENCE = [
+  const COMPLETE_PREFERENCE = [
     "auto_return" => "approved",
     "back_urls" => [
       "failure" => "http://www.myapp.com/carrinho/?cancel_order=true&order=wc_order&order_id=XX&redirect&_wpnonce=XX",

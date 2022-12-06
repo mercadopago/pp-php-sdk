@@ -2,8 +2,6 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
-use Iterator;
-
 /**
  * Class AbstractCollection
  *
@@ -17,12 +15,27 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     public $collection = [];
 
     /**
+     * @var Manager
+     */
+    protected $manager;
+
+    /**
+     * AbstractCollection constructor.
+     *
+     * @param Manager|null $manager
+     */
+    public function __construct(Manager $manager = null)
+    {
+        $this->manager = $manager;
+    }
+
+    /**
      * Add entity to collection
      *
-     * @param mixed $entity
+     * @param AbstractEntity $entity
      * @param string|null $key
      */
-    public function add($entity, $key = null)
+    public function addEntity(AbstractEntity $entity, string $key = null)
     {
         if (is_null($key)) {
             $this->collection[] = $entity;
@@ -34,12 +47,12 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * Add multiple entities to collection
      *
-     * @param mixed $entity
+     * @param $entities
      */
-    public function setEntity($entityArray)
+    public function setEntity($entities)
     {
-        if (is_array($entityArray) || is_object($entityArray)) {
-            foreach ($entityArray as $value) {
+        if (is_array($entities) || is_object($entities)) {
+            foreach ($entities as $value) {
                 $this->add($value);
             }
         }
@@ -48,13 +61,13 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @inheritDoc
      */
-    public function getIterator(): Iterator
+    public function getIterator()
     {
         return new \ArrayIterator($this->collection);
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function count(): int
     {
@@ -62,10 +75,9 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->collection;
     }

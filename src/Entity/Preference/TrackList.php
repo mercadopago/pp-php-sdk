@@ -11,10 +11,16 @@ use MercadoPago\PP\Sdk\Common\AbstractCollection;
  */
 class TrackList extends AbstractCollection
 {
-    public function add($entity, $key = null)
+    /**
+     * Add entity to collection
+     *
+     * @param array $entity
+     * @param string|null $key
+     */
+    public function add(array $entity, string $key = null)
     {
-        $track = new Track();
+        $track = new Track($this->manager);
         $track->setEntity($entity);
-        parent::add($track, $key);
+        parent::addEntity($track, $key);
     }
 }
