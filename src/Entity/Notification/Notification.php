@@ -8,6 +8,25 @@ use MercadoPago\PP\Sdk\Common\Manager;
 /**
  * Class Notification
  *
+ *  @property string $ip_address
+ *
+ * @property string $notification_id
+ * @property string $notification_url
+ * @property string $status
+ * @property string $external_reference
+ * @property float $transaction_id
+ * @property string $transaction_type
+ * @property float $transaction_amount
+ * @property float $total_pending
+ * @property float $total_approved
+ * @property float $total_paid
+ * @property float $total_rejected
+ * @property float $total_refunded
+ * @property float $total_cancelled
+ * @property float $total_charged_back
+ * @property array $payments_metadata
+ * @property PaymentDetails $payments_details
+ *
  * @package MercadoPago\PP\Sdk\Entity\Notification
  */
 class Notification extends AbstractEntity
