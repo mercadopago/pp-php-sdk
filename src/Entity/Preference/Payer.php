@@ -14,7 +14,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property PayerIdentification $identification
  * @property string $name
  * @property Phone $phone
- * @property string $surname;
+ * @property string $surname
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
  */

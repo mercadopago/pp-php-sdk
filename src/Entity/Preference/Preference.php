@@ -17,7 +17,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property string $expiration_date_from
  * @property string $expiration_date_to
  * @property boolean $expires
- * @property string $external_reference;
+ * @property string $external_reference
  * @property ItemList $items
  * @property string $marketplace
  * @property float $marketplace_fee

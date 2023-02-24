@@ -8,8 +8,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
 /**
  * Class Notification
  *
- *  @property string $ip_address
- *
+ * @property string $ip_address
  * @property string $notification_id
  * @property string $notification_url
  * @property string $status
