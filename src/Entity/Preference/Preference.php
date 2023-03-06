@@ -8,6 +8,29 @@ use MercadoPago\PP\Sdk\Common\Manager;
 /**
  * Class Preference
  *
+ * @property string $additional_info
+ * @property string $auto_return
+ * @property BackUrl $back_urls
+ * @property boolean $binary_mode
+ * @property string $date_of_expiration
+ * @property object $differential_pricing
+ * @property string $expiration_date_from
+ * @property string $expiration_date_to
+ * @property boolean $expires
+ * @property string $external_reference
+ * @property ItemList $items
+ * @property string $marketplace
+ * @property float $marketplace_fee
+ * @property object $metadata
+ * @property string $notification_url
+ * @property Payer $payer
+ * @property PaymentMethod $payment_methods
+ * @property string $purpose
+ * @property Shipment $shipments
+ * @property string $sponsor_id
+ * @property string $statement_descriptor
+ * @property TrackList $tracks
+ *
  * @package MercadoPago\PP\Sdk\Entity\Preference
  */
 class Preference extends AbstractEntity

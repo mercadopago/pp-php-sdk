@@ -8,6 +8,27 @@ use MercadoPago\PP\Sdk\Common\Manager;
 /**
  * Class Payment
  *
+ * @property string $description
+ * @property string $external_reference
+ * @property string $notification_url
+ * @property int $installments
+ * @property double $transaction_amount
+ * @property string $payment_method_id
+ * @property string $statement_descriptor
+ * @property boolean $binary_mode
+ * @property string $date_of_expiration
+ * @property string $callback_url
+ * @property string $token
+ * @property string $issuer_id
+ * @property string $campaign_id
+ * @property double $coupon_amount
+ * @property string $coupon_code
+ * @property Payer $payer
+ * @property AdditionalInfo $additional_info
+ * @property TransactionDetails $transaction_details
+ * @property PointOfInteraction $point_of_interaction
+ * @property object $metadata
+ *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
 class Payment extends AbstractEntity
