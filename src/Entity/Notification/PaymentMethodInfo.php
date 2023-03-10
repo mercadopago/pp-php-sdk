@@ -40,4 +40,14 @@ class PaymentMethodInfo extends AbstractEntity
      * @var double
      */
     protected $installment_rate;
+
+    /**
+     * @var string
+     */
+    protected $last_four_digits;
+
+    /**
+     * @var double
+     */
+    protected $installment_amount;
 }

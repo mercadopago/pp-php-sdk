@@ -47,7 +47,9 @@ class NotificationMock
           "payment_method_reference_id" => "1129288350",
           "date_of_expiration" => "2022-09-20T22:13:32.000+0000",
           "installments" => 51.99,
-          "installment_rate" => 51.99
+          "installment_rate" => 51.99,
+          "last_four_digits" => "1234",
+          "installment_amount" => 51.99
         ],
         "total_amount" => 51.99,
         "paid_amount" => 51.99,
