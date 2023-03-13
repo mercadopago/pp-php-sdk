@@ -183,8 +183,6 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         $customHeaders = $this->getHeaders()['save'];
         $header        = $this->manager->getHeader($customHeaders);
 
-        error_log('sdk manager headers: ' . json_encode($header));
-
         $uri      = $this->manager->getEntityUri($this, $method);
         $response = $this->manager->execute($this, $uri, $method, $header);
 
