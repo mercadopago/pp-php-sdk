@@ -8,6 +8,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
 /**
  * Class Payment
  *
+ * @property string $armor
  * @property string $description
  * @property string $external_reference
  * @property string $notification_url
@@ -33,6 +34,11 @@ use MercadoPago\PP\Sdk\Common\Manager;
  */
 class Payment extends AbstractEntity
 {
+    /**
+     * @var string
+     */
+    protected $armor;
+
     /**
      * @var string
      */
@@ -148,7 +154,20 @@ class Payment extends AbstractEntity
     }
 
     /**
-     * Get uris
+     * Get and set custom headers for entity.
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return [
+            'save' => [],
+            'read' => ['x-meli-session-id: ' . $this->armor],
+        ];
+    }
+
+    /**
+     * Get uris.
      *
      * @return array
      */

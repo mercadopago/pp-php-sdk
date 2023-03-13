@@ -122,7 +122,20 @@ class Notification extends AbstractEntity
     }
 
     /**
-     * Get uris
+     * Get and set custom headers for entity.
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return [
+            'save' => [],
+            'read' => [],
+        ];
+    }
+
+    /**
+     * Get uris.
      *
      * @return array
      */

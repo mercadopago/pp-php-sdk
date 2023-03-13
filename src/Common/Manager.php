@@ -128,13 +128,13 @@ class Manager
      */
     public function handleResponse(Response $response, string $method, AbstractEntity $entity = null)
     {
-        if ($response->getStatus() == "200" || $response->getStatus() == "201") {
+        if ($response->getStatus() == '200' || $response->getStatus() == '201') {
             if ($entity && $method == 'get') {
                 $entity->setEntity($response->getData());
                 return $entity;
             }
             return $response->getData();
-        } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
+        } elseif ($response->getStatus() >= 400 && $response->getStatus() < 500) {
             throw new \Exception($response->getData()['message']);
         } else {
             throw new \Exception("Internal API Error");
