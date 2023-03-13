@@ -134,7 +134,7 @@ class Manager
                 return $entity;
             }
             return $response->getData();
-        } elseif ($response->getStatus() >= 400 && $response->getStatus() < 500) {
+        } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus() < 500)) {
             throw new \Exception($response->getData()['message']);
         } else {
             throw new \Exception("Internal API Error");
