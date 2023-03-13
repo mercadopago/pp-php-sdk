@@ -43,13 +43,6 @@ interface EntityInterface
      */
     public function getProperties(): array;
 
-	/**
-	 * Exclude properties from entity building.
-	 *
-	 * @return void
-	 */
-	public function setExcludedProperties(): void;
-
     /**
      * Get an array from an object.
      *
@@ -61,4 +54,11 @@ interface EntityInterface
      * @return array
      */
     public function jsonSerialize(): array;
+
+	/**
+	 * Exclude properties from entity building.
+	 *
+	 * @return void
+	 */
+	public function setExcludedProperties(): void;
 }
