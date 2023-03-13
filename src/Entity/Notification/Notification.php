@@ -4,6 +4,7 @@ namespace MercadoPago\PP\Sdk\Entity\Notification;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Manager;
+use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 
 /**
  * Class Notification
@@ -28,7 +29,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  *
  * @package MercadoPago\PP\Sdk\Entity\Notification
  */
-class Notification extends AbstractEntity
+class Notification extends AbstractEntity implements RequesterEntityInterface
 {
     /**
      * @var string
@@ -121,6 +122,16 @@ class Notification extends AbstractEntity
         $this->payments_details = new PaymentDetailsList($manager);
     }
 
+	/**
+	 * Exclude properties from entity building.
+	 *
+	 * @return void
+	 */
+	public function setExcludedProperties(): void
+	{
+		$this->excluded_properties = [];
+	}
+
     /**
      * Get and set custom headers for entity.
      *
@@ -129,8 +140,8 @@ class Notification extends AbstractEntity
     public function getHeaders(): array
     {
         return [
+			'read' => [],
             'save' => [],
-            'read' => [],
         ];
     }
 

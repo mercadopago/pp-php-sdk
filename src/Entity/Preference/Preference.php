@@ -4,6 +4,7 @@ namespace MercadoPago\PP\Sdk\Entity\Preference;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Manager;
+use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 
 /**
  * Class Preference
@@ -33,7 +34,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
  */
-class Preference extends AbstractEntity
+class Preference extends AbstractEntity implements RequesterEntityInterface
 {
     /**
      * @var string
@@ -161,6 +162,16 @@ class Preference extends AbstractEntity
         $this->tracks               = new TrackList($manager);
     }
 
+	/**
+	 * Exclude properties from entity building.
+	 *
+	 * @return void
+	 */
+	public function setExcludedProperties(): void
+	{
+		$this->excluded_properties = [];
+	}
+
     /**
      * Get and set custom headers for entity.
      *
@@ -169,8 +180,8 @@ class Preference extends AbstractEntity
     public function getHeaders(): array
     {
         return [
+			'read' => [],
             'save' => [],
-            'read' => [],
         ];
     }
 

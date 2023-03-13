@@ -16,6 +16,11 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     private $manager;
 
+	/**
+	 * @var array
+	 */
+	protected $excluded_properties;
+
     /**
      * AbstractEntity constructor.
      *
@@ -24,6 +29,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     public function __construct(Manager $manager = null)
     {
         $this->manager = $manager;
+		$this->setExcludedProperties();
     }
 
     /**
@@ -106,13 +112,18 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     public function toArray(): array
     {
-        $properties = $this->getProperties();
+		$data                    = [];
+        $properties              = $this->getProperties();
+		$excludedPropertiesCount = count($this->excluded_properties);
 
-        $data = [];
         foreach ($properties as $property => $value) {
-            if ($property === 'manager') {
+            if ($property === 'manager' || $property === 'excluded_properties') {
                 continue;
             }
+
+			if ($excludedPropertiesCount !== 0 && in_array($property, $this->excluded_properties)) {
+				continue;
+			}
 
             if ($value instanceof self) {
                 $data[$property] = $value->toArray();
@@ -187,4 +198,14 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     {
         return $this->toArray();
     }
+
+	/**
+	 * Exclude properties from entity building.
+	 *
+	 * @return void
+	 */
+	public function setExcludedProperties(): void
+	{
+		$this->excluded_properties = [];
+	}
 }

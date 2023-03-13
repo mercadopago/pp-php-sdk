@@ -43,37 +43,12 @@ interface EntityInterface
      */
     public function getProperties(): array;
 
-    /**
-     * Get and set custom headers for entity.
-     *
-     * @return array
-     */
-    public function getHeaders(): array;
-
-    /**
-     * Get uris.
-     *
-     * @return array
-     */
-    public function getUris(): array;
-
-    /**
-     * Read method (GET).
-     *
-     * @param array $params
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function read(array $params = []);
-
-    /**
-     * Save method (POST).
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function save();
+	/**
+	 * Exclude properties from entity building.
+	 *
+	 * @return void
+	 */
+	public function setExcludedProperties(): void;
 
     /**
      * Get an array from an object.
