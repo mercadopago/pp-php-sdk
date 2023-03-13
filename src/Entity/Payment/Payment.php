@@ -135,10 +135,10 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      */
     protected $metadata;
 
-	/**
-	 * @var string
-	 */
-	protected $session_id;
+    /**
+     * @var string
+     */
+    protected $session_id;
 
     /**
      * Payment constructor.
@@ -154,15 +154,15 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
         $this->point_of_interaction = new PointOfInteraction($manager);
     }
 
-	/**
-	 * Exclude properties from entity building.
-	 *
-	 * @return void
-	 */
-	public function setExcludedProperties(): void
-	{
-		$this->excluded_properties = ['session_id'];
-	}
+    /**
+     * Exclude properties from entity building.
+     *
+     * @return void
+     */
+    public function setExcludedProperties(): void
+    {
+        $this->excluded_properties = ['session_id'];
+    }
 
     /**
      * Get and set custom headers for entity.
@@ -172,7 +172,7 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     public function getHeaders(): array
     {
         return [
-			'read' => [],
+            'read' => [],
             'save' => ['x-meli-session-id: ' . $this->session_id],
         ];
     }

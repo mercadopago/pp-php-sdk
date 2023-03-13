@@ -162,15 +162,15 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
         $this->tracks               = new TrackList($manager);
     }
 
-	/**
-	 * Exclude properties from entity building.
-	 *
-	 * @return void
-	 */
-	public function setExcludedProperties(): void
-	{
-		$this->excluded_properties = [];
-	}
+    /**
+     * Exclude properties from entity building.
+     *
+     * @return void
+     */
+    public function setExcludedProperties(): void
+    {
+        $this->excluded_properties = [];
+    }
 
     /**
      * Get and set custom headers for entity.
@@ -180,7 +180,7 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
     public function getHeaders(): array
     {
         return [
-			'read' => [],
+            'read' => [],
             'save' => [],
         ];
     }

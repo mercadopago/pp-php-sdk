@@ -55,10 +55,10 @@ interface EntityInterface
      */
     public function jsonSerialize(): array;
 
-	/**
-	 * Exclude properties from entity building.
-	 *
-	 * @return void
-	 */
-	public function setExcludedProperties(): void;
+    /**
+     * Exclude properties from entity building.
+     *
+     * @return void
+     */
+    public function setExcludedProperties(): void;
 }
