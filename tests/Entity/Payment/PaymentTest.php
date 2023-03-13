@@ -98,6 +98,31 @@ class PaymentTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    function testGetHeadersSuccess()
+    {
+        $actual = $this->payment->getHeaders();
+
+        $this->assertTrue(is_array($actual));
+        $this->assertArrayHasKey('read', $actual);
+        $this->assertArrayHasKey('save', $actual);
+        $this->assertTrue(is_array($actual['read']));
+        $this->assertTrue(is_array($actual['save']));
+    }
+
+    function testGetAndSetSessionIdHeaderSuccess()
+    {
+        $this->payment->__set('session_id', 'armor.hash.123456');
+
+        $headers = $this->payment->getHeaders()['save'];
+        $expectedHeader = 'x-meli-session-id: armor.hash.123456';
+
+        $property = $this->payment->__get('session_id');
+        $expectedProperty = 'armor.hash.123456';
+
+        $this->assertContains($expectedHeader, $headers);
+        $this->assertEquals($expectedProperty, $property);
+    }
+
     function testGetUriSuccess()
     {
         $actual = $this->payment->getUris();
