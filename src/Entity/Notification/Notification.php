@@ -127,7 +127,7 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
      *
      * @return void
      */
-    public function setExcludedProperties(): void
+    public function setExcludedProperties()
     {
         $this->excluded_properties = [];
     }

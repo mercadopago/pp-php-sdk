@@ -60,5 +60,5 @@ interface EntityInterface
      *
      * @return void
      */
-    public function setExcludedProperties(): void;
+    public function setExcludedProperties();
 }

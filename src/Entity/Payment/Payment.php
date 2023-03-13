@@ -159,7 +159,7 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      *
      * @return void
      */
-    public function setExcludedProperties(): void
+    public function setExcludedProperties()
     {
         $this->excluded_properties = ['session_id'];
     }

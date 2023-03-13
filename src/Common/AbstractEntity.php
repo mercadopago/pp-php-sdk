@@ -202,7 +202,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      *
      * @return void
      */
-    public function setExcludedProperties(): void
+    public function setExcludedProperties()
     {
         $this->excluded_properties = [];
     }
