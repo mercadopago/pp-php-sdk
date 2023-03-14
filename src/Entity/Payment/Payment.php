@@ -4,10 +4,12 @@ namespace MercadoPago\PP\Sdk\Entity\Payment;
 
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Manager;
+use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 
 /**
  * Class Payment
  *
+ * @property string $session_id
  * @property string $description
  * @property string $external_reference
  * @property string $notification_url
@@ -31,7 +33,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
-class Payment extends AbstractEntity
+class Payment extends AbstractEntity implements RequesterEntityInterface
 {
     /**
      * @var string
@@ -134,6 +136,11 @@ class Payment extends AbstractEntity
     protected $metadata;
 
     /**
+     * @var string
+     */
+    protected $session_id;
+
+    /**
      * Payment constructor.
      *
      * @param Manager|null $manager
@@ -148,7 +155,30 @@ class Payment extends AbstractEntity
     }
 
     /**
-     * Get uris
+     * Exclude properties from entity building.
+     *
+     * @return void
+     */
+    public function setExcludedProperties()
+    {
+        $this->excluded_properties = ['session_id'];
+    }
+
+    /**
+     * Get and set custom headers for entity.
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return [
+            'read' => [],
+            'save' => ['x-meli-session-id: ' . $this->session_id],
+        ];
+    }
+
+    /**
+     * Get uris.
      *
      * @return array
      */
