@@ -114,6 +114,17 @@ class PreferenceTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    function testGetHeadersSuccess()
+    {
+        $actual = $this->preference->getHeaders();
+
+        $this->assertTrue(is_array($actual));
+        $this->assertArrayHasKey('read', $actual);
+        $this->assertArrayHasKey('save', $actual);
+        $this->assertTrue(is_array($actual['read']));
+        $this->assertTrue(is_array($actual['save']));
+    }
+
     function testGetUriSuccess()
     {
         $actual = $this->preference->getUris();
