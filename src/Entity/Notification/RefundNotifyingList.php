@@ -24,4 +24,3 @@ class RefundNotifyingList extends AbstractCollection
         parent::addEntity($item, $key);
     }
 }
-
