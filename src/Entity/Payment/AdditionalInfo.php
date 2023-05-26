@@ -12,7 +12,6 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property ItemList $items
  * @property AdditionalInfoPayer $payer
  * @property Shipments $shipments
- * @property string $poi_id
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
@@ -37,11 +36,6 @@ class AdditionalInfo extends AbstractEntity
      * @var Shipments
      */
     protected $shipments;
-
-    /**
-     * @var string
-     */
-    protected $poi_id;
 
     /**
      * AdditionalInfo constructor.

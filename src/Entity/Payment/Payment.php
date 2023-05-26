@@ -27,7 +27,6 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  * @property double $transaction_amount
  * @property double $coupon_amount
  * @property int $differential_pricing_id
- * @property Barcode $barcode
  * @property int $installments
  * @property TransactionDetails $transaction_details
  * @property bool $binary_mode
@@ -144,11 +143,6 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      * @var int
      */
     protected $differential_pricing_id;
-
-    /**
-     * @var Barcode
-     */
-    protected $barcode;
 
     /**
      * @var int
@@ -270,7 +264,6 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
         parent::__construct($manager);
         $this->payer = new Payer($manager);
         $this->additional_info = new AdditionalInfo($manager);
-        $this->barcode = new Barcode($manager);
         $this->transaction_details = new TransactionDetails($manager);
         $this->point_of_interaction = new PointOfInteraction($manager);
     }

@@ -13,7 +13,6 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  * @property string $picture_url
  * @property string $category_id
  * @property int $quantity
- * @property string $currency_id
  * @property float $unit_price
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
@@ -49,11 +48,6 @@ class Item extends AbstractEntity
      * @var int
      */
     protected $quantity;
-
-    /**
-     * @var string
-     */
-    protected $currency_id;
 
     /**
      * @var float
