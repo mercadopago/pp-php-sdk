@@ -17,12 +17,10 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  * @property string $sponsor_id
  * @property string $counter_currency
  * @property double $shipping_amount
- * @property string $pos_id
  * @property string $store_id
  * @property Payer $payer
  * @property array $metadata
  * @property AdditionalInfo $additional_info
- * @property array $order
  * @property string $external_reference
  * @property double $transaction_amount
  * @property double $coupon_amount
@@ -35,14 +33,10 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  * @property string $processing_mode
  * @property string $merchant_account_id
  * @property PointOfInteraction $point_of_interaction
- * @property string $profile_id
  * @property string $brand_id
  * @property string $reserve_id
  * @property array $collector
- * @property array $internal_metadata
- * @property string $splitter_id
  * @property string $callback_url
- * @property string $owner
  * @property double $application_fee
  * @property int $campaign_id
  * @property bool $capture
@@ -97,11 +91,6 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     /**
      * @var string
      */
-    protected $pos_id;
-
-    /**
-     * @var string
-     */
     protected $store_id;
 
     /**
@@ -118,11 +107,6 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      * @var AdditionalInfo
      */
     protected $additional_info;
-
-    /**
-     * @var array
-     */
-    protected $order;
 
     /**
      * @var string
@@ -187,11 +171,6 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     /**
      * @var string
      */
-    protected $profile_id;
-
-    /**
-     * @var string
-     */
     protected $brand_id;
 
     /**
@@ -205,24 +184,9 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     protected $collector;
 
     /**
-     * @var array
-     */
-    protected $internal_metadata;
-
-    /**
-     * @var string
-     */
-    protected $splitter_id;
-
-    /**
      * @var string
      */
     protected $callback_url;
-
-    /**
-     * @var string
-     */
-    protected $owner;
 
     /**
      * @var double
