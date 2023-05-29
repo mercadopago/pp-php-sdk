@@ -11,7 +11,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property ExcludedPaymentMethodList $excluded_payment_methods
  * @property ExcludedPaymentTypeList $excluded_payment_types
  * @property string $default_payment_method_id
- * @property string $default_installments
+ * @property int $default_installments
  * @property int $installments
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
@@ -34,7 +34,7 @@ class PaymentMethod extends AbstractEntity
     protected $default_payment_method_id;
 
     /**
-     * @var string
+     * @var int
      */
     protected $default_installments;
 
