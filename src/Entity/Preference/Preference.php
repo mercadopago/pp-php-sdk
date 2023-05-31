@@ -11,25 +11,25 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  *
  * @property string $additional_info
  * @property string $auto_return
- * @property BackUrl $back_urls
- * @property boolean $binary_mode
- * @property string $date_of_expiration
- * @property object $differential_pricing
+ * @property bool $binary_mode
  * @property string $expiration_date_from
  * @property string $expiration_date_to
- * @property boolean $expires
+ * @property bool $expires
  * @property string $external_reference
+ * @property string $notification_url
+ * @property string $purpose
+ * @property string $statement_descriptor
  * @property ItemList $items
+ * @property PaymentMethod $payment_methods
+ * @property BackUrl $back_urls
+ * @property Payer $payer
+ * @property Shipment $shipments
+ * @property array $metadata
+ * @property string $date_of_expiration
+ * @property array $differential_pricing
  * @property string $marketplace
  * @property float $marketplace_fee
- * @property object $metadata
- * @property string $notification_url
- * @property Payer $payer
- * @property PaymentMethod $payment_methods
- * @property string $purpose
- * @property Shipment $shipments
  * @property string $sponsor_id
- * @property string $statement_descriptor
  * @property TrackList $tracks
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
@@ -47,24 +47,9 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
     protected $auto_return;
 
     /**
-     * @var BackUrl
-     */
-    protected $back_urls;
-
-    /**
-     * @var boolean
+     * @var bool
      */
     protected $binary_mode;
-
-    /**
-     * @var string
-     */
-    protected $date_of_expiration;
-
-    /**
-     * @var object
-     */
-    protected $differential_pricing;
 
     /**
      * @var string
@@ -77,7 +62,7 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
     protected $expiration_date_to;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $expires;
 
@@ -87,9 +72,59 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
     protected $external_reference;
 
     /**
+     * @var string
+     */
+    protected $notification_url;
+
+    /**
+     * @var string
+     */
+    protected $purpose;
+
+    /**
+     * @var string
+     */
+    protected $statement_descriptor;
+
+    /**
      * @var ItemList
      */
     protected $items;
+
+    /**
+     * @var PaymentMethod
+     */
+    protected $payment_methods;
+
+    /**
+     * @var BackUrl
+     */
+    protected $back_urls;
+
+    /**
+     * @var Payer
+     */
+    protected $payer;
+
+    /**
+     * @var Shipment
+     */
+    protected $shipments;
+
+    /**
+     * @var array
+     */
+    protected $metadata;
+
+    /**
+     * @var string
+     */
+    protected $date_of_expiration;
+
+    /**
+     * @var array
+     */
+    protected $differential_pricing;
 
     /**
      * @var string
@@ -102,44 +137,9 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
     protected $marketplace_fee;
 
     /**
-     * @var object
-     */
-    protected $metadata;
-
-    /**
-     * @var string
-     */
-    protected $notification_url;
-
-    /**
-     * @var Payer
-     */
-    protected $payer;
-
-    /**
-     * @var PaymentMethod
-     */
-    protected $payment_methods;
-
-    /**
-     * @var string
-     */
-    protected $purpose;
-
-    /**
-     * @var Shipment
-     */
-    protected $shipments;
-
-    /**
      * @var string
      */
     protected $sponsor_id;
-
-    /**
-     * @var string
-     */
-    protected $statement_descriptor;
 
     /**
      * @var TrackList

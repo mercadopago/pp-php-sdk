@@ -9,23 +9,26 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 /**
  * Class Notification
  *
- * @property string $ip_address
  * @property string $notification_id
  * @property string $notification_url
  * @property string $status
- * @property string $external_reference
- * @property float $transaction_id
+ * @property string $transaction_id
  * @property string $transaction_type
+ * @property string $platform_id
+ * @property string $external_reference
+ * @property string $preference_id
  * @property float $transaction_amount
- * @property float $total_pending
- * @property float $total_approved
  * @property float $total_paid
- * @property float $total_rejected
+ * @property float $total_approved
+ * @property float $total_pending
  * @property float $total_refunded
+ * @property float $total_rejected
  * @property float $total_cancelled
  * @property float $total_charged_back
+ * @property string $multiple_payment_transaction_id
  * @property array $payments_metadata
- * @property PaymentDetails $payments_details
+ * @property PaymentDetailsList $payments_details
+ * @property RefundNotifyingList $refunds_notifying
  *
  * @package MercadoPago\PP\Sdk\Entity\Notification
  */
@@ -49,17 +52,27 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     /**
      * @var string
      */
-    protected $external_reference;
-
-    /**
-     * @var float
-     */
     protected $transaction_id;
 
     /**
      * @var string
      */
     protected $transaction_type;
+
+    /**
+     * @var string
+     */
+    protected $platform_id;
+
+    /**
+     * @var string
+     */
+    protected $external_reference;
+
+    /**
+     * @var string
+     */
+    protected $preference_id;
 
     /**
      * @var float
@@ -69,7 +82,7 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     /**
      * @var float
      */
-    protected $total_pending;
+    protected $total_paid;
 
     /**
      * @var float
@@ -79,17 +92,17 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     /**
      * @var float
      */
-    protected $total_paid;
-
-    /**
-     * @var float
-     */
-    protected $total_rejected;
+    protected $total_pending;
 
     /**
      * @var float
      */
     protected $total_refunded;
+
+    /**
+     * @var float
+     */
+    protected $total_rejected;
 
     /**
      * @var float
@@ -102,14 +115,24 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     protected $total_charged_back;
 
     /**
+     * @var string
+     */
+    protected $multiple_payment_transaction_id;
+
+    /**
      * @var array
      */
     protected $payments_metadata;
 
     /**
-     * @var PaymentDetails
+     * @var PaymentDetailsList
      */
     protected $payments_details;
+
+    /**
+     * @var RefundNotifyingList
+     */
+    protected $refunds_notifying;
 
     /**
      * Notification constructor.
@@ -120,6 +143,7 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     {
         parent::__construct($manager);
         $this->payments_details = new PaymentDetailsList($manager);
+        $this->refunds_notifying = new RefundNotifyingList($manager);
     }
 
     /**

@@ -10,8 +10,9 @@ use MercadoPago\PP\Sdk\Common\Manager;
  *
  * @property string $first_name
  * @property string $last_name
- * @property Phone $phone
  * @property AdditionalInfoPayerAddress $address
+ * @property Phone $phone
+ * @property string $registration_date
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
@@ -28,14 +29,19 @@ class AdditionalInfoPayer extends AbstractEntity
     protected $last_name;
 
     /**
+     * @var AdditionalInfoPayerAddress
+     */
+    protected $address;
+
+    /**
      * @var Phone
      */
     protected $phone;
 
     /**
-     * @var AdditionalInfoPayerAddress
+     * @var string
      */
-    protected $address;
+    protected $registration_date;
 
     /**
      * AdditionalInfoPayer constructor.
