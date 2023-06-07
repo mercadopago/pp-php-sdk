@@ -8,6 +8,7 @@ use MercadoPago\PP\Sdk\Common\Constants;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Notification\Notification;
 use MercadoPago\PP\Sdk\Entity\Payment\Payment;
+use MercadoPago\PP\Sdk\Entity\Payment\PaymentV2;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Requester\CurlRequester;
@@ -85,5 +86,13 @@ class Sdk
     public function getPaymentInstance()
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\Payment', Constants::BASEURL_MP);
+    }
+
+    /**
+     * @return PaymentV2
+     */
+    public function getPaymentV2Instance()
+    {
+        return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\PaymentV2', Constants::BASEURL_MP);
     }
 }

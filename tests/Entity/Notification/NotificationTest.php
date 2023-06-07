@@ -88,7 +88,7 @@ class NotificationTest extends TestCase
         $this->responseMock->expects(self::any())->method('getStatus')->willReturn(200);
         $this->responseMock->expects(self::any())->method('getData')->willReturn($this->notificationMock);
 
-        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/bifrost/notification/status/:id');
+        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/v1/asgard/notification/:id');
         $this->managerMock->expects(self::any())->method('getHeader')->willReturn([]);
         $this->managerMock->expects(self::any())->method('execute')->willReturn($this->responseMock);
         $this->managerMock->expects(self::any())->method('handleResponse')->willReturn($this->notificationMock);
