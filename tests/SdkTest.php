@@ -86,4 +86,11 @@ class SdkTest extends TestCase
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\Payment', $actual);
     }
+
+    function testGetPaymentV2Success()
+    {
+        $actual = $this->sdk->getPaymentV2Instance();
+
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\PaymentV2', $actual);
+    }
 }

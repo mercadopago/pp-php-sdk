@@ -177,7 +177,7 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     public function getUris(): array
     {
         return array(
-            'get' => '/v1/bifrost/notification/status/:id',
+            'get' => '/v1/asgard/notification/:id',
         );
     }
 }
