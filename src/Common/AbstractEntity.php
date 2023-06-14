@@ -217,7 +217,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     public function obfuscateAuthorizationHeader(array $headers)
     {
         foreach ($headers as $header) {
-            array_merge($this->LAST_HEADERS, preg_replace('/(Authorization: Bearer) (.*)/i', '$1 xxx', $header)); ;
+            array_merge(self::LAST_HEADERS, preg_replace('/(Authorization: Bearer) (.*)/i', '$1 xxx', $header)); ;
         }
     }
 
@@ -228,6 +228,6 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     public function getLastHeaders(): array
     {
-        return $this->LAST_HEADERS;
+        return self::LAST_HEADERS;
     }
 }
