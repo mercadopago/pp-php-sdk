@@ -11,7 +11,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
-class MultipaymentV2 extends Payment
+class MultipaymentV2 extends PaymentV2
 {
     /**
      * @var TransactionInfoList
