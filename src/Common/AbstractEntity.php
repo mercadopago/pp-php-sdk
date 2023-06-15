@@ -53,7 +53,8 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         }
 
         if (is_subclass_of($this->{$name}, AbstractEntity::class) ||
-            is_subclass_of($this->{$name}, AbstractCollection::class)) {
+            is_subclass_of($this->{$name}, AbstractCollection::class)
+        ) {
             $this->{$name}->setEntity($value);
         } else {
             $this->{$name} = $value;
