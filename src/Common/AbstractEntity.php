@@ -210,7 +210,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     /**
      * Obfuscate Authorization Header.
      *
-     * @return array
+     * @return void
      */
     public function obfuscateAuthorizationHeader(array $headers)
     {
