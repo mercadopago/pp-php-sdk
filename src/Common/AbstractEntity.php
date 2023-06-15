@@ -52,7 +52,8 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
             return;
         }
 
-        if (is_subclass_of($this->{$name}, AbstractEntity::class) ||
+        if (
+            is_subclass_of($this->{$name}, AbstractEntity::class) ||
             is_subclass_of($this->{$name}, AbstractCollection::class)
         ) {
             $this->{$name}->setEntity($value);
@@ -214,8 +215,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     public function obfuscateAuthorizationHeader(array $headers)
     {
-        if(!isset($_SESSION))
-        {
+        if (!isset($_SESSION)) {
             session_start();
         }
         $_SESSION["last_headers"] = preg_replace('/(Authorization: Bearer) (.*)/i', '$1 xxx', $headers);
