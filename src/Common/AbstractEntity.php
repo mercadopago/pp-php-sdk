@@ -3,6 +3,7 @@
 namespace MercadoPago\PP\Sdk\Common;
 
 use MercadoPago\PP\Sdk\Interfaces\EntityInterface;
+use MercadoPago\PP\Sdk\Sdk;
 
 /**
  * Class AbstractEntity
@@ -214,10 +215,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     public function obfuscateAuthorizationHeader(array $headers)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        $_SESSION["last_headers"] = preg_replace('/(Authorization: Bearer) (.*)/i', '$1 xxx', $headers);
+        Sdk::$cache['last_headers'] = preg_replace('/(Authorization: Bearer) (.*)/i', '$1 xxx', $headers);
     }
 
     /**
@@ -227,6 +225,9 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     public function getLastHeaders(): array
     {
-        return $_SESSION["last_headers"];
+        if (isset(Sdk::$cache['last_headers'])) {
+            return Sdk::$cache['last_headers'];
+        }
+        return [];
     }
 }
