@@ -23,6 +23,8 @@ use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
  */
 class Sdk
 {
+    public static $cache = [];
+    
     /**
      * @var Config
      */
