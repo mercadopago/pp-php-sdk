@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-SOURCE_DIRECTORY=$(pwd)
-SSH_SDK_DEPLOY_KEY=''
-GIT_USER_NAME=''
-GIT_USER_EMAIL=''
-DESTINATION_REPOSITORY_USERNAME=''
-DESTINATION_REPOSITORY_NAME=''
-
-apt-get install jq
 
 # Verify that there (potentially) some access to the destination repository
 # and set up git (with GIT_CMD variable) and GIT_CMD_REPOSITORY
@@ -34,10 +26,7 @@ fi
 
 cd "$SOURCE_DIRECTORY"
 ### Preparing release folder
-# rm -rf .git .github .gitmodules .fury .pre-commit-config.yaml bin/publish-tag-release.sh
-# rm -rf .github .gitmodules .fury .pre-commit-config.yaml bin/publish-tag-release.sh
-rm -rf .git bin/publish-tag-release.sh
-
+rm -rf .git .github .gitmodules .fury .pre-commit-config.yaml bin/publish-tag-release.sh
 
 CLONE_DIR=$(mktemp -d)
 
@@ -92,12 +81,20 @@ echo "[+] Pushing git commit"
 # --set-upstream: sets the branch when pushing to a branch that does not exist
 git push "${GIT_CMD_REPOSITORY}" --set-upstream "$TARGET_BRANCH"
 
+echo "[+] git checkout master:"
 git checkout master
+
+echo "[+] git pull origin master:"
 git pull origin master
+
+echo "[+] git merge branch $TARGET_BRANCH with master:"
 git merge "$TARGET_BRANCH"
+
+echo "[+] git push origin master:"
 git push origin master
 
 echo "[+] git tag:"
 git tag "v$TAG_VERSION" master
 
+echo "[+] git push origin v$TAG_VERSION:"
 git push origin "v$TAG_VERSION"
