@@ -61,12 +61,12 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @inheritDoc
      */
-    #[\ReturnTypeWillChange] 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->collection);
     }
-    
+
     /**
      * @return int|null
      */
