@@ -12,7 +12,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property string $type
  * @property string $id
  * @property string $email
- * @property PayerIdentification $identification
+ * @property Identification $identification
  * @property string $first_name
  * @property string $last_name
  * @property string $operator_id
@@ -43,7 +43,7 @@ class Payer extends AbstractEntity
     protected $email;
 
     /**
-     * @var PayerIdentification
+     * @var Identification
      */
     protected $identification;
 
@@ -75,7 +75,7 @@ class Payer extends AbstractEntity
     public function __construct($manager)
     {
         parent::__construct($manager);
-        $this->identification = new PayerIdentification($manager);
+        $this->identification = new Identification($manager);
         $this->address        = new Address($manager);
     }
 }

@@ -5,11 +5,12 @@ namespace MercadoPago\PP\Sdk\Entity\Preference;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
+use MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfo;
 
 /**
  * Class Preference
  *
- * @property string $additional_info
+ * @property AdditionalInfo $additional_info
  * @property string $auto_return
  * @property bool $binary_mode
  * @property string $expiration_date_from
@@ -37,7 +38,7 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 class Preference extends AbstractEntity implements RequesterEntityInterface
 {
     /**
-     * @var string
+     * @var AdditionalInfo
      */
     protected $additional_info;
 
@@ -154,6 +155,7 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
     public function __construct($manager)
     {
         parent::__construct($manager);
+        $this->additional_info      = new AdditionalInfo($manager);
         $this->back_urls            = new BackUrl($manager);
         $this->items                = new ItemList($manager);
         $this->payer                = new Payer($manager);

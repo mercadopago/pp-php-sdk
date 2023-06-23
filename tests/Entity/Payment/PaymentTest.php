@@ -74,17 +74,17 @@ class PaymentTest extends TestCase
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfo", $additionalInfo);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoPayer", $additionalInfoPayer);
-        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoPayerAddress", $additionalInfoPayerAddress);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $additionalInfoPayerAddress);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Phone", $phone);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Shipments", $shipments);
-        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ReceiverAddress", $receiverAddress);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $receiverAddress);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ItemList", $items);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Item", $item);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Payer", $payer);
-        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\PayerIdentification", $identification);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Identification", $identification);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Address", $payerAddress);
     }
 

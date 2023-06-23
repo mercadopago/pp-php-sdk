@@ -80,6 +80,17 @@ class PreferenceTest extends TestCase
         $freeMethod = $freeMethods->getIterator()[0];
         $receiverAddress = $shipment->__get('receiver_address');
 
+        $additionalInfo = $this->preference->__get('additional_info');
+        $additionalInfoPayer = $additionalInfo->__get('payer');
+        $additionalInfoPayerAddress = $additionalInfoPayer->__get('address');
+        $phone_additional_info = $additionalInfoPayer->__get('phone');
+
+        $shipments = $additionalInfo->__get('shipments');
+        $receiverAddress_additional_info = $shipments->__get('receiver_address');
+
+        $items_additional_info = $additionalInfo->__get('items');
+        $item_additional_info = $items_additional_info->getIterator()[0];
+
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\BackUrl", $backUrl);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\Item", $item);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\ItemList", $items);
@@ -102,6 +113,17 @@ class PreferenceTest extends TestCase
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\Track", $track);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Preference\TrackList", $tracks);
+
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfo", $additionalInfo);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoPayer", $additionalInfoPayer);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $additionalInfoPayerAddress);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Phone", $phone_additional_info);
+
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Shipments", $shipments);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $receiverAddress_additional_info);
+
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ItemList", $items_additional_info);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Item", $item_additional_info);
     }
 
     function testGetAndSetSuccess()
