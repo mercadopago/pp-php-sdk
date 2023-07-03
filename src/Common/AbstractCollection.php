@@ -61,8 +61,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
     /**
      * @inheritDoc
      */
-    #[\ReturnTypeWillChange]
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->collection);
     }
