@@ -15,6 +15,7 @@ class PaymentMock
     "statement_descriptor" => "TESTSTORE",
     "transaction_amount" => 12,
     "installments" => null,
+    "three_d_secure_mode" => "not_supported",
     "description" => "Flying Ninja x 1",
     "payment_method_id" => "pix",
     "date_of_expiration" => "2022-09-20T22:13:32.000+0000",

@@ -43,6 +43,7 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  * @property string $coupon_code
  * @property string $token
  * @property string $session_id
+ * @property string $three_d_secure_mode
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
@@ -67,6 +68,11 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      * @var string
      */
     protected $payment_method_id;
+
+    /**
+     * @var string
+     */
+    protected $three_d_secure_mode;
 
     /**
      * @var string
