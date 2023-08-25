@@ -71,6 +71,7 @@ class PaymentTest extends TestCase
         $payer = $this->payment->__get('payer');
         $identification = $payer->__get('identification');
         $payerAddress = $payer->__get('address');
+        $phoneAddress = $payer->__get('phone');
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfo", $additionalInfo);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoPayer", $additionalInfoPayer);
@@ -86,6 +87,7 @@ class PaymentTest extends TestCase
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Payer", $payer);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Identification", $identification);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Address", $payerAddress);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Phone", $phoneAddress);
     }
 
     function testGetAndSetSuccess()
