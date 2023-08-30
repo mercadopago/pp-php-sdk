@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## V1.5.4
+### Added
+- Adds a step to the script that runs via GitHub Actions to create a version tag for the internal repository
+
+## V1.5.3
+### Added
+- Adds to the autoload-dev of the composer.json file the necessary package to run the integration tests
+
 ## V1.5.2
 ### Changed
 - Add Docs for Asgard Services Integration
+
+## V1.5.1
+### Added
+- Add Tests of integration on Payment
