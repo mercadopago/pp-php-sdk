@@ -7,7 +7,12 @@ use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 
 /**
- * Class Payment
+ * Handles integration with the Asgard Transaction service.
+ *
+ * The Asgard Transaction acts as a middleware for creating various transaction-related entities
+ * such as Payments, Preferences, Point, and Transaction Intent. It orchestrates all actions
+ * taken during a payment transaction. Its main responsibility is to ensure a secure intermediation
+ * between P&P and MercadoPago during payment creation.
  *
  * @property string $date_of_expiration
  * @property string $operation_type
@@ -271,5 +276,27 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
         return array(
             'post' => '/v1/asgard/payments',
         );
+    }
+
+    /**
+     * Creates a payment using the Asgard Transaction service API.
+     *
+     * To execute this method, it is essential to provide the payment request payload. The payload includes
+     * properties such as 'paymentMethodId', 'description', 'transactionAmount', among others.
+     * The method returns details of the created payment, including fields like 'id', 'status',
+     * 'applicationId', 'dateCreated', etc.
+     *
+     * Internally, this method makes a call to the Asgard Transaction API, supplying the required parameters:
+     * Payment creation payload, Platform Identifier, and Access Token.
+     *
+     * Note: This method is inherited from the parent class but specialized for payments.
+     *
+     * @return mixed The result of the save operation, typically an instance of this Payment
+     * class populated with the created data.
+     * @throws \Exception Throws an exception if something goes wrong during the save operation.
+     */
+    public function save()
+    {
+        return parent::save();
     }
 }
