@@ -99,3 +99,8 @@ $notification = $sdk->getNotificationInstance();
 $notification->read(array("id" => "P-1316643861"));
 
 ```
+
+## Executando os testes de Integração
+
+Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo .env.sample
+que está na raiz do projeto e criar um .env também na raiz do projeto, feito isso, você deve popular os valores dentro do .env

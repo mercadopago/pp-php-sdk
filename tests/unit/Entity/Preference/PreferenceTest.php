@@ -1,11 +1,11 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Tests\Entity\Preference;
+namespace MercadoPago\PP\Sdk\Tests\Unit\Entity\Preference;
 
 use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
-use MercadoPago\PP\Sdk\Tests\Mock\PreferenceMock;
+use MercadoPago\PP\Sdk\Tests\Unit\Mock\PreferenceMock;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

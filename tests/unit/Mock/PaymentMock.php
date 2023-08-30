@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Tests\Mock;
+namespace MercadoPago\PP\Sdk\Tests\Unit\Mock;
 
 /**
  * Class PaymentMock

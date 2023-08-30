@@ -1,11 +1,11 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Tests\Entity\Notification;
+namespace MercadoPago\PP\Sdk\Tests\Unit\Entity\Notification;
 
 use MercadoPago\PP\Sdk\HttpClient\Response;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Notification\Notification;
-use MercadoPago\PP\Sdk\Tests\Mock\NotificationMock;
+use MercadoPago\PP\Sdk\Tests\Unit\Mock\NotificationMock;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

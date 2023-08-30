@@ -6,8 +6,11 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
-		<testsuite name='pp-php-sdk'>
-			<directory suffix="Test.php">./tests/</directory>
+		<testsuite name='pp-php-sdk-unit'>
+			<directory>./tests/unit/</directory>
+		</testsuite>
+		<testsuite name='pp-php-sdk-integration'>
+			<directory>./tests/integration/</directory>
 		</testsuite>
 	</testsuites>
 	<coverage>

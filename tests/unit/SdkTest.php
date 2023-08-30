@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\PP\Sdk\Tests;
+namespace MercadoPago\PP\Sdk\Tests\Unit;
 
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Manager;
