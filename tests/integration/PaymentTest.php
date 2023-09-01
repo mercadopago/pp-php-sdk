@@ -38,7 +38,7 @@ class PaymentTest extends TestCase
         $payment = $this->loadPayment();
 
         $cardToken = new CardToken();
-        $idToken = $cardToken->generateCardToken("APRO");
+        $idToken = $cardToken->generateCardTokenMaster("APRO");
 
         $payment->token = $idToken;
         $payment->installments = 1;
@@ -58,7 +58,7 @@ class PaymentTest extends TestCase
         $payment = $this->loadPayment();
 
         $cardToken = new CardToken();
-        $idToken = $cardToken->generateCardToken("OTHE");
+        $idToken = $cardToken->generateCardTokenMaster("OTHE");
 
         $payment->token = $idToken;
         $payment->installments = 1;
