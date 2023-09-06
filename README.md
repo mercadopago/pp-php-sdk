@@ -104,3 +104,5 @@ $notification->read(array("id" => "P-1316643861"));
 
 Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo .env.sample
 que está na raiz do projeto e criar um .env também na raiz do projeto, feito isso, você deve popular os valores dentro do .env
+
+Documentação dos testes integrados: https://mercadolibre.atlassian.net/wiki/spaces/PLU/pages/2280065838/Testes+Integrados+pp-php-sdk
