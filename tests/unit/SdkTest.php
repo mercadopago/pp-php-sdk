@@ -94,6 +94,13 @@ class SdkTest extends TestCase
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\PaymentV2', $actual);
     }
 
+    function testGetPaymentV21Success()
+    {
+        $actual = $this->sdk->getPaymentV21Instance();
+
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\PaymentV21', $actual);
+    }
+
     function testGetMultipaymentSuccess()
     {
         $actual = $this->sdk->getMultipaymentInstance();
@@ -106,5 +113,12 @@ class SdkTest extends TestCase
         $actual = $this->sdk->getMultipaymentV2Instance();
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV2', $actual);
+    }
+
+    function testGetMultipaymentV21Success()
+    {
+        $actual = $this->sdk->getMultipaymentV21Instance();
+
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV21', $actual);
     }
 }

@@ -9,8 +9,10 @@ use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Entity\Notification\Notification;
 use MercadoPago\PP\Sdk\Entity\Payment\Multipayment;
 use MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV2;
+use MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV21;
 use MercadoPago\PP\Sdk\Entity\Payment\Payment;
 use MercadoPago\PP\Sdk\Entity\Payment\PaymentV2;
+use MercadoPago\PP\Sdk\Entity\Payment\PaymentV21;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Requester\CurlRequester;
@@ -100,6 +102,14 @@ class Sdk
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\PaymentV2', Constants::BASEURL_MP);
     }
 
+     /**
+     * @return PaymentV21
+     */
+    public function getPaymentV21Instance()
+    {
+        return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\PaymentV21', Constants::BASEURL_MP);
+    }
+
     /**
      * @return Multipayment
      */
@@ -114,5 +124,13 @@ class Sdk
     public function getMultipaymentV2Instance()
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV2', Constants::BASEURL_MP);
+    }
+
+     /**
+     * @return MultipaymentV21
+     */
+    public function getMultipaymentV21Instance()
+    {
+        return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV21', Constants::BASEURL_MP);
     }
 }
