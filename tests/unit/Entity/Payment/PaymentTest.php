@@ -113,7 +113,7 @@ class PaymentTest extends TestCase
 
     function testSetCustomHeaderSuccess()
     {
-        $this->payment->__set('customHeader', ['x-customer-id: ' . '102030']);
+        $this->payment->setCustomHeaders(['x-customer-id: ' . '102030']);
         $headers = $this->payment->getHeaders()['save'];
         $expectedHeader = 'x-customer-id: 102030';
 

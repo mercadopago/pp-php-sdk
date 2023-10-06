@@ -233,7 +233,7 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      /**
      * @var array
      */
-    protected $customHeader;
+    private $customHeader;
 
     /**
      * Payment constructor.
@@ -270,7 +270,7 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
             'read' => [],
             'save' => isset($this->customHeader)
                         ? array_merge(['x-meli-session-id: ' . $this->session_id], $this->customHeader)
-                        : ['x-meli-session-id: ' . $this->session_id]
+                        : ['x-meli-session-id: ' . $this->session_id],
         ];
     }
     /**
