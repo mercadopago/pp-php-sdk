@@ -48,6 +48,7 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  * @property string $coupon_code
  * @property string $token
  * @property string $session_id
+ * @property array $customHeader
  * @property string $three_d_secure_mode
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
@@ -229,6 +230,11 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      */
     protected $session_id;
 
+     /**
+     * @var array
+     */
+    protected $customHeader;
+
     /**
      * Payment constructor.
      *
@@ -262,10 +268,20 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     {
         return [
             'read' => [],
-            'save' => ['x-meli-session-id: ' . $this->session_id],
+            'save' => isset($this->customHeader)
+                        ? array_merge(['x-meli-session-id: ' . $this->session_id], $this->customHeader)
+                        : ['x-meli-session-id: ' . $this->session_id]
         ];
     }
-
+    /**
+     * Set custom headers for entity.
+     *
+     * @return array
+     */
+    public function setCustomHeaders(array $customHeader = [])
+    {
+        return $this->customHeader = $customHeader;
+    }
     /**
      * Get uris.
      *

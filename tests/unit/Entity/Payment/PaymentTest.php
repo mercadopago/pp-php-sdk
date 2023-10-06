@@ -111,6 +111,15 @@ class PaymentTest extends TestCase
         $this->assertTrue(is_array($actual['save']));
     }
 
+    function testSetCustomHeaderSuccess()
+    {
+        $this->payment->__set('customHeader', ['x-customer-id: ' . '102030']);
+        $headers = $this->payment->getHeaders()['save'];
+        $expectedHeader = 'x-customer-id: 102030';
+
+        $this->assertContains($expectedHeader, $headers);
+    }
+
     function testGetAndSetSessionIdHeaderSuccess()
     {
         $this->payment->__set('session_id', 'armor.hash.123456');
