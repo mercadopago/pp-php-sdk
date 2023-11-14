@@ -1,8 +1,13 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## V1.8.0
+### Added
+- added 3DS validation layer.
 
 ## V1.7.1
 ### Added
@@ -27,7 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## V1.5.5
 ### Added
 - Integration tests for multipayment scenario
-
 ### Changed
 - Modify composer.json in autoload-dev to load all class in /tests
 

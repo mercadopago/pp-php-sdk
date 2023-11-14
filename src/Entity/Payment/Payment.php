@@ -2,7 +2,9 @@
 
 namespace MercadoPago\PP\Sdk\Entity\Payment;
 
+use Exception;
 use MercadoPago\PP\Sdk\Common\AbstractEntity;
+use MercadoPago\PP\Sdk\Common\Constants;
 use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 
@@ -292,6 +294,24 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
         return array(
             'post' => '/v1/asgard/payments',
         );
+    }
+
+    /**
+     *  Addition of the 3DS validation layer. Possible values are as follows:
+     * - not_supported: 3DS should not be used (it is the default value).
+     * - optional: 3DS may or may not be required, depending on the risk profile of the operation.
+     * - mandatory: 3DS must be required, depending on the risk profile of the operation.
+     */
+
+    public function validateThreeDSecureMode()
+    {
+
+        $validation = Constants::THREE_DS_VALID_OPTIONS;
+        if (in_array(strtolower($this->three_d_secure_mode), $validation)) {
+            return $this->save();
+        }
+
+        throw new Exception("Invalid value for field three_d_secure_mode");
     }
 
     /**

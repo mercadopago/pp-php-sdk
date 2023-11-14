@@ -156,6 +156,24 @@ class PaymentTest extends TestCase
         $this->assertEquals(json_encode($this->responseMock->getData()), json_encode($actual));
     }
 
+    function testRead3DSSuccess()
+    {
+        $this->paymentMock = PaymentMock::COMPLETE_PAYMENT_WITH_3DS;
+        $this->payment->setEntity($this->paymentMock);
+
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(200);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($this->paymentMock);
+
+        $this->managerMock->expects(self::any())->method('getEntityUri')->willReturn('/v1/asgard/payments');
+        $this->managerMock->expects(self::any())->method('getHeader')->willReturn([]);
+        $this->managerMock->expects(self::any())->method('execute')->willReturn($this->responseMock);
+        $this->managerMock->expects(self::any())->method('handleResponse')->willReturn($this->paymentMock);
+
+        $actual = $this->payment->read(array("external_reference" => "WC-105"));
+
+        $this->assertEquals(json_encode($this->responseMock->getData()), json_encode($actual));
+    }
+
     function testJsonSerializeSuccess()
     {
         $actual = $this->payment->jsonSerialize();

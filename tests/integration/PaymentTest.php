@@ -33,6 +33,7 @@ class PaymentTest extends TestCase
 
         return $payment;
     }
+
     private function loadPaymentV21()
     {
         $configKeys = new ConfigKeys();
@@ -59,6 +60,32 @@ class PaymentTest extends TestCase
 
         return $payment;
     }
+
+    private function loadPayment3DS()
+    {
+        $configKeys = new ConfigKeys();
+        $envVars = $configKeys->loadConfigs();
+        $accessToken = $envVars['ACCESS_TOKEN_3DS'] ?? null;
+        $sdk = new Sdk(
+            $accessToken,
+            'BP1EF6QIC4P001KBGQ10',
+            'BC32CANTRPP001U8NHO0',
+            ''
+        );
+
+        $payment = $sdk->getPaymentInstance();
+
+        $payment->transaction_amount = 230;
+        $payment->description = "Ergonomic Silk Shirt";
+        $payment->installments = 3;
+        $payment->payment_method_id = "master";
+        $payment->payer->email = "test_user_98934401@testuser.com";
+        $payment->three_d_secure_mode = "optional";
+
+        return $payment;
+    }
+
+
     public function testPaymentSuccessCreditCard()
     {
         $payment = $this->loadPayment();
@@ -165,5 +192,45 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'pix');
         $this->assertEquals($response->payment_type_id, 'bank_transfer');
         $this->assertEquals($response->status_detail, "pending_waiting_transfer");
+    }
+
+    public function testPaymentSuccessCreditCard3DS()
+    {
+        $payment = $this->loadPayment3DS();
+
+        $cardToken = new CardToken();
+        $idToken = $cardToken->generateCardTokenMaster3DS("APRO");
+
+        $payment->token = $idToken;
+        $payment->installments = 3;
+        $payment->payment_method_id = "master";
+
+        $response = json_decode(json_encode($payment->save()));
+
+        $this->assertEquals($response->status, 'approved');
+        $this->assertEquals($response->payment_method_id, 'master');
+        $this->assertEquals($response->payment_type_id, 'credit_card');
+        $this->assertEquals($response->installments, 3);
+        $this->assertEquals($response->status_detail, "accredited");
+    }
+
+    public function testPaymentRejectedCreditCard3DS()
+    {
+        $payment = $this->loadPayment3DS();
+
+        $cardToken = new CardToken();
+        $idToken = $cardToken->generateCardTokenMaster3DS("OTHE");
+
+        $payment->token = $idToken;
+        $payment->installments = 1;
+        $payment->payment_method_id = "master";
+
+        $response = json_decode(json_encode($payment->save()));
+
+        $this->assertEquals($response->status, 'rejected');
+        $this->assertEquals($response->payment_method_id, 'master');
+        $this->assertEquals($response->payment_type_id, 'credit_card');
+        $this->assertEquals($response->installments, 1);
+        $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
     }
 }
