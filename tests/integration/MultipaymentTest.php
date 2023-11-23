@@ -109,6 +109,7 @@ class MultipaymentTest extends TestCase
         $this->assertEquals($response->transaction_info[1]->status, 'approved');
         $this->assertEquals($response->transaction_info[0]->status_detail, "accredited");
         $this->assertEquals($response->transaction_info[1]->status_detail, "accredited");
+        $this->assertNotEquals($response->transaction_info[0]->id, $response->transaction_info[1]->id);
     }
 
     public function testMultipaymentV1Rejected()
@@ -180,6 +181,7 @@ class MultipaymentTest extends TestCase
         $this->assertEquals($response->transaction_info[1]->status, 'approved');
         $this->assertEquals($response->transaction_info[0]->status_detail, "accredited");
         $this->assertEquals($response->transaction_info[1]->status_detail, "accredited");
+        $this->assertNotEquals($response->transaction_info[0]->id, $response->transaction_info[1]->id);
     }
 
     public function testMultipaymentV2Rejected()
@@ -250,6 +252,7 @@ class MultipaymentTest extends TestCase
         $this->assertEquals($response->transaction_info[1]->status, 'approved');
         $this->assertEquals($response->transaction_info[0]->status_detail, "accredited");
         $this->assertEquals($response->transaction_info[1]->status_detail, "accredited");
+        $this->assertNotEquals($response->transaction_info[0]->id, $response->transaction_info[1]->id);
     }
 
     public function testMultipaymentV21Rejected()
@@ -276,7 +279,6 @@ class MultipaymentTest extends TestCase
         ];
         $multipayment->transaction_info = $transaction_info;
 
-        $response = null;
         try {
             $response = json_decode(json_encode($multipayment->save()));
         } catch (\Exception $e) {
