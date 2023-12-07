@@ -80,7 +80,7 @@ class MultipaymentTest extends TestCase
 
         $cardToken = new CardToken();
         $firstIdCardToken = $cardToken->generateCardTokenMaster("APRO");
-        $secondIdCardToken = $cardToken->generateCardTokenAmex("APRO");
+        $secondIdCardToken = $cardToken->generateCardTokenVisa("APRO");
 
         $transaction_info = ["transaction_info" =>
             [
@@ -93,7 +93,7 @@ class MultipaymentTest extends TestCase
                 "transaction_amount" => 40,
                 "installments" => 1,
                 "token" => $secondIdCardToken,
-                "payment_method_id" => "amex"
+                "payment_method_id" => "visa"
             ]
         ];
         $multipayment->transaction_info = $transaction_info;
@@ -104,7 +104,7 @@ class MultipaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'pp_multiple_payments');
         $this->assertEquals($response->payment_type_id, 'pp_multiple_payments');
         $this->assertEquals($response->transaction_info[0]->payment_method_id, 'master');
-        $this->assertEquals($response->transaction_info[1]->payment_method_id, 'amex');
+        $this->assertEquals($response->transaction_info[1]->payment_method_id, 'visa');
         $this->assertEquals($response->transaction_info[0]->status, 'approved');
         $this->assertEquals($response->transaction_info[1]->status, 'approved');
         $this->assertEquals($response->transaction_info[0]->status_detail, "accredited");
@@ -118,7 +118,7 @@ class MultipaymentTest extends TestCase
 
         $cardToken = new CardToken();
         $firstIdCardToken = $cardToken->generateCardTokenMaster("APRO");
-        $secondIdCardToken = $cardToken->generateCardTokenAmex("OTHE");
+        $secondIdCardToken = $cardToken->generateCardTokenVisa("OTHE");
 
         $transaction_info = ["transaction_info" =>
             [
@@ -131,7 +131,7 @@ class MultipaymentTest extends TestCase
                 "transaction_amount" => 40,
                 "installments" => 1,
                 "token" => $secondIdCardToken,
-                "payment_method_id" => "amex"
+                "payment_method_id" => "visa"
             ]
         ];
         $multipayment->transaction_info = $transaction_info;
@@ -152,7 +152,7 @@ class MultipaymentTest extends TestCase
 
         $cardToken = new CardToken();
         $firstIdCardToken = $cardToken->generateCardTokenMaster("APRO");
-        $secondIdCardToken = $cardToken->generateCardTokenAmex("APRO");
+        $secondIdCardToken = $cardToken->generateCardTokenVisa("APRO");
 
         $transaction_info = ["transaction_info" =>
             [
@@ -165,7 +165,7 @@ class MultipaymentTest extends TestCase
                 "transaction_amount" => 40,
                 "installments" => 1,
                 "token" => $secondIdCardToken,
-                "payment_method_id" => "amex"
+                "payment_method_id" => "visa"
             ]
         ];
         $multipayment->transaction_info = $transaction_info;
@@ -176,7 +176,7 @@ class MultipaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'pp_multiple_payments');
         $this->assertEquals($response->payment_type_id, 'pp_multiple_payments');
         $this->assertEquals($response->transaction_info[0]->payment_method_id, 'master');
-        $this->assertEquals($response->transaction_info[1]->payment_method_id, 'amex');
+        $this->assertEquals($response->transaction_info[1]->payment_method_id, 'visa');
         $this->assertEquals($response->transaction_info[0]->status, 'approved');
         $this->assertEquals($response->transaction_info[1]->status, 'approved');
         $this->assertEquals($response->transaction_info[0]->status_detail, "accredited");
@@ -190,7 +190,7 @@ class MultipaymentTest extends TestCase
 
         $cardToken = new CardToken();
         $firstIdCardToken = $cardToken->generateCardTokenMaster("APRO");
-        $secondIdCardToken = $cardToken->generateCardTokenAmex("OTHE");
+        $secondIdCardToken = $cardToken->generateCardTokenVisa("OTHE");
 
         $transaction_info = ["transaction_info" =>
             [
@@ -203,7 +203,7 @@ class MultipaymentTest extends TestCase
                 "transaction_amount" => 40,
                 "installments" => 1,
                 "token" => $secondIdCardToken,
-                "payment_method_id" => "amex"
+                "payment_method_id" => "visa"
             ]
         ];
         $multipayment->transaction_info = $transaction_info;
@@ -223,7 +223,7 @@ class MultipaymentTest extends TestCase
 
         $cardToken = new CardToken();
         $firstIdCardToken = $cardToken->generateCardTokenMaster("APRO");
-        $secondIdCardToken = $cardToken->generateCardTokenAmex("APRO");
+        $secondIdCardToken = $cardToken->generateCardTokenVisa("APRO");
 
         $transaction_info = ["transaction_info" =>
             [
@@ -236,7 +236,7 @@ class MultipaymentTest extends TestCase
                 "transaction_amount" => 40,
                 "installments" => 1,
                 "token" => $secondIdCardToken,
-                "payment_method_id" => "amex"
+                "payment_method_id" => "visa"
             ]
         ];
         $multipayment->transaction_info = $transaction_info;
@@ -247,7 +247,7 @@ class MultipaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'pp_multiple_payments');
         $this->assertEquals($response->payment_type_id, 'pp_multiple_payments');
         $this->assertEquals($response->transaction_info[0]->payment_method_id, 'master');
-        $this->assertEquals($response->transaction_info[1]->payment_method_id, 'amex');
+        $this->assertEquals($response->transaction_info[1]->payment_method_id, 'visa');
         $this->assertEquals($response->transaction_info[0]->status, 'approved');
         $this->assertEquals($response->transaction_info[1]->status, 'approved');
         $this->assertEquals($response->transaction_info[0]->status_detail, "accredited");
@@ -261,7 +261,7 @@ class MultipaymentTest extends TestCase
 
         $cardToken = new CardToken();
         $firstIdCardToken = $cardToken->generateCardTokenMaster("APRO");
-        $secondIdCardToken = $cardToken->generateCardTokenAmex("OTHE");
+        $secondIdCardToken = $cardToken->generateCardTokenVisa("OTHE");
 
         $transaction_info = ["transaction_info" =>
             [
@@ -274,7 +274,7 @@ class MultipaymentTest extends TestCase
                 "transaction_amount" => 40,
                 "installments" => 1,
                 "token" => $secondIdCardToken,
-                "payment_method_id" => "amex"
+                "payment_method_id" => "visa"
             ]
         ];
         $multipayment->transaction_info = $transaction_info;

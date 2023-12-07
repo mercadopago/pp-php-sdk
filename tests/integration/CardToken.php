@@ -51,7 +51,7 @@ class CardToken
         return json_decode($output)->id;
     }
 
-    public function generateCardTokenAmex($statusCardToken)
+    public function generateCardTokenVisa($statusCardToken)
     {
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
@@ -61,10 +61,10 @@ class CardToken
         $year = date("Y") + 1;
 
         $data = [
-            "card_number" => "375365153556885",
+            "card_number" => "4235647728025682",
             "expiration_year" => $year,
             "expiration_month" => 11,
-            "security_code" => "5176",
+            "security_code" => "123",
             "site_id" => "MLB",
             "cardholder" => [
                 "identification" => [
