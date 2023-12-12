@@ -31,7 +31,7 @@ class PreferenceMock
         "unit_price" => 10
       ]
     ],
-    "notification_url" => "https://pyppayments.requestcatcher.com/notification",
+    "notification_url" => "https://httpbin.org/post",
     "payer" => [
       "address" => [
         "street_name" => "Address - BR - BR",

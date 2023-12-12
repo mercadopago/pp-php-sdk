@@ -14,8 +14,8 @@ class PreferenceTest extends TestCase
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $sdk = new Sdk(
             $accessToken,
-            'BP1EF6QIC4P001KBGQ10',
-            'BC32CANTRPP001U8NHO0',
+            'ppcoreinternal',
+            'ppcoreinternal',
             ''
         );
 
@@ -32,9 +32,9 @@ class PreferenceTest extends TestCase
                 "unit_price" => 10.5
             ]
         ];
-
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
         $preference->items = $items;
-        $preference->notification_url = "notification_url";
+        $preference->notification_url = $notificationUrl;
         $preference->external_reference = "external_reference";
 
         return $preference;

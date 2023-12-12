@@ -121,4 +121,11 @@ class SdkTest extends TestCase
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV21', $actual);
     }
+
+    function testGetMelidataErrorSuccess()
+    {
+        $actual = $this->sdk->getMelidataErrorInstance();
+
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Monitoring\MelidataError', $actual);
+    }
 }

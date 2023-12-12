@@ -10,7 +10,7 @@ class NotificationMock
 
   const COMPLETE_NOTIFICATION = [
     "notification_id" => "P-25604645467",
-    "notification_url" => "https://mercadopago.vtexpayments.com.br/api/pvt/payment-provider/transactions/4ED8296AB28F47C6AF3FFFBA558F2EDD/payments/9A5431CE81A44DBA8C76268BBD7F6781/callback?accountName=paguemenos01040",
+    "notification_url" => "https://httpbin.org/post",
     "status" => "approved",
     "transaction_id" => 25604645467,
     "transaction_type" => "payment",
@@ -28,7 +28,7 @@ class NotificationMock
       "delay_auto_settle" => "1",
       "merchant_name" => "paguemenos01040",
       "order_id" => "4ED8296AB28F47C6AF3FFFBA558F2EDD",
-      "original_notification_url" => "https://mercadopago.vtexpayments.com.br/api/pvt/payment-provider/transactions/4ED8296AB28F47C6AF3FFFBA558F2EDD/payments/9A5431CE81A44DBA8C76268BBD7F6781/callback?accountName=paguemenos01040",
+      "original_notification_url" => "https://httpbin.org/post",
       "seller_website" => "http://paguemenos.vtexcommercestable.com.br",
       "uuid" => "c9b70cc3-dd29-4c28-acb3-94f3632f3dd1",
       "vtex_payment_id" => "9A5431CE81A44DBA8C76268BBD7F6781",

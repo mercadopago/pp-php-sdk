@@ -15,8 +15,8 @@ class NotificationTest extends TestCase
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $sdk = new Sdk(
             $accessToken,
-            'BP1EF6QIC4P001KBGQ10',
-            'BC32CANTRPP001U8NHO0',
+            'ppcoreinternal',
+            'ppcoreinternal',
             ''
         );
 

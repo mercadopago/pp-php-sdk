@@ -100,6 +100,33 @@ $notification->read(array("id" => "P-1316643861"));
 
 ```
 
+## Registrando um erro no Melidata
+
+```php
+<?php
+require('vendor/autoload.php');
+
+$sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
+
+$melidataError = $sdk->getMelidataErrorInstance();
+
+$details = [
+    "payment_id" => "123456"
+];
+
+$melidataError->name = "nome do erro";
+$melidataError->message = "mensagem do erro";
+$melidataError->target = "error_name";
+$melidataError->plugin->version = "error_name";
+$melidataError->platform->name = "error_name";
+$melidataError->platform->version = "error_name";
+$melidataError->platform->uri = "error_name";
+$melidataError->platform->location = "error_name";
+$melidataError->details = $details;
+   
+$melidataError->registerError();
+```
+
 ## Executando os testes de Integração
 
 Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo .env.sample

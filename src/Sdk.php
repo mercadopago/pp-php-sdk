@@ -6,6 +6,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Constants;
 use MercadoPago\PP\Sdk\Common\Manager;
+use MercadoPago\PP\Sdk\Entity\Monitoring\MelidataError;
 use MercadoPago\PP\Sdk\Entity\Notification\Notification;
 use MercadoPago\PP\Sdk\Entity\Payment\Multipayment;
 use MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV2;
@@ -132,5 +133,13 @@ class Sdk
     public function getMultipaymentV21Instance()
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV21', Constants::BASEURL_MP);
+    }
+
+    /**
+     * @return MelidataError
+     */
+    public function getMelidataErrorInstance()
+    {
+        return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Monitoring\MelidataError', Constants::BASEURL_MP);
     }
 }

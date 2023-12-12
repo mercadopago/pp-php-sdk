@@ -11,7 +11,7 @@ class PaymentMock
   const COMPLETE_PAYMENT = [
     "binary_mode" => false,
     "external_reference" => "WC-105",
-    "notification_url" => "https://pyppayments.requestcatcher.com/notification",
+    "notification_url" => "https://httpbin.org/post",
     "statement_descriptor" => "TESTSTORE",
     "transaction_amount" => 12,
     "installments" => null,
@@ -154,7 +154,7 @@ class PaymentMock
   const COMPLETE_PAYMENT_WITH_3DS = [
     "binary_mode" => false,
     "external_reference" => "WC-105",
-    "notification_url" => "https://pyppayments.requestcatcher.com/notification",
+    "notification_url" => "https://httpbin.org/post",
     "statement_descriptor" => "TESTSTORE",
     "transaction_amount" => 210,
     "installments" => 3,
