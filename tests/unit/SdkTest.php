@@ -128,4 +128,11 @@ class SdkTest extends TestCase
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Monitoring\MelidataError', $actual);
     }
+
+    function testGetRegisterErrorLogSuccess()
+    {
+        $actual = $this->sdk->getRegisterErrorLogInstance();
+
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Monitoring\RegisterErrorLog', $actual);
+    }
 }

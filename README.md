@@ -127,6 +127,35 @@ $melidataError->details = $details;
 $melidataError->registerError();
 ```
 
+## Registrando um log de erro
+
+```php
+<?php
+require('vendor/autoload.php');
+
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId');
+
+$registerErrorLog = $sdk->getRegisterErrorLogInstance();
+
+$registerErrorLog->message = 'Sample error message';
+$registerErrorLog->stacktrace = 'monitoring_regiter_log.php';
+$registerErrorLog->location = 'registerErrorLog';
+$registerErrorLog->platform_version = phpversion();
+$registerErrorLog->module_version = "1.0.0";
+$registerErrorLog->user_agent = 'PHP SDK';
+$registerErrorLog->flow = 'sample-php-sdk';
+$registerErrorLog->runtime_version = phpversion();
+$registerErrorLog->os_version = "10";
+$registerErrorLog->browser_version = "Chrome";
+$registerErrorLog->uri = 'http://localhost';
+$registerErrorLog->url = 'http://localhost';
+$registerErrorLog->details = [
+    'payment_id' => '123456789',
+];
+
+$registerErrorLog->save();
+```
+
 ## Executando os testes de Integração
 
 Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo .env.sample

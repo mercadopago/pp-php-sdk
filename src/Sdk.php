@@ -142,4 +142,12 @@ class Sdk
     {
         return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Monitoring\MelidataError', Constants::BASEURL_MP);
     }
+
+    /**
+     * @return RegisterErrorLog
+    */
+    public function getRegisterErrorLogInstance()
+    {
+        return $this->getEntityInstance('MercadoPago\PP\Sdk\Entity\Monitoring\RegisterErrorLog', Constants::BASEURL_MP);
+    }
 }
