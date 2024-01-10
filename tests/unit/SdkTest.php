@@ -122,11 +122,11 @@ class SdkTest extends TestCase
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Payment\MultipaymentV21', $actual);
     }
 
-    function testGetMelidataErrorSuccess()
+    function testGetDatadogEventSuccess()
     {
-        $actual = $this->sdk->getMelidataErrorInstance();
+        $actual = $this->sdk->getDatadogEventInstance();
 
-        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Monitoring\MelidataError', $actual);
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Monitoring\DatadogEvent', $actual);
     }
 
     function testGetRegisterErrorLogSuccess()

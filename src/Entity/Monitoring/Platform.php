@@ -10,7 +10,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  * @property string $name
  * @property string $version
  * @property string $uri
- * @property string $location
+ * @property string $url
  *
  * @package MercadoPago\PP\Sdk\Entity\Monitoring
  */
@@ -34,5 +34,5 @@ class Platform extends AbstractEntity
     /**
      * @var string
      */
-    protected $location;
+    protected $url;
 }

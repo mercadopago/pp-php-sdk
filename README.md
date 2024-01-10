@@ -100,7 +100,7 @@ $notification->read(array("id" => "P-1316643861"));
 
 ```
 
-## Registrando um erro no Melidata
+## Registrando um evento no Datadog
 
 ```php
 <?php
@@ -108,23 +108,22 @@ require('vendor/autoload.php');
 
 $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
 
-$melidataError = $sdk->getMelidataErrorInstance();
+$datadogEvent = $sdk->getDatadogEventInstance();
 
 $details = [
     "payment_id" => "123456"
 ];
 
-$melidataError->name = "nome do erro";
-$melidataError->message = "mensagem do erro";
-$melidataError->target = "error_name";
-$melidataError->plugin->version = "error_name";
-$melidataError->platform->name = "error_name";
-$melidataError->platform->version = "error_name";
-$melidataError->platform->uri = "error_name";
-$melidataError->platform->location = "error_name";
-$melidataError->details = $details;
+$datadogEvent->value = "success";
+$datadogEvent->message = "mensagem vinda do teste de integração da SDK de PHP";
+$datadogEvent->plugin_version = "1.0.0";
+$datadogEvent->platform->name = "core";
+$datadogEvent->platform->version = "1.2.0";
+$datadogEvent->platform->uri = "/integration_test";
+$datadogEvent->platform->url = "https://...";
+$datadogEvent->details = $details;
    
-$melidataError->registerError();
+$datadogEvent->register(array("team" => "core", "event_type"=> "unit_test"));
 ```
 
 ## Registrando um log de erro

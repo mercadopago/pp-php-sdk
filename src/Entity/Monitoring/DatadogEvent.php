@@ -9,23 +9,22 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 /**
  * Handles integration with the Core Monitor service.
  *
- * The purpose of this class is to generate error metrics in Melidata.
+ * The purpose of this class is to generate metrics in Datadog.
  *
- * @property string $name
+ * @property string $value
  * @property string $message
- * @property string $target
- * @property Plugin $plugin
+ * @property string $plugin_version
  * @property Platform $platform
  * @property array $details
  *
  * @package MercadoPago\PP\Sdk\Entity\Monitoring
  */
-class MelidataError extends AbstractEntity implements RequesterEntityInterface
+class DatadogEvent extends AbstractEntity implements RequesterEntityInterface
 {
     /**
      * @var string
      */
-    protected $name;
+    protected $value;
 
     /**
      * @var string
@@ -35,12 +34,7 @@ class MelidataError extends AbstractEntity implements RequesterEntityInterface
     /**
      * @var string
      */
-    protected $target;
-
-    /**
-     * @var Plugin
-     */
-    protected $plugin;
+    protected $plugin_version;
 
     /**
      * @var Platform
@@ -53,14 +47,13 @@ class MelidataError extends AbstractEntity implements RequesterEntityInterface
     protected $details;
 
     /**
-     * MelidataError constructor.
+     * DatadogEvent constructor.
      *
      * @param Manager|null $manager
      */
     public function __construct($manager)
     {
         parent::__construct($manager);
-        $this->plugin = new Plugin($manager);
         $this->platform = new Platform($manager);
     }
 
@@ -95,33 +88,36 @@ class MelidataError extends AbstractEntity implements RequesterEntityInterface
     public function getUris(): array
     {
         return array(
-            'post' => '/ppcore/prod/monitor/v1/melidata/errors',
+            'post' => '/ppcore/prod/monitor/v1/event/datadog/:team/:event_type',
         );
     }
 
     /**
-     * Register errors in Melidata using the Core Monitor service API.
+     * Register events on Datadog using the Core Monitor service API.
      *
-     * Once called, it receives a payload with error data and records this error
-     * in the metric: application.mpmodules.melidata.error.
-     * A status tag is used to indicate success or failure in the registration and enable the application
-     * of filters in dashboards that use this metric.
+     * Once called, it receives a payload with event data and records this event
+     * in the metric: ppcore.event.<team>.<type>
      *
-     * To execute this method, it is essential to provide the melidata_error request payload. The payload includes
-     * properties such as 'name', 'message', 'target', 'details' among others.
+     * To execute this method, it is essential to provide the datadog_event request payload.
      *
      * The 'details' field receives a map where the key and value are of type string with additional
      * information that needs to be tagged in Datadog according to the needs of the plugin/platform.
      * This information will be tagged and made available to use in Datadog dashboards.
      *
-     * Note: This method is inherited from the parent class but specialized for melidata_errors.
+     * Note: This method is inherited from the parent class but specialized for datadog_event.
      *
-     * @return mixed The result of the save operation, typically an instance of ErrorRegisterResponse, with the
-     * follow properties: 'code', 'message' and 'status'
-     * @throws \Exception Throws an exception if something goes wrong during the save operation.
+     * @param array $params Associative array containing the parameters for the register operation.
+     *      It expects:
+     *          - A team' key which receives the name of the team responsible for the registration.
+     *            The available values ​​to be set in the team are: 'long', 'smb', 'big' and 'core';
+     *          - A 'event_type' key with the type of event that will be registered in Datadog.
+     *            The event_type accept only the alphanumeric, underscore and the '-' characters.
+     *
+     *      Example: $datadogEvent->register(array("team" => "core", "event_type" => "mp_card_form"))
+     * @throws \Exception Throws an exception if something goes wrong during the register operation.
      */
-    public function registerError()
+    public function register(array $params = [])
     {
-        return parent::save();
+        return parent::saveWithParams($params);
     }
 }

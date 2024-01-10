@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## V1.12.0
+### Added
+- `DatadogEvent` entity to register events in Datadog using the Core Monitor service API
+- Integration tests for datadogEvent scenario
+- Create saveWithParams method in AbstractEntity and RequesterEntityInterface
+
+### Changed
+- Remove `MelidataError` entity
+
 ## V1.11.0
 ### Added
 - `RegisterErrorLog` entity to register errors log using the Core Monitor service API
