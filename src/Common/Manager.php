@@ -64,7 +64,7 @@ class Manager
      * @return mixed
      * @throws \Exception
      */
-    public function getEntityUri(AbstractEntity $entity, string $method, array $params = [])
+    public function getEntityUri(AbstractEntity $entity, string $method, array $params = [], array $queryStrings = [])
     {
         if (method_exists($entity, 'getUris')) {
             $uri = $entity->getUris()[$method];
@@ -82,7 +82,10 @@ class Manager
                     $uri = str_replace($match, '', $uri);
                 }
             }
-
+            if (count($queryStrings) > 0) {
+                $uri = $uri . '?' . http_build_query($queryStrings);
+            }
+            var_dump($uri);
             return $uri;
         } else {
             throw new \Exception('Method not available for ' . get_class($entity) . ' entity');
@@ -97,11 +100,25 @@ class Manager
     public function getDefaultHeader(): array
     {
           return [
-            'Authorization: Bearer ' . $this->config->__get('access_token'),
-            'x-platform-id: ' . $this->config->__get('platform_id'),
-            'x-product-id: ' . $this->config->__get('product_id'),
-            'x-integrator-id: ' . $this->config->__get('integrator_id')
+            'Authorization' => 'Bearer ' . $this->config->__get('access_token'),
+            'x-platform-id' => $this->config->__get('platform_id'),
+            'x-product-id' => $this->config->__get('product_id'),
+            'x-integrator-id' => $this->config->__get('integrator_id')
           ];
+    }
+
+    /**
+     * Normalize headers
+     *
+     * @return array
+     */
+    public function normalizeHeaders(array $unnormalizedHeaders): array
+    {
+        $normalizedHeaders = [];
+        foreach ($unnormalizedHeaders as $key => $value) {
+            array_push($normalizedHeaders, $key . ': ' . $value);
+        }
+        return $normalizedHeaders;
     }
 
     /**
@@ -113,7 +130,54 @@ class Manager
     public function getHeader(array $customHeaders = []): array
     {
         $defaultHeaders = $this->getDefaultHeader();
-        return array_merge($defaultHeaders, $customHeaders);
+        if (count($customHeaders) > 0 && !$this->isHeadersAsKeyAndValueMap($customHeaders)) {
+            $customHeaders = $this->setHeadersAsKeyAndValueMap($customHeaders);
+        };
+        return $this->normalizeHeaders(array_merge($defaultHeaders, $customHeaders));
+    }
+
+    /**
+     * Get header
+     *
+     * If the format of the customHeaders passed is like `array('x-header: 123abc')`,
+     * the method will convert the customHeaders to
+     * follow format: `array('x-header' => '123abc')` and return the converted customHeaders.
+     *
+     * @param array $customHeaders
+     *
+     * @return array
+     */
+    public function setHeadersAsKeyAndValueMap(array $customHeaders = []): array
+    {
+        $headersAsKeyAndValueMap = [];
+
+        foreach ($customHeaders as $header) {
+            [$headerKey, $headerValue] = explode(":", $header);
+            $headersAsKeyAndValueMap[trim($headerKey)] = trim($headerValue);
+        }
+        return $headersAsKeyAndValueMap;
+    }
+    
+    /**
+     * Checks if the header is in key and value format
+     *
+     * If the format of the customHeader passed is like `array('x-header: 123abc')`, the method will return false
+     * Otherwise, if the format of the customHeader passed is like `array('x-header' => '123abc')`,
+     * the method will return true
+     *
+     * @param array $customHeaders
+     *
+     * @return bool
+     */
+    public function isHeadersAsKeyAndValueMap(array $customHeaders = []): bool
+    {
+        foreach ($customHeaders as $i => $value) {
+            if (is_int($i)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -140,5 +204,13 @@ class Manager
         } else {
             throw new \Exception("Internal API Error");
         }
+    }
+
+    /**
+     * Get config
+     */
+    public function getConfig(): Config
+    {
+        return $this->config;
     }
 }

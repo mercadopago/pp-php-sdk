@@ -12,11 +12,13 @@ class PaymentTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
-            ''
+            '',
+            $publicKey
         );
 
         $payment = $sdk->getPaymentInstance();
@@ -39,11 +41,13 @@ class PaymentTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
-            ''
+            '',
+            $publicKey
         );
 
         $payment = $sdk->getPaymentV2Instance();
@@ -66,11 +70,13 @@ class PaymentTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN_3DS'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
-            ''
+            '',
+            $publicKey
         );
 
         $payment = $sdk->getPaymentInstance();

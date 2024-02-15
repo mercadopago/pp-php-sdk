@@ -22,11 +22,17 @@ interface RequesterEntityInterface
      * Read method (GET).
      *
      * @param array $params
+     * @param array $queryStrings
+     * @param bool  $shouldTheExpectedResponseBeMappedOntoTheEntity
      *
      * @return mixed
      * @throws \Exception
      */
-    public function read(array $params = []);
+    public function read(
+        array $params = [],
+        array $queryStrings = [],
+        bool $shouldTheExpectedResponseBeMappedOntoTheEntity = true
+    );
 
     /**
      * Save method (POST).
@@ -40,9 +46,10 @@ interface RequesterEntityInterface
      * Save method with params (POST).
      *
      * @param array $params
+     * @param array $queryStrings
      *
      * @return mixed
      * @throws \Exception
      */
-    public function saveWithParams(array $params = []);
+    public function saveWithParams(array $params = [], array $queryStrings = []);
 }

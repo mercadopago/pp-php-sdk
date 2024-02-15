@@ -12,11 +12,13 @@ class MultipaymentTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
-            ''
+            '',
+            $publicKey
         );
 
         $multipayment = $sdk->getMultipaymentInstance();
@@ -34,11 +36,13 @@ class MultipaymentTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
-            ''
+            '',
+            $publicKey
         );
 
         $multipayment = $sdk->getMultipaymentV2Instance();
@@ -56,11 +60,13 @@ class MultipaymentTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
-            ''
+            '',
+            $publicKey
         );
 
         $multipayment = $sdk->getMultipaymentV21Instance();

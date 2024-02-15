@@ -12,9 +12,8 @@
 
     $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey' );
 
-    $notification = $sdk->getNotificationInstance();
+    $paymentMethods = $sdk->getPaymentMethodsInstance();
 
-    debug(json_encode($notification->read(array("id" => "P-1316643861"))));
-
+    debug(json_encode($paymentMethods->getPaymentMethodsByGroupBy('id')));
  ?>
  

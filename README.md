@@ -24,7 +24,7 @@ Para incluir a biblioteca em seu projeto, basta fazer o seguinte:
 <?php
 require('vendor/autoload.php');
 
-$sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
 
 ```
 
@@ -34,7 +34,7 @@ $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
 <?php
 require('vendor/autoload.php');
 
-$sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
 
 $payment = $sdk->getPaymentInstance();
 
@@ -58,7 +58,7 @@ $payment->save();
 <?php
 require('vendor/autoload.php');
 
-$sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
 
 $preference = $sdk->getPreferenceInstance();
 
@@ -92,7 +92,7 @@ O parâmetro para consulta deve seguir o modelo abaixo:
 <?php
 require('vendor/autoload.php');
 
-$sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
 
 $notification = $sdk->getNotificationInstance();
 
@@ -106,7 +106,7 @@ $notification->read(array("id" => "P-1316643861"));
 <?php
 require('vendor/autoload.php');
 
-$sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId' );
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
 
 $datadogEvent = $sdk->getDatadogEventInstance();
 
@@ -132,7 +132,7 @@ $datadogEvent->register(array("team" => "core", "event_type"=> "unit_test"));
 <?php
 require('vendor/autoload.php');
 
-$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId');
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
 
 $registerErrorLog = $sdk->getRegisterErrorLogInstance();
 
@@ -153,6 +153,34 @@ $registerErrorLog->details = [
 ];
 
 $registerErrorLog->save();
+```
+
+## Obtendo métodos de pagamento
+
+```php
+<?php
+require('vendor/autoload.php');
+
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+
+$paymentMethods = $sdk->getPaymentMethodsInstance();
+
+$paymentMethods->getPaymentMethodsByGroupBy('id');
+```
+
+## Obtendo métodos de pagamento agrupados
+
+Exemplo de requisição agrupando os meios de pagamento pelo campo id:
+
+```php
+<?php
+require('vendor/autoload.php');
+
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+
+$paymentMethods = $sdk->getPaymentMethodsInstance();
+
+$paymentMethods->getPaymentMethodsByGroupBy('id');
 ```
 
 ## Executando os testes de Integração
