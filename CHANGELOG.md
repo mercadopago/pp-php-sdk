@@ -5,8 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## V1.13.0
+## V2.0.0
 ### Added
+- Adds the `public_key` parameter to the sdk constructor.
 - `PaymentMethods` entity to get payment methods using the Core Payment Methods service API
 - Create `getPaymentMethods` and `getPaymentMethodsByGroupBy` methods in `PaymentMethods` class
 - Integration tests for PaymentMethods scenario
