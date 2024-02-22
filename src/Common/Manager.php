@@ -85,7 +85,7 @@ class Manager
             if (count($queryStrings) > 0) {
                 $uri = $uri . '?' . http_build_query($queryStrings);
             }
-            var_dump($uri);
+
             return $uri;
         } else {
             throw new \Exception('Method not available for ' . get_class($entity) . ' entity');
