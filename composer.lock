@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b210f18dabea4b9170686960cdb996d8",
+    "content-hash": "9ee267107acf04286eac819986f96382",
     "packages": [],
     "packages-dev": [
         {
@@ -151,7 +151,7 @@
                 "shasum": ""
             },
             "require": {
-                "ext-tokenizer": "*",
+                                "ext-tokenizer": "*",
                 "php": ">=7.0"
             },
             "require-dev": {
