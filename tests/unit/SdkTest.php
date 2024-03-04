@@ -135,4 +135,11 @@ class SdkTest extends TestCase
 
         $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\Monitoring\RegisterErrorLog', $actual);
     }
+
+    function testGetMerchantOrderSuccess()
+    {
+        $actual = $this->sdk->getMerchantOrderInstance();
+
+        $this->assertInstanceOf('MercadoPago\PP\Sdk\Entity\MerchantOrder\MerchantOrder', $actual);
+    }
 }

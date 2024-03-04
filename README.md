@@ -183,6 +183,27 @@ $paymentMethods = $sdk->getPaymentMethodsInstance();
 $paymentMethods->getPaymentMethodsByGroupBy('id');
 ```
 
+## Obtendo todas as Merchant Orders de acordo com o access token
+
+```php
+<?php
+    use MercadoPago\PP\Sdk\Sdk;
+
+    require_once(__DIR__ . '/vendor/autoload.php');
+
+    function debug($value){
+        echo "<pre>";
+        print_r($value);
+        echo "</pre>";
+    }
+
+    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey' );
+
+    $merchantOrder = $sdk->getMerchantOrderInstance();
+
+    debug(json_encode($merchantOrder->getMerchantOrders()));
+```
+
 ## Executando os testes de Integração
 
 Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo .env.sample

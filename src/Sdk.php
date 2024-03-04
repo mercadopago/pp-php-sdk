@@ -16,6 +16,7 @@ use MercadoPago\PP\Sdk\Entity\Payment\PaymentV2;
 use MercadoPago\PP\Sdk\Entity\Payment\PaymentV21;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
 use MercadoPago\PP\Sdk\Entity\PaymentMethods\PaymentMethods;
+use MercadoPago\PP\Sdk\Entity\MerchantOrder\MerchantOrder;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Requester\CurlRequester;
 use MercadoPago\PP\Sdk\HttpClient\Requester\RequesterInterface;
@@ -162,6 +163,17 @@ class Sdk
     {
         return $this->getEntityInstance(
             'MercadoPago\PP\Sdk\Entity\PaymentMethods\PaymentMethods',
+            Constants::BASEURL_MP
+        );
+    }
+
+    /**
+     * @return MerchantOrder
+    */
+    public function getMerchantOrderInstance()
+    {
+        return $this->getEntityInstance(
+            'MercadoPago\PP\Sdk\Entity\MerchantOrder\MerchantOrder',
             Constants::BASEURL_MP
         );
     }
