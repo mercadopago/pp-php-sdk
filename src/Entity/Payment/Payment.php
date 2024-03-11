@@ -293,6 +293,7 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     {
         return array(
             'post' => '/v1/asgard/payments',
+            'get' => '/v1/payments/:id'
         );
     }
 
@@ -334,5 +335,31 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     public function save()
     {
         return parent::save();
+    }
+
+     /**
+     * Retrieves a Payment from the v1/payments API.
+     *
+     * Upon invoking this method, a request is made to the Payments API
+     * using the provided Payment ID. Authentication is performed using
+     * the seller's access token, which should be previously configured in the default headers.
+     *
+     * Note: This method is inherited from the parent class but specialized for Payment
+     *
+     * @param array $params Associative array containing the parameters for the read operation.
+     *                      It expects an "id" key with the Payment ID as its value.
+     *                      Example: $payment->read(['id' => '123456789'])
+     *
+     * @return mixed The result of the read operation, typically an instance of
+     *               this Payment class populated with the retrieved data.
+     *
+     * @throws \Exception Throws an exception if something goes wrong during the read operation.
+     */
+    public function read(
+        array $params = [],
+        array $queryStrings = [],
+        bool $shouldTheExpectedResponseBeMappedOntoTheEntity = true
+    ) {
+        return parent::read($params, $queryStrings, true);
     }
 }

@@ -25,5 +25,9 @@
 
     debug(json_encode($payment->save()));
 
+    //Get Payment
+    debug(json_encode($payment->read(array(
+        "id" => $payment->id,
+    ))));
  ?>
  

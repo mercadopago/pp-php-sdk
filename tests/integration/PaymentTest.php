@@ -7,8 +7,23 @@ use MercadoPago\PP\Sdk\Sdk;
 
 class PaymentTest extends TestCase
 {
-    private function loadPayment()
-    {
+
+    private function loadPaymentSdk() {
+        $configKeys = new ConfigKeys();
+        $envVars = $configKeys->loadConfigs();
+        $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $sdk = new Sdk(
+            $accessToken,
+            'ppcoreinternal',
+            'ppcoreinternal',
+            '',
+            $publicKey
+        );
+        return $sdk->getPaymentInstance(); 
+    }
+
+    private function loadPaymentSdkV21() {
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
@@ -21,8 +36,12 @@ class PaymentTest extends TestCase
             $publicKey
         );
 
-        $payment = $sdk->getPaymentInstance();
+        return $sdk->getPaymentV2Instance();
+    }
 
+    private function loadPayment()
+    {
+        $payment = $this->loadPaymentSdk();
         $payment->transaction_amount = 230;
         $payment->description = "Ergonomic Silk Shirt";
         $payment->payer->first_name = "Daniel";
@@ -38,20 +57,7 @@ class PaymentTest extends TestCase
 
     private function loadPaymentV21()
     {
-        $configKeys = new ConfigKeys();
-        $envVars = $configKeys->loadConfigs();
-        $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
-        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
-        $sdk = new Sdk(
-            $accessToken,
-            'ppcoreinternal',
-            'ppcoreinternal',
-            '',
-            $publicKey
-        );
-
-        $payment = $sdk->getPaymentV2Instance();
-
+        $payment = $this->loadPaymentSdkV21();
         $payment->transaction_amount = 230;
         $payment->description = "Ergonomic Silk Shirt";
         $payment->payer->first_name = "Daniel";
@@ -238,5 +244,53 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_type_id, 'credit_card');
         $this->assertEquals($response->installments, 1);
         $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
+    }
+
+    public function testGetPaymentSuccess()
+    {
+        $payment = $this->loadPayment();
+        $payment->payment_method_id = "pix";
+        $response = json_decode(json_encode($payment->save()));
+
+        $paymentInstance = $this->loadPaymentSdk();
+        $responseRead = json_decode(json_encode($paymentInstance->read(array(
+            "id" => $response->id,
+        ))));
+
+        $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
+    }
+
+    public function testGetPaymentNotFound()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Payment not found');
+        $paymentInstance = $this->loadPaymentSdk();
+        $responseRead = json_decode(json_encode($paymentInstance->read(array(
+            "id" => "123",
+        ))));
+    }
+
+    public function testGetPaymentSuccessV21()
+    {
+        $payment = $this->loadPayment();
+        $payment->payment_method_id = "pix";
+        $response = json_decode(json_encode($payment->save()));
+
+        $paymentInstance = $this->loadPaymentSdkV21();
+        $responseRead = json_decode(json_encode($paymentInstance->read(array(
+            "id" => $response->id,
+        ))));
+
+        $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
+    }
+
+    public function testGetPaymentNotFoundV21()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Payment not found');
+        $paymentInstance = $this->loadPaymentSdkV21();
+        $responseRead = json_decode(json_encode($paymentInstance->read(array(
+            "id" => "123",
+        ))));
     }
 }

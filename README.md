@@ -51,6 +51,18 @@ $payment->payer->email = "test_user_98934401@testuser.com";
 $payment->save();
 
 ```
+## Obtendo pagamento
+
+```php
+<?php
+require('vendor/autoload.php');
+
+$sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+
+$payment = $sdk->getPaymentInstance();
+
+$payment->read(array("id" => 'payment_id'));
+```
 
 ## Criando uma preferência
 
