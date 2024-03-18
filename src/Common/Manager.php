@@ -207,6 +207,28 @@ class Manager
     }
 
     /**
+     * Handle response
+     *
+     * @param Response $response
+     * @param string $method
+     * @param AbstractEntity|null $entity
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function handleResponseWithHeaders(Response $response)
+    {
+        if ($response->getStatus() == '200' || $response->getStatus() == '201') {
+            return $response;
+        } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
+            $message = $response->getData()['message'] ?? 'No message for Multipayment scenario in v1!';
+            throw new \Exception($message);
+        } else {
+            throw new \Exception("Internal API Error");
+        }
+    }
+
+    /**
      * Get config
      */
     public function getConfig(): Config

@@ -200,6 +200,25 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     }
 
     /**
+     * Save method (POST).
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function saveWithResponseHeaders()
+    {
+        $method = 'post';
+
+        $customHeaders = $this->getHeaders()['save'];
+        $header        = $this->manager->getHeader($customHeaders);
+
+        $uri      = $this->manager->getEntityUri($this, $method);
+        $response = $this->manager->execute($this, $uri, $method, $header);
+        $this->obfuscateAuthorizationHeader($header);
+        return $this->manager->handleResponseWithHeaders($response);
+    }
+
+    /**
      * Save method with params (POST).
      *
      * @param array $params
