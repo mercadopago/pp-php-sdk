@@ -10,7 +10,7 @@ use MercadoPago\PP\Sdk\Tests\Unit\Mock\CreateSellerFunnelBaseMock;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class CreateSellerFunnelBaseTest
+ * Class SellerFunnelBaseTest
  *
  * @package MercadoPago\PP\Sdk\Tests\Entity\Identifiation
  */

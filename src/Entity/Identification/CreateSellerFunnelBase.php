@@ -71,7 +71,7 @@ class CreateSellerFunnelBase extends AbstractEntity
     public function save(array $params = [])
     {
         $response = parent::saveWithResponseHeaders();
-        
+
         return $this->buildResponseSellerFunnelBase($response);
     }
 
