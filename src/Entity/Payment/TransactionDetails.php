@@ -29,4 +29,14 @@ class TransactionDetails extends AbstractEntity
      * @var string
      */
     protected $transaction_id;
+
+    /**
+     * @var double
+     */
+    protected $total_paid_amount;
+
+    /**
+     * @var double
+     */
+    protected $installment_amount;
 }
