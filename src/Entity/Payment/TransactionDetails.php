@@ -10,6 +10,8 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  * @property string $financial_institution
  * @property string $bank_transfer_id
  * @property string $transaction_id
+ * @property double $total_paid_amount
+ * @property double $installment_amount
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
