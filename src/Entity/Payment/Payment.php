@@ -334,6 +334,9 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      */
     public function save()
     {
+        unset($this->transaction_details->total_paid_amount);
+        unset($this->transaction_details->installment_amount);
+        unset($this->transaction_details->external_resource_url);
         return parent::save();
     }
 

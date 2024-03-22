@@ -258,6 +258,8 @@ class PaymentTest extends TestCase
         ))));
 
         $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
+        $this->assertEquals($responseRead->transaction_details->total_paid_amount, $response->transaction_details->total_paid_amount);
+        $this->assertEquals($responseRead->transaction_details->installment_amount, $response->transaction_details->installment_amount);
     }
 
     public function testGetPaymentNotFound()
@@ -282,6 +284,8 @@ class PaymentTest extends TestCase
         ))));
 
         $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
+        $this->assertEquals($responseRead->transaction_details->total_paid_amount, $response->transaction_details->total_paid_amount);
+        $this->assertEquals($responseRead->transaction_details->installment_amount, $response->transaction_details->installment_amount);
     }
 
     public function testGetPaymentNotFoundV21()
