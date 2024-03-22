@@ -260,6 +260,8 @@ class PaymentTest extends TestCase
         $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
         $this->assertEquals($responseRead->transaction_details->total_paid_amount, $response->transaction_details->total_paid_amount);
         $this->assertEquals($responseRead->transaction_details->installment_amount, $response->transaction_details->installment_amount);
+        $this->assertEquals($responseRead->point_of_interaction->transaction_data->qr_code_base64, $response->point_of_interaction->transaction_data->qr_code_base64);
+        $this->assertEquals($responseRead->point_of_interaction->transaction_data->qr_code, $response->point_of_interaction->transaction_data->qr_code);
     }
 
     public function testGetPaymentNotFound()
