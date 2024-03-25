@@ -257,6 +257,9 @@ class PaymentTest extends TestCase
             "id" => $response->id,
         ))));
 
+        $this->assertEquals($responseRead->id, $response->id);
+        $this->assertEquals($responseRead->status, $response->status);
+        $this->assertEquals($responseRead->payment_type_id, $response->payment_type_id);
         $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
         $this->assertEquals($responseRead->transaction_details->total_paid_amount, $response->transaction_details->total_paid_amount);
         $this->assertEquals($responseRead->transaction_details->installment_amount, $response->transaction_details->installment_amount);
@@ -285,6 +288,9 @@ class PaymentTest extends TestCase
             "id" => $response->id,
         ))));
 
+        $this->assertEquals($responseRead->id, $response->id);
+        $this->assertEquals($responseRead->status, $response->status);
+        $this->assertEquals($responseRead->payment_type_id, $response->payment_type_id);
         $this->assertEquals($responseRead->payment_method_id, $response->payment_method_id);
         $this->assertEquals($responseRead->transaction_details->total_paid_amount, $response->transaction_details->total_paid_amount);
         $this->assertEquals($responseRead->transaction_details->installment_amount, $response->transaction_details->installment_amount);

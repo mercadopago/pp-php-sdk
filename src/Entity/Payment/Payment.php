@@ -16,10 +16,13 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
  * taken during a payment transaction. Its main responsibility is to ensure a secure intermediation
  * between P&P and MercadoPago during payment creation.
  *
+ * @property int $id
+ * @property string $status
  * @property string $date_of_expiration
  * @property string $operation_type
  * @property string $issuer_id
  * @property string $payment_method_id
+ * @property string $payment_type_id
  * @property string $description
  * @property string $sponsor_id
  * @property string $counter_currency
@@ -58,6 +61,16 @@ use MercadoPago\PP\Sdk\Interfaces\RequesterEntityInterface;
 class Payment extends AbstractEntity implements RequesterEntityInterface
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $status;
+
+    /**
      * @var string
      */
     protected $date_of_expiration;
@@ -76,6 +89,11 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      * @var string
      */
     protected $payment_method_id;
+
+    /**
+     * @var string
+     */
+    protected $payment_type_id;
 
     /**
      * @var string
@@ -334,6 +352,9 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      */
     public function save()
     {
+        unset($this->id);
+        unset($this->status);
+        unset($this->payment_type_id);
         unset($this->transaction_details->total_paid_amount);
         unset($this->transaction_details->installment_amount);
         unset($this->transaction_details->external_resource_url);
