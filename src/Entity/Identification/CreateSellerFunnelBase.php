@@ -10,6 +10,9 @@ use MercadoPago\PP\Sdk\HttpClient\Response;
  *
  * @property string $platform_id
  * @property string $shop_url
+ * @property string $platform_version
+ * @property string $plugin_version
+ * @property string $site_id
  *
  * @package MercadoPago\PP\Sdk\Entity\Identification
  */

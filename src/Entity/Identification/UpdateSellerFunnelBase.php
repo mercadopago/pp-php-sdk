@@ -17,6 +17,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  * @property bool $is_deleted
  * @property string[] $accepted_payments
  * @property string $cpp_token
+ * @property bool $is_disabled
  *
  * @package MercadoPago\PP\Sdk\Entity\Identification
  */
