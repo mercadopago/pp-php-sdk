@@ -10,33 +10,13 @@ class SellerFunnelBaseTest extends TestCase
 
     private function loadSdkCreateSellerFunnelBase()
     {
-        $configKeys = new ConfigKeys();
-        $envVars = $configKeys->loadConfigs();
-        $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
-        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
-        $sdk = new Sdk(
-            $accessToken,
-            'ppcoreinternal',
-            'ppcoreinternal',
-            '',
-            $publicKey
-        );
+        $sdk = new Sdk(null, 'ppcoreinternal', 'product_id');
         return $sdk->getCreateSellerFunnelBaseInstance();
     }
 
     private function loadSdkUpdateSellerFunnelBase()
     {
-        $configKeys = new ConfigKeys();
-        $envVars = $configKeys->loadConfigs();
-        $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
-        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
-        $sdk = new Sdk(
-            $accessToken,
-            'ppcoreinternal',
-            'ppcoreinternal',
-            '',
-            $publicKey
-        );
+        $sdk = new Sdk(null, 'ppcoreinternal', 'product_id');
         return $sdk->getUpdateSellerFunnelBaseInstance();
     }
 
@@ -48,6 +28,9 @@ class SellerFunnelBaseTest extends TestCase
 
         $createSellerFunnelBase->platform_id = "123";
         $createSellerFunnelBase->shop_url = "http://localhost";
+        $createSellerFunnelBase->platform_version = "1.0.0";
+        $createSellerFunnelBase->plugin_version = "1.0.0";
+        $createSellerFunnelBase->site_id = "MLB";
 
         return $createSellerFunnelBase;
     }
@@ -65,6 +48,7 @@ class SellerFunnelBaseTest extends TestCase
         $updateSellerFunnelBase->plugin_mode = "prod";
         $updateSellerFunnelBase->is_deleted = false;
         $updateSellerFunnelBase->accepted_payments = ["bolbradesco", "pix"];
+        $updateSellerFunnelBase->is_disabled = false;
 
         return $updateSellerFunnelBase;
     }

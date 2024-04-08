@@ -50,19 +50,27 @@ class Sdk
      * @param String $public_key
      */
     public function __construct(
-        string $access_token,
-        string $platform_id,
-        string $product_id,
-        string $integrator_id,
-        string $public_key
+        string $access_token = null,
+        string $platform_id = null,
+        string $product_id = null,
+        string $integrator_id = null,
+        string $public_key = null
     ) {
         $this->requester = new CurlRequester();
         $this->config = new Config();
-        $this->config->__set('access_token', $access_token);
-        $this->config->__set('platform_id', $platform_id);
-        $this->config->__set('product_id', $product_id);
-        $this->config->__set('integrator_id', $integrator_id);
-        $this->config->__set('public_key', $public_key);
+        $parameters = [
+            'access_token' => $access_token,
+            'platform_id' => $platform_id,
+            'product_id' => $product_id,
+            'integrator_id' => $integrator_id,
+            'public_key' => $public_key
+        ];
+        
+        foreach ($parameters as $key => $value) {
+            if (!empty($value) && isset($value)) {
+                $this->config->__set($key, $value);
+            }
+        }
     }
 
     /**

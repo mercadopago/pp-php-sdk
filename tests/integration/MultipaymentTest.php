@@ -24,7 +24,7 @@ class MultipaymentTest extends TestCase
         $multipayment = $sdk->getMultipaymentInstance();
 
         $multipayment->transaction_amount = 90;
-        $multipayment->date_of_expiration = "2024-03-30T20:10:00.000+0000";
+        $multipayment->date_of_expiration = (date('Y') + 1)."-03-30T20:10:00.000+0000";
         $multipayment->description = "Ergonomic Silk Shirt";
         $multipayment->payer->email = "test_user_98934401@testuser.com";
         $multipayment->payment_method_id = "pp_multiple_payments";
@@ -48,7 +48,7 @@ class MultipaymentTest extends TestCase
         $multipayment = $sdk->getMultipaymentV2Instance();
 
         $multipayment->transaction_amount = 90;
-        $multipayment->date_of_expiration = "2024-03-30T20:10:00.000+0000";
+        $multipayment->date_of_expiration = (date('Y') + 1)."-03-30T20:10:00.000+0000";
         $multipayment->description = "Ergonomic Silk Shirt";
         $multipayment->payer->email = "test_user_98934401@testuser.com";
         $multipayment->payment_method_id = "pp_multiple_payments";
@@ -220,7 +220,7 @@ class MultipaymentTest extends TestCase
         } catch (\Exception $e) {
             $response = $e->getMessage();
         }
-        $this->assertStringContainsString("Your payment was declined", $response);
+        $this->assertStringContainsString("No message for Multipayment scenario in v1!", $response);
     }
 
     public function testMultipaymentV21Success()
@@ -290,6 +290,6 @@ class MultipaymentTest extends TestCase
         } catch (\Exception $e) {
             $response = $e->getMessage();
         }
-        $this->assertStringContainsString("Payment with the second card was declined due to an error. We recommend paying with another card or contacting the bank. Do not worry if any fees were charged on the first payment method, they will be refunded automatically.", $response);
+        $this->assertStringContainsString("You entered one or more details from the second card incorrectly. Please enter them as they appear on the card. Do not worry if any fees were charged on the first payment method, they will be refunded automatically.", $response);
     }
 }

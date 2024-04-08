@@ -58,11 +58,14 @@ class UpdateSellerFunnelBase extends AbstractEntity
      * @var string[]
      */
     protected $accepted_payments;
-
     /**
      * @var string
      */
     protected $cpp_token;
+    /**
+     * @var bool
+     */
+    protected $is_disabled;
 
 
     /**

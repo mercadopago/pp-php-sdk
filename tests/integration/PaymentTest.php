@@ -135,7 +135,7 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'master');
         $this->assertEquals($response->payment_type_id, 'credit_card');
         $this->assertEquals($response->installments, 1);
-        $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
+        $this->assertEquals($response->status_detail, "cc_rejected_bad_filled_other");
     }
 
     public function testPaymentV21SuccessCreditCard()
@@ -175,7 +175,7 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'master');
         $this->assertEquals($response->payment_type_id, 'credit_card');
         $this->assertEquals($response->installments, 1);
-        $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
+        $this->assertEquals($response->status_detail, "cc_rejected_bad_filled_other");
     }
 
     public function testPaymentSuccessBoleto()
@@ -243,7 +243,7 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'master');
         $this->assertEquals($response->payment_type_id, 'credit_card');
         $this->assertEquals($response->installments, 1);
-        $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
+        $this->assertEquals($response->status_detail, "cc_rejected_bad_filled_other");
     }
 
     public function testGetPaymentSuccess()

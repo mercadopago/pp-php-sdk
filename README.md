@@ -242,6 +242,9 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
     
     $createSellerFunnelBase->platform_id = "123";
     $createSellerFunnelBase->shop_url = "http://localhost";
+    $createSellerFunnelBase->platform_version = "1.0.0";
+    $createSellerFunnelBase->plugin_version = "1.0.0";
+    $createSellerFunnelBase->site_id = "MLB";
     
     $response = $createSellerFunnelBase->save();
     
@@ -279,6 +282,7 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
     $updateSellerFunnelBase->plugin_mode = "prod";
     $updateSellerFunnelBase->is_deleted = false;
     $updateSellerFunnelBase->accepted_payments = ["bolbradesco", "pix"];
+    $updateSellerFunnelBase->is_disabled = false;
 
     debug(json_encode($updateSellerFunnelBase->update()));
 ```

@@ -25,6 +25,20 @@ class CreateSellerFunnelBase extends AbstractEntity
      */
     protected $shop_url;
 
+    /**
+     * @var string
+     */
+    protected $platform_version;
+
+    /**
+     * @var string
+     */
+    protected $plugin_version;
+
+    /**
+     * @var string
+     */
+    protected $site_id;
 
     /**
      * Identification constructor.

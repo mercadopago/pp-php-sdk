@@ -24,6 +24,7 @@
     $updateSellerFunnelBase->plugin_mode = "prod";
     $updateSellerFunnelBase->is_deleted = false;
     $updateSellerFunnelBase->accepted_payments = ["bolbradesco", "pix"];
+    $updateSellerFunnelBase->is_disabled = false;
 
     debug(json_encode($updateSellerFunnelBase->update()));
  ?>

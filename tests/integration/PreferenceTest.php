@@ -25,6 +25,8 @@ class PreferenceTest extends TestCase
 
     private function loadPreference()
     {
+        $configKeys = new ConfigKeys();
+        $envVars = $configKeys->loadConfigs();
         $preference = $this->loadPreferenceSdk();
         $items = ["items" =>  
             [
