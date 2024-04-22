@@ -20,7 +20,10 @@ class PaymentTest extends TestCase
             '',
             $publicKey
         );
-        return $sdk->getPaymentInstance(); 
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
+        $payment = $sdk->getPaymentInstance(); 
+        $payment->notification_url = $notificationUrl;
+        return $payment;
     }
 
     private function loadPaymentSdkV21() {
@@ -35,8 +38,10 @@ class PaymentTest extends TestCase
             '',
             $publicKey
         );
-
-        return $sdk->getPaymentV2Instance();
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
+        $payment = $sdk->getPaymentV21Instance(); 
+        $payment->notification_url = $notificationUrl;
+        return $payment;
     }
 
     private function loadPayment()
@@ -84,8 +89,9 @@ class PaymentTest extends TestCase
             '',
             $publicKey
         );
-
-        $payment = $sdk->getPaymentInstance();
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
+        $payment = $sdk->getPaymentInstance(); 
+        $payment->notification_url = $notificationUrl;
 
         $payment->transaction_amount = 230;
         $payment->description = "Ergonomic Silk Shirt";
@@ -183,6 +189,12 @@ class PaymentTest extends TestCase
         $payment = $this->loadPayment();
 
         $payment->payment_method_id = "bolbradesco";
+        $payment->payer->address->zip_code = "000";
+        $payment->payer->address->street_name = "rua teste";
+        $payment->payer->address->street_number = "123";
+        $payment->payer->address->neighborhood = "neighborhood";
+        $payment->payer->address->city = "city";
+        $payment->payer->address->federal_unit = "federal_unit";
 
         $response = json_decode(json_encode($payment->save()));
 

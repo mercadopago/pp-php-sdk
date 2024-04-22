@@ -107,7 +107,7 @@ class CurlRequesterTest extends TestCase
         $mockResponse = new Response();
         $mockResponse->setStatus(200);
         $mockResponse->setData(json_decode('{"test":"123"}', true));
-        $mockResponse->setHeaders(['content-type' => 'application/json']);
+        $mockResponse->setHeaders([]);
 
         $requester = $this->getPartialCurlRequesterMock(200, 0, '');
 

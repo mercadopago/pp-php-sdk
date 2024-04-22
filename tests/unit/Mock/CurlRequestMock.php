@@ -7,5 +7,5 @@ namespace MercadoPago\PP\Sdk\Tests\Unit\Mock;
  */
 class CurlRequestMock
 {
-const CURL_EXEC_RESPONSE = "content-type: application/json \r\n\r\n {\"test\":\"123\"}";
+const CURL_EXEC_RESPONSE = "{\"test\":\"123\"}";
 }

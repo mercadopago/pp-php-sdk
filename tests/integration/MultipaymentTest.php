@@ -20,9 +20,11 @@ class MultipaymentTest extends TestCase
             '',
             $publicKey
         );
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
 
         $multipayment = $sdk->getMultipaymentInstance();
 
+        $multipayment->notification_url = $notificationUrl;
         $multipayment->transaction_amount = 90;
         $multipayment->date_of_expiration = (date('Y') + 1)."-03-30T20:10:00.000+0000";
         $multipayment->description = "Ergonomic Silk Shirt";
@@ -44,9 +46,11 @@ class MultipaymentTest extends TestCase
             '',
             $publicKey
         );
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
 
         $multipayment = $sdk->getMultipaymentV2Instance();
 
+        $multipayment->notification_url = $notificationUrl;
         $multipayment->transaction_amount = 90;
         $multipayment->date_of_expiration = (date('Y') + 1)."-03-30T20:10:00.000+0000";
         $multipayment->description = "Ergonomic Silk Shirt";
@@ -68,9 +72,11 @@ class MultipaymentTest extends TestCase
             '',
             $publicKey
         );
+        $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
 
         $multipayment = $sdk->getMultipaymentV21Instance();
 
+        $multipayment->notification_url = $notificationUrl;
         $multipayment->transaction_amount = 90;
         $multipayment->date_of_expiration = (date('Y') + 1)."-03-30T20:10:00.000+0000";
         $multipayment->description = "Ergonomic Silk Shirt";

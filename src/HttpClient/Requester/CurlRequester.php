@@ -58,7 +58,6 @@ class CurlRequester implements RequesterInterface
         $connect = $this->curlInit();
         $this->setOption($connect, CURLOPT_USERAGENT, 'platform:v1-whitelabel,type:mp_sdk');
         $this->setOption($connect, CURLOPT_RETURNTRANSFER, true);
-        $this->setOption($connect, CURLOPT_HEADER, true);
 
         // @TODO define CAINFO when implementing SDK
         // $this->setOption($connect, CURLOPT_SSL_VERIFYPEER, true);
@@ -97,9 +96,20 @@ class CurlRequester implements RequesterInterface
      */
     public function sendRequest($request): Response
     {
+        $headers = [];
+        $this->setOption($request, CURLOPT_HEADERFUNCTION, function ($curl, $header) use (&$headers) {
+            $len = strlen($header);
+            $header = explode(':', $header, 2);
+            if (count($header) < 2) {
+                return $len;
+            }
+            $headers[strtolower(trim($header[0]))] = trim($header[1]);
+            return $len;
+        });
+
         $response = new Response();
         $api_result = $this->curlExec($request);
-
+    
         if ($this->curlErrno($request)) {
             throw new \Exception($this->curlError($request));
         }
@@ -107,38 +117,16 @@ class CurlRequester implements RequesterInterface
         $info          = $this->curlGetInfo($request);
         $api_http_code = $info['http_code'];
 
-        list($headers, $body) = explode("\r\n\r\n", $api_result, 2);
-
         // @TODO: call logging service when ready
 
         if (null !== $api_http_code && null !== $api_result) {
             $response->setStatus($api_http_code);
-            $response->setData(json_decode($body, true));
-            $response->setHeaders(self::buildResponseHeaders($headers));
+            $response->setData(json_decode($api_result, true));
+            $response->setHeaders($headers);
         }
 
         $this->curlClose($request);
-
         return $response;
-    }
-
-    /**
-     * Build headers
-     *
-     * @param $headers
-     * @return array
-     */
-    public static function buildResponseHeaders($headers): array
-    {
-        $headers = explode("\r\n", $headers);
-        $header_data = array();
-        foreach ($headers as $header) {
-            $header_parts = explode(":", $header);
-            if (count($header_parts) == 2) {
-                $header_data[trim($header_parts[0])] = trim($header_parts[1]);
-            }
-        }
-        return $header_data;
     }
 
     /**

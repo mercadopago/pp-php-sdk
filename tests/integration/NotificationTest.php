@@ -31,7 +31,7 @@ class NotificationTest extends TestCase
         $configKeys = new ConfigKeys();
         $envVars = $configKeys->loadConfigs();
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
-
+        
         $sdk = $this->loadSdk();
         $payment = $sdk->getPaymentInstance();
 
