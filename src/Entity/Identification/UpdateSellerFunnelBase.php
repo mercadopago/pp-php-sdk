@@ -67,6 +67,10 @@ class UpdateSellerFunnelBase extends AbstractEntity
      * @var bool
      */
     protected $is_disabled;
+    /**
+     * @var string
+     */
+    protected $site_id;
 
 
     /**
