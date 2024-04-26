@@ -386,6 +386,6 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
         array $queryStrings = [],
         bool $shouldTheExpectedResponseBeMappedOntoTheEntity = true
     ) {
-        return parent::read($params, $queryStrings, true);
+        return parent::read($params, $queryStrings, $shouldTheExpectedResponseBeMappedOntoTheEntity);
     }
 }
