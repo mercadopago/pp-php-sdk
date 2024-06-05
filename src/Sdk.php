@@ -6,6 +6,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Common\Constants;
 use MercadoPago\PP\Sdk\Common\Manager;
+use MercadoPago\PP\Sdk\Entity\Exchange\Exchange;
 use MercadoPago\PP\Sdk\Entity\Identification\CreateSellerFunnelBase;
 use MercadoPago\PP\Sdk\Entity\Identification\UpdateSellerFunnelBase;
 use MercadoPago\PP\Sdk\Entity\Monitoring\DatadogEvent;
@@ -173,6 +174,17 @@ class Sdk
     {
         return $this->getEntityInstance(
             'MercadoPago\PP\Sdk\Entity\PaymentMethods\PaymentMethods',
+            Constants::BASEURL_MP
+        );
+    }
+
+    /**
+     * @return Exchange
+     */
+    public function getExchangeInstance()
+    {
+        return $this->getEntityInstance(
+            'MercadoPago\PP\Sdk\Entity\Exchange\Exchange',
             Constants::BASEURL_MP
         );
     }

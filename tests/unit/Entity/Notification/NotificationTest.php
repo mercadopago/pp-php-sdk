@@ -22,9 +22,19 @@ class NotificationTest extends TestCase
     private $notification;
 
     /**
+     * @var Notification
+     */
+    private $notificationRefunds;
+
+    /**
      * @var array
      */
     private $notificationMock;
+
+    /**
+     * @var array
+     */
+    private $notificationRefundsMock;
 
     /**
      * @var MockObject
@@ -42,6 +52,7 @@ class NotificationTest extends TestCase
     protected function setUp(): void
     {
         $this->notificationMock = NotificationMock::COMPLETE_NOTIFICATION;
+        $this->notificationRefundsMock = NotificationMock::COMPLETE_NOTIFICATION_WITH_REFUND_NOTIFYING;
 
         $this->managerMock = $this->getMockBuilder(Manager::class)
             ->disableOriginalConstructor()
@@ -50,6 +61,9 @@ class NotificationTest extends TestCase
         $this->responseMock = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->notificationRefunds = new Notification($this->managerMock);
+        $this->notificationRefunds->setEntity($this->notificationRefundsMock);
 
         $this->notification = new Notification($this->managerMock);
         $this->notification->setEntity($this->notificationMock);
@@ -105,5 +119,16 @@ class NotificationTest extends TestCase
 
         $this->assertTrue(is_array($actual));
         $this->assertEquals($expected, $actual['notification_id']);
+    }
+
+    function testJsonSerializeRefundsNotifyingSuccess()
+    {
+        $actual = $this->notificationRefunds->refunds_notifying->jsonSerialize();
+        var_dump($actual);
+        $this->assertTrue(is_array($actual));
+        $this->assertEquals('22.01', $actual[0]->original_currency_amount);
+        $this->assertEquals(10, $actual[0]->amount);
+        $this->assertEquals(true, $actual[0]->notifying);
+        $this->assertEquals(1719452103, $actual[0]->id);
     }
 }

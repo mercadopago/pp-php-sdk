@@ -287,6 +287,19 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
     debug(json_encode($updateSellerFunnelBase->update()));
 ```
 
+## Obtendo cotação para determinada moeda
+
+```php
+<?php
+    require('vendor/autoload.php');
+    
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    
+    $exchange = $sdk->getExchangeInstance();
+    
+    $exchange->getExchangeRate("currency_id");
+```
+
 ## Executando os testes de Integração
 
 Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo
