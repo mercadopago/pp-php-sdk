@@ -44,6 +44,17 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
         }
     }
 
+
+    /**
+     * Add entity to collection
+     *
+     * @param array $entity
+     */
+    public function add(array $entity)
+    {
+        array_push($this->collection, $entity);
+    }
+
     /**
      * Add multiple entities to collection
      *

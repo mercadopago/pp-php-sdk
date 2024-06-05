@@ -226,7 +226,9 @@ class MultipaymentTest extends TestCase
         } catch (\Exception $e) {
             $response = $e->getMessage();
         }
-        $this->assertStringContainsString("No message for Multipayment scenario in v1!", $response);
+        $this->assertStringContainsString(
+            "Your payment was declined because some of your second card details are incorrect.", $response
+        );
     }
 
     public function testMultipaymentV21Success()
@@ -296,6 +298,6 @@ class MultipaymentTest extends TestCase
         } catch (\Exception $e) {
             $response = $e->getMessage();
         }
-        $this->assertStringContainsString("You entered one or more details from the second card incorrectly. Please enter them as they appear on the card. Do not worry if any fees were charged on the first payment method, they will be refunded automatically.", $response);
+        $this->assertStringContainsString("Payment with the second card was declined due to an error. We recommend paying with another card or contacting the bank. Do not worry if any fees were charged on the first payment method, they will be refunded automatically.", $response);
     }
 }

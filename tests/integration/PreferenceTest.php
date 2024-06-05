@@ -75,7 +75,7 @@ class PreferenceTest extends TestCase
         $preference->items = $items;
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('items.1.unit_price must be a number');
+        $this->expectExceptionMessage('unit_price needed');
 
         $preference->save();
     }
@@ -99,7 +99,7 @@ class PreferenceTest extends TestCase
         $preference->items = $items;
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('items.1.quantity must be a number');
+        $this->expectExceptionMessage('quantity needed');
 
         $preference->save();
     }

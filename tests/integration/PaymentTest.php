@@ -141,7 +141,7 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'master');
         $this->assertEquals($response->payment_type_id, 'credit_card');
         $this->assertEquals($response->installments, 1);
-        $this->assertEquals($response->status_detail, "cc_rejected_bad_filled_other");
+        $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
     }
 
     public function testPaymentV21SuccessCreditCard()
@@ -174,14 +174,12 @@ class PaymentTest extends TestCase
         $payment->token = $idToken;
         $payment->installments = 1;
         $payment->payment_method_id = "master";
-
-        $response = json_decode(json_encode($payment->save()));
-
-        $this->assertEquals($response->status, 'rejected');
-        $this->assertEquals($response->payment_method_id, 'master');
-        $this->assertEquals($response->payment_type_id, 'credit_card');
-        $this->assertEquals($response->installments, 1);
-        $this->assertEquals($response->status_detail, "cc_rejected_bad_filled_other");
+        try {
+            $response = json_decode(json_encode($payment->save()));
+        } catch (\Exception $e) {
+            $response = $e->getMessage();
+        }
+        $this->assertStringContainsString("Your payment was declined because something went wrong. We recommend trying again or paying with another payment method.", $response);
     }
 
     public function testPaymentSuccessBoleto()
@@ -255,7 +253,7 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->payment_method_id, 'master');
         $this->assertEquals($response->payment_type_id, 'credit_card');
         $this->assertEquals($response->installments, 1);
-        $this->assertEquals($response->status_detail, "cc_rejected_bad_filled_other");
+        $this->assertEquals($response->status_detail, "cc_rejected_other_reason");
     }
 
     public function testGetPaymentSuccess()

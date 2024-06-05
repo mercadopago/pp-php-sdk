@@ -210,18 +210,6 @@ class MerchantOrder extends AbstractEntity implements RequesterEntityInterface
     }
 
     /**
-     * Get and set custom headers for entity.
-     *
-     * @return array
-     */
-    public function getHeaders(): array
-    {
-        return [
-            'read' => [],
-        ];
-    }
-
-    /**
      * Get uris.
      *
      * @return array

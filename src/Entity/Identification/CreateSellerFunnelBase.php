@@ -54,18 +54,6 @@ class CreateSellerFunnelBase extends AbstractEntity
     }
 
     /**
-     * Get and set custom headers for entity.
-     *
-     * @return array
-     */
-    public function getHeaders(): array
-    {
-        return [
-            'save' => []
-        ];
-    }
-
-    /**
      * Get uris.
      *
      * @return array

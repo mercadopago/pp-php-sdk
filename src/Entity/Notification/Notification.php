@@ -165,19 +165,6 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
     }
 
     /**
-     * Get and set custom headers for entity.
-     *
-     * @return array
-     */
-    public function getHeaders(): array
-    {
-        return [
-            'read' => [],
-            'save' => [],
-        ];
-    }
-
-    /**
      * Get uris.
      *
      * @return array

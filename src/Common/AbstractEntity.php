@@ -165,7 +165,9 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     ) {
         $method = 'get';
         $class  = get_called_class();
-        $entity = new $class($this->manager);
+        if (is_subclass_of($class, AbstractEntity::class)) {
+            $entity = new $class($this->manager);
+        }
 
         $customHeaders = $this->getHeaders()['read'];
         $header        = $this->manager->getHeader($customHeaders);
@@ -297,5 +299,19 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
             return Sdk::$cache['last_headers'];
         }
         return [];
+    }
+
+    /**
+     * Get and set custom headers for entity.
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return [
+            'read' => [],
+            'save' => [],
+            'update' => [],
+        ];
     }
 }

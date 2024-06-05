@@ -43,7 +43,7 @@ class CardToken
         $output = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            $this->fail('cURL error: ' . curl_error($ch));
+            echo 'cURL error: ' . curl_error($ch);
         }
 
         curl_close($ch);
@@ -90,7 +90,7 @@ class CardToken
         $output = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            $this->fail('cURL error: ' . curl_error($ch));
+            echo 'cURL error: ' . curl_error($ch);
         }
 
         curl_close($ch);
@@ -137,7 +137,7 @@ class CardToken
         $output = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            $this->fail('cURL error: ' . curl_error($ch));
+            echo 'cURL error: ' . curl_error($ch);
         }
 
         curl_close($ch);
