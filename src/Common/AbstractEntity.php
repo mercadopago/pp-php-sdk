@@ -165,6 +165,8 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     ) {
         $method = 'get';
         $class  = get_called_class();
+        $entity = null;
+
         if (is_subclass_of($class, AbstractEntity::class)) {
             $entity = new $class($this->manager);
         }
