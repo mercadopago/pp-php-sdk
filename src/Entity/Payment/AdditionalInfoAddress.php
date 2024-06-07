@@ -16,6 +16,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  * @property string $complement
  * @property string $apartment
  * @property string $floor
+ * @property string $street_number
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
@@ -65,4 +66,9 @@ class AdditionalInfoAddress extends AbstractEntity
      * @var string
      */
     protected $floor;
+
+    /**
+     * @var string
+     */
+    protected $street_number;
 }

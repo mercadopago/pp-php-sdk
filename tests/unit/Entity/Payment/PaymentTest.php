@@ -79,7 +79,7 @@ class PaymentTest extends TestCase
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Phone", $phone);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Shipments", $shipments);
-        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $receiverAddress);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ReceiverAddress", $receiverAddress);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ItemList", $items);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Item", $item);

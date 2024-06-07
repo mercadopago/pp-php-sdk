@@ -15,7 +15,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property string $safety
  * @property boolean $withdrawn
  * @property Tracking $tracking
- * @property AdditionalInfoAddress $receiver_address
+ * @property ReceiverAddress $receiver_address
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
@@ -57,7 +57,7 @@ class Shipments extends AbstractEntity
     protected $tracking;
 
      /**
-     * @var AdditionalInfoAddress
+     * @var ReceiverAddress
      */
     protected $receiver_address;
 
@@ -70,6 +70,6 @@ class Shipments extends AbstractEntity
     {
         parent::__construct($manager);
         $this->tracking = new Tracking($manager);
-        $this->receiver_address = new AdditionalInfoAddress($manager);
+        $this->receiver_address = new ReceiverAddress($manager);
     }
 }

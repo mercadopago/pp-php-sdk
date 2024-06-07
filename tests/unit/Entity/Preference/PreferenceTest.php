@@ -120,7 +120,7 @@ class PreferenceTest extends TestCase
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Phone", $phone_additional_info);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Shipments", $shipments);
-        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $receiverAddress_additional_info);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ReceiverAddress", $receiverAddress_additional_info);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ItemList", $items_additional_info);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Item", $item_additional_info);

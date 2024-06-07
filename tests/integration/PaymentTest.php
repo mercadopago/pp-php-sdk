@@ -55,6 +55,32 @@ class PaymentTest extends TestCase
         $payment->payer->identification->number = "097.588.560-06";
         $payment->point_of_interaction->type = "CHECKOUT";
 
+        $payment->payer->address->street_name = "Rua teste";
+        $payment->payer->address->street_number = "12";
+        $payment->payer->address->neighborhood = "Centro";
+        $payment->payer->address->city = "São Paulo";
+        $payment->payer->address->federal_unit = "SP";
+        $payment->payer->address->zip_code = "12345-123";
+
+        $payment->additional_info->payer->address->street_name = "Rua teste";
+        $payment->additional_info->payer->address->zip_code = "12345-123";
+        $payment->additional_info->payer->address->city = "São Paulo";
+        $payment->additional_info->payer->address->country = "Brasil";
+        $payment->additional_info->payer->address->state = "SP";
+        $payment->additional_info->payer->address->number = "12";
+        $payment->additional_info->payer->address->complement = "12A";
+        $payment->additional_info->payer->address->apartment = "1123";
+        $payment->additional_info->payer->address->floor = "10";
+        $payment->additional_info->payer->address->street_number = "12";
+
+        $payment->additional_info->shipments->receiver_address->street_name = "Rua teste";
+        $payment->additional_info->shipments->receiver_address->zip_code = "12345-123";
+        $payment->additional_info->shipments->receiver_address->city_name = "São Paulo";
+        $payment->additional_info->shipments->receiver_address->state_name = "SP";
+        $payment->additional_info->shipments->receiver_address->street_number = "12";
+        $payment->additional_info->shipments->receiver_address->apartment = "1123";
+        $payment->additional_info->shipments->receiver_address->floor = "10";
+
         $payment->payer->email = "test_user_98934401@testuser.com";
 
         return $payment;
