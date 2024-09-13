@@ -54,8 +54,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         }
 
         if (is_subclass_of($this->{$name}, AbstractEntity::class) ||
-            is_subclass_of($this->{$name}, AbstractCollection::class)
-        ) {
+            is_subclass_of($this->{$name}, AbstractCollection::class)) {
             $this->{$name}->setEntity($value);
         } else {
             $this->{$name} = $value;
@@ -90,6 +89,8 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     {
         if (is_array($data) || is_object($data)) {
             foreach ($data as $key => $value) {
+                print "[plugin:MercadoPago][flow:createPreference][step:setEntity]["
+                    . json_encode($key) . ":" . json_encode($value) . "] <br>";
                 $this->__set($key, $value);
             }
         }
@@ -113,8 +114,8 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      */
     public function toArray(): array
     {
-        $data                    = [];
-        $properties              = $this->getProperties();
+        $data = [];
+        $properties = $this->getProperties();
         $excludedPropertiesCount = count($this->excluded_properties);
 
         foreach ($properties as $property => $value) {
@@ -164,7 +165,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         bool $shouldTheExpectedResponseBeMappedOntoTheEntity = true
     ) {
         $method = 'get';
-        $class  = get_called_class();
+        $class = get_called_class();
         $entity = null;
 
         if (is_subclass_of($class, AbstractEntity::class)) {
@@ -172,9 +173,9 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         }
 
         $customHeaders = $this->getHeaders()['read'];
-        $header        = $this->manager->getHeader($customHeaders);
+        $header = $this->manager->getHeader($customHeaders);
 
-        $uri      = $this->manager->getEntityUri($entity, $method, $params, $queryStrings);
+        $uri = $this->manager->getEntityUri($entity, $method, $params, $queryStrings);
         $response = $this->manager->execute($entity, $uri, $method, $header);
         $this->obfuscateAuthorizationHeader($header);
         return $this->manager->handleResponse(
@@ -195,9 +196,9 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         $method = 'put';
 
         $customHeaders = $this->getHeaders()['update'];
-        $header        = $this->manager->getHeader($customHeaders);
+        $header = $this->manager->getHeader($customHeaders);
 
-        $uri      = $this->manager->getEntityUri($this, $method);
+        $uri = $this->manager->getEntityUri($this, $method);
         $response = $this->manager->execute($this, $uri, $method, $header);
         $this->obfuscateAuthorizationHeader($header);
         return $this->manager->handleResponse($response, $method);
@@ -214,12 +215,30 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         $method = 'post';
 
         $customHeaders = $this->getHeaders()['save'];
-        $header        = $this->manager->getHeader($customHeaders);
 
-        $uri      = $this->manager->getEntityUri($this, $method);
+        print "[plugin:MercadoPago][flow:createPreference][step:save][customHeaders:"
+            . json_encode($customHeaders) . "] <br>";
+
+        $header = $this->manager->getHeader($customHeaders);
+
+        print "[plugin:MercadoPago][flow:createPreference][step:save][header:" . json_encode($header) . "] <br>";
+
+        $uri = $this->manager->getEntityUri($this, $method);
+
+        print "[plugin:MercadoPago][flow:createPreference][step:save][uri:" . json_encode($uri) . "] <br>";
+
         $response = $this->manager->execute($this, $uri, $method, $header);
+
+        print "[plugin:MercadoPago][flow:createPreference][step:save][response:" . json_encode($response) . "] <br>";
+
         $this->obfuscateAuthorizationHeader($header);
-        return $this->manager->handleResponse($response, $method);
+
+        $handleResponse = $this->manager->handleResponse($response, $method);
+
+        print "[plugin:MercadoPago][flow:createPreference][step:save][handleResponse:"
+            . json_encode($handleResponse) . "] <br>";
+
+        return $handleResponse;
     }
 
     /**
@@ -233,9 +252,9 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
         $method = 'post';
 
         $customHeaders = $this->getHeaders()['save'];
-        $header        = $this->manager->getHeader($customHeaders);
+        $header = $this->manager->getHeader($customHeaders);
 
-        $uri      = $this->manager->getEntityUri($this, $method);
+        $uri = $this->manager->getEntityUri($this, $method);
         $response = $this->manager->execute($this, $uri, $method, $header);
         $this->obfuscateAuthorizationHeader($header);
         return $this->manager->handleResponseWithHeaders($response);
@@ -254,9 +273,9 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     {
         $method = 'post';
         $customHeaders = $this->getHeaders()['save'];
-        $header        = $this->manager->getHeader($customHeaders);
+        $header = $this->manager->getHeader($customHeaders);
 
-        $uri      = $this->manager->getEntityUri($this, $method, $params, $queryStrings);
+        $uri = $this->manager->getEntityUri($this, $method, $params, $queryStrings);
         $response = $this->manager->execute($this, $uri, $method, $header);
         $this->obfuscateAuthorizationHeader($header);
         return $this->manager->handleResponse($response, $method);

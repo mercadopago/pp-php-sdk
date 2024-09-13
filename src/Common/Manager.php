@@ -99,12 +99,12 @@ class Manager
      */
     public function getDefaultHeader(): array
     {
-          return [
+        return [
             'Authorization' => 'Bearer ' . $this->config->__get('access_token'),
             'x-platform-id' => $this->config->__get('platform_id'),
             'x-product-id' => $this->config->__get('product_id'),
             'x-integrator-id' => $this->config->__get('integrator_id')
-          ];
+        ];
     }
 
     /**
@@ -132,7 +132,8 @@ class Manager
         $defaultHeaders = $this->getDefaultHeader();
         if (count($customHeaders) > 0 && !$this->isHeadersAsKeyAndValueMap($customHeaders)) {
             $customHeaders = $this->setHeadersAsKeyAndValueMap($customHeaders);
-        };
+        }
+        ;
         return $this->normalizeHeaders(array_merge($defaultHeaders, $customHeaders));
     }
 
@@ -157,7 +158,7 @@ class Manager
         }
         return $headersAsKeyAndValueMap;
     }
-    
+
     /**
      * Checks if the header is in key and value format
      *
@@ -200,6 +201,10 @@ class Manager
             return $response->getData();
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
             $message = $response->getData()['message'] ?? 'No message for Multipayment scenario in v1!';
+
+            print "[plugin:MercadoPago][flow:createPreference][step:save][error_message:"
+                . json_encode($message) . "] <br>";
+
             throw new \Exception($message);
         } else {
             throw new \Exception("Internal API Error");
