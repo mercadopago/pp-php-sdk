@@ -38,7 +38,7 @@ Para incluir a biblioteca em seu projeto, basta fazer o seguinte:
     
     $payment = $sdk->getPaymentInstance();
     
-    $payment->token = "034215d05985b328683ec816607b2a5d";
+    $payment->token = "card_token";
     $payment->transaction_amount = 230;
     $payment->description = "Ergonomic Silk Shirt";
     $payment->installments = 1;

@@ -16,7 +16,7 @@ use MercadoPago\PP\Sdk\Sdk;
     $payment = $sdk->getPaymentInstance();
 
     //For each new call it will be necessary to create a card token
-    $payment->token = "034215d05985b328683ec816607b2a5d";
+    $payment->token = "card_token";
 
     $payment->transaction_amount = 230;
     $payment->description = "Ergonomic Silk Shirt";

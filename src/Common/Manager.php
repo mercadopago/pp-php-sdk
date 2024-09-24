@@ -202,9 +202,6 @@ class Manager
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
             $message = $response->getData()['message'] ?? 'No message for Multipayment scenario in v1!';
 
-            print "[plugin:MercadoPago][flow:createPreference][step:save][error_message:"
-                . json_encode($message) . "] <br>";
-
             throw new \Exception($message);
         } else {
             throw new \Exception("Internal API Error");

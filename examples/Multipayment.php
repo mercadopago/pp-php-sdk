@@ -21,13 +21,13 @@
                                 [
                                     "transaction_amount" => 50,
                                     "installments" => 1,
-                                    "token" => "732057aed78e3a571eaacdffe7a388d5",
+                                    "token" => "card_token",
                                     "payment_method_id" => "master"
                                 ],
                                 [
                                     "transaction_amount" => 40,
                                     "installments" => 1,
-                                    "token" => "eb01f5336d50f365f0f449ee117dfa46",
+                                    "token" => "card_token",
                                     "payment_method_id" => "amex"
                                 ]
                         ];

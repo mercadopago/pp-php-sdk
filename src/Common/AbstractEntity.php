@@ -89,8 +89,6 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
     {
         if (is_array($data) || is_object($data)) {
             foreach ($data as $key => $value) {
-                print "[plugin:MercadoPago][flow:createPreference][step:setEntity]["
-                    . json_encode($key) . ":" . json_encode($value) . "] <br>";
                 $this->__set($key, $value);
             }
         }
@@ -216,27 +214,15 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
 
         $customHeaders = $this->getHeaders()['save'];
 
-        print "[plugin:MercadoPago][flow:createPreference][step:save][customHeaders:"
-            . json_encode($customHeaders) . "] <br>";
-
         $header = $this->manager->getHeader($customHeaders);
-
-        print "[plugin:MercadoPago][flow:createPreference][step:save][header:" . json_encode($header) . "] <br>";
 
         $uri = $this->manager->getEntityUri($this, $method);
 
-        print "[plugin:MercadoPago][flow:createPreference][step:save][uri:" . json_encode($uri) . "] <br>";
-
         $response = $this->manager->execute($this, $uri, $method, $header);
-
-        print "[plugin:MercadoPago][flow:createPreference][step:save][response:" . json_encode($response) . "] <br>";
 
         $this->obfuscateAuthorizationHeader($header);
 
         $handleResponse = $this->manager->handleResponse($response, $method);
-
-        print "[plugin:MercadoPago][flow:createPreference][step:save][handleResponse:"
-            . json_encode($handleResponse) . "] <br>";
 
         return $handleResponse;
     }
