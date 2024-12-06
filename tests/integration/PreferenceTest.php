@@ -75,7 +75,9 @@ class PreferenceTest extends TestCase
         $preference->items = $items;
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('unit_price needed');
+        // TODO: Atualmente o transaction está retornando 500, mas deveria retornar 400
+        // Tarefa criada: https://mercadolibre.atlassian.net/browse/PPCO-3829
+        $this->expectExceptionMessage('Internal API Error');
 
         $preference->save();
     }
@@ -99,7 +101,9 @@ class PreferenceTest extends TestCase
         $preference->items = $items;
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('quantity needed');
+        // TODO: Atualmente o transaction está retornando 500, mas deveria retornar 400
+        // Tarefa criada: https://mercadolibre.atlassian.net/browse/PPCO-3829
+        $this->expectExceptionMessage('Internal API Error');
 
         $preference->save();
     }

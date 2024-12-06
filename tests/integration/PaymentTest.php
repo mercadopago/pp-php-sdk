@@ -111,7 +111,7 @@ class PaymentTest extends TestCase
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
-            'ppcoreinternal',
+            $envVars['PRODUCT_ID'],
             '',
             $publicKey
         );

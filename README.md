@@ -300,6 +300,24 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
     $exchange->getExchangeRate("currency_id");
 ```
 
+## Obtendo dados de onboarding
+
+```php
+<?php
+    $sdk = new Sdk( 
+        'accessToken',
+        'platformId',
+        'productId',
+        'integratorId',
+        'publicKey'
+    );
+
+    $onboarding = $sdk->getOnboardingInstance();
+
+    $onboarding->getOnboardingData("applicationId");
+?>
+```
+
 ## Executando os testes de Integração
 
 Os testes de integração se encontram em tests/integration, para executa-los é necessário efetuar uma copia do arquivo
