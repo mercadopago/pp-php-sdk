@@ -72,10 +72,12 @@ class DatadogEvent extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
+        $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'prod';
+
         return array(
-            'post' => '/ppcore/prod/monitor/v1/event/datadog/:team/:event_type',
+            'post' => '/ppcore/' . $scope_ppcore . '/monitor/v1/event/datadog/:team/:event_type',
         );
     }
 

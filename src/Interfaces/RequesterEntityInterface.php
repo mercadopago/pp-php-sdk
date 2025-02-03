@@ -16,7 +16,7 @@ interface RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array;
+    public function getUris(string $uris_scope = null): array;
 
     /**
      * Read method (GET).

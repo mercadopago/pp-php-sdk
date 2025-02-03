@@ -71,6 +71,7 @@ class MerchantOrderTest extends TestCase
         $actual = $this->merchantOrder->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/merchant_orders/:id', $actual);
     }
 
     function testGetMerchantOrdersSuccess()

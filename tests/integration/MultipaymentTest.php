@@ -13,12 +13,14 @@ class MultipaymentTest extends TestCase
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $urisScope = $envVars['URIS_SCOPE'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
             '',
-            $publicKey
+            $publicKey,
+            $urisScope
         );
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
 
@@ -39,12 +41,14 @@ class MultipaymentTest extends TestCase
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $urisScope = $envVars['URIS_SCOPE'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
             '',
-            $publicKey
+            $publicKey,
+            $urisScope
         );
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
 
@@ -65,12 +69,14 @@ class MultipaymentTest extends TestCase
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $urisScope = $envVars['URIS_SCOPE'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
             '',
-            $publicKey
+            $publicKey,
+            $urisScope
         );
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
 

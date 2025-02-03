@@ -152,6 +152,16 @@ class PreferenceTest extends TestCase
         $actual = $this->preference->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/v1/asgard/preferences', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->preference->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/beta/asgard/preferences', $actual);
     }
 
     function testSaveSuccess()

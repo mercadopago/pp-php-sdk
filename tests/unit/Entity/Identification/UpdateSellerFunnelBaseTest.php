@@ -69,6 +69,16 @@ class UpdateSellerFunnelBaseTest extends TestCase
         $actual = $this->updateSellerFunnelBase->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/v1/eplatforms/core/identification/seller-configuration/update-integration', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->updateSellerFunnelBase->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/beta/eplatforms/core/identification/seller-configuration/update-integration', $actual);
     }
 
     function testSaveSuccess()

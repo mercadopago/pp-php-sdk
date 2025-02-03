@@ -184,10 +184,12 @@ class Preference extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
+        $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'v1';
+
         return array(
-            'post' => '/v1/asgard/preferences',
+            'post' => '/' . $scope_ppcore . '/asgard/preferences',
             'get' => '/checkout/preferences/:id'
         );
     }

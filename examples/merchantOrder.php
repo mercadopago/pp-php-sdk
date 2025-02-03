@@ -9,7 +9,7 @@
         echo "</pre>";
     }
 
-    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey' );
+    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope' );
 
     $merchantOrder = $sdk->getMerchantOrderInstance();
 

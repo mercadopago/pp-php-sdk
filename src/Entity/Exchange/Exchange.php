@@ -78,10 +78,12 @@ class Exchange extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
+        $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'prod';
+
         return array(
-            'get' => '/ppcore/prod/payment-methods/v1/exchange',
+            'get' => '/ppcore/' . $scope_ppcore . '/payment-methods/v1/exchange',
         );
     }
 

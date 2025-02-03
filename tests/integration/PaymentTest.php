@@ -13,12 +13,14 @@ class PaymentTest extends TestCase
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $urisScope = $envVars['URIS_SCOPE'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
             '',
-            $publicKey
+            $publicKey,
+            $urisScope
         );
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
         $payment = $sdk->getPaymentInstance(); 
@@ -31,12 +33,14 @@ class PaymentTest extends TestCase
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN'] ?? null;
         $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $urisScope = $envVars['URIS_SCOPE'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             'ppcoreinternal',
             '',
-            $publicKey
+            $publicKey,
+            $urisScope
         );
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
         $payment = $sdk->getPaymentV21Instance(); 
@@ -108,12 +112,14 @@ class PaymentTest extends TestCase
         $envVars = $configKeys->loadConfigs();
         $accessToken = $envVars['ACCESS_TOKEN_3DS'] ?? null;
         $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        $urisScope = $envVars['URIS_SCOPE'] ?? null;
         $sdk = new Sdk(
             $accessToken,
             'ppcoreinternal',
             $envVars['PRODUCT_ID'],
             '',
-            $publicKey
+            $publicKey,
+            $urisScope
         );
         $notificationUrl = $envVars['NOTIFICATION_URL'] ?? null;
         $payment = $sdk->getPaymentInstance(); 

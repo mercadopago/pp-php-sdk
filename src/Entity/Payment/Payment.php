@@ -307,10 +307,12 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
+        $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'v1';
+
         return array(
-            'post' => '/v1/asgard/payments',
+            'post' => '/' . $scope_ppcore . '/asgard/payments',
             'get' => '/v1/payments/:id'
         );
     }

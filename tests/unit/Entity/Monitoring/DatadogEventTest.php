@@ -90,6 +90,16 @@ class DatadogEventTest extends TestCase
         $actual = $this->datadogEvent->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/ppcore/prod/monitor/v1/event/datadog/:team/:event_type', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->datadogEvent->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/ppcore/beta/monitor/v1/event/datadog/:team/:event_type', $actual);
     }
 
     function testRegisterSuccess()

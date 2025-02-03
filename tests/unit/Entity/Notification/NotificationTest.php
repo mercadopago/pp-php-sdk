@@ -95,6 +95,16 @@ class NotificationTest extends TestCase
         $actual = $this->notification->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/v1/asgard/notification/:id', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->notification->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/beta/asgard/notification/:id', $actual);
     }
 
     function testReadSuccess()

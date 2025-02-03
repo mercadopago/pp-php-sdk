@@ -91,6 +91,16 @@ class PaymentMethodsTest extends TestCase
         $actual = $this->paymentMethods->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/ppcore/prod/payment-methods/v1/payment-methods', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->paymentMethods->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/ppcore/beta/payment-methods/v1/payment-methods', $actual);
     }
 
     function testGetPaymentMethodsSuccess()

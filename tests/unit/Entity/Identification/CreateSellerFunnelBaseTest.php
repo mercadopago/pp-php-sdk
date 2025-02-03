@@ -69,6 +69,16 @@ class CreateSellerFunnelBaseTest extends TestCase
         $actual = $this->createSellerFunnelBase->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/v1/eplatforms/core/identification/seller-configuration/start-integration', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->createSellerFunnelBase->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/beta/eplatforms/core/identification/seller-configuration/start-integration', $actual);
     }
 
     function testSaveSuccess()

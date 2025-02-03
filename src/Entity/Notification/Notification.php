@@ -169,10 +169,12 @@ class Notification extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
+        $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'v1';
+
         return array(
-            'get' => '/v1/asgard/notification/:id',
+            'get' => '/' . $scope_ppcore . '/asgard/notification/:id',
         );
     }
 

@@ -139,6 +139,16 @@ class PaymentTest extends TestCase
         $actual = $this->payment->getUris();
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/v1/asgard/payments', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->payment->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/beta/asgard/payments', $actual);
     }
 
     function testReadSuccess()

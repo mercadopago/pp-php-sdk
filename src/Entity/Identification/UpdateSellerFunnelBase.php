@@ -110,10 +110,12 @@ class UpdateSellerFunnelBase extends AbstractEntity
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
+        $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'v1';
+
         return array(
-            'put' => '/v1/eplatforms/core/identification/seller-configuration/update-integration',
+            'put' => '/' . $scope_ppcore . '/eplatforms/core/identification/seller-configuration/update-integration',
         );
     }
 

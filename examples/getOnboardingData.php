@@ -15,7 +15,8 @@
         'platformId',
         'productId',
         'integratorId',
-        'publicKey'
+        'publicKey',
+        'urisScope'
     );
 
     $onboarding = $sdk->getOnboardingInstance();

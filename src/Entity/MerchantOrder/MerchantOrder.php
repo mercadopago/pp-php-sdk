@@ -214,7 +214,7 @@ class MerchantOrder extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(): array
+    public function getUris(string $uris_scope = null): array
     {
         return array(
             'get' => '/merchant_orders/:id'

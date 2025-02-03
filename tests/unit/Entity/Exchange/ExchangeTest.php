@@ -59,9 +59,20 @@ class ExchangeTest extends TestCase
 
     function testGetUriSuccess()
     {
-        $actual = $this->exchange->getUris();
+        $uris_scope = null;
+        $actual = $this->exchange->getUris($uris_scope);
 
         $this->assertTrue(is_array($actual));
+        $this->assertContains('/ppcore/prod/payment-methods/v1/exchange', $actual);
+    }
+
+    function testGetUriBetaSuccess()
+    {
+        $uris_scope = 'beta';
+        $actual = $this->exchange->getUris($uris_scope);
+
+        $this->assertTrue(is_array($actual));
+        $this->assertContains('/ppcore/beta/payment-methods/v1/exchange', $actual);
     }
 
     function testGetExchangeSuccess()

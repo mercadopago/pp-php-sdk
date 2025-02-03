@@ -63,7 +63,7 @@ class SdkTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->sdk = new Sdk('access_token', 'platform_id', 'product_id', 'integrator_id', 'publicKey');
+        $this->sdk = new Sdk('access_token', 'platform_id', 'product_id', 'integrator_id', 'publicKey', 'urisScope');
     }
 
     function testGetPreferenceSuccess()

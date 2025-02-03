@@ -24,9 +24,11 @@ Para incluir a biblioteca em seu projeto, basta fazer o seguinte:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
 
 ```
+
+Os parâmetros para instanciar a SDK são: Access Token, Platform ID, Product ID, Integrator ID, Public Key e URIs Scope que deve ser preenchido com `beta` caso queira que as URIs das APIs acessadas estejam em Beta.
 
 ## Criando um pagamento
 
@@ -34,7 +36,7 @@ Para incluir a biblioteca em seu projeto, basta fazer o seguinte:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $payment = $sdk->getPaymentInstance();
     
@@ -57,7 +59,7 @@ Para incluir a biblioteca em seu projeto, basta fazer o seguinte:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $payment = $sdk->getPaymentInstance();
     
@@ -70,7 +72,7 @@ Para incluir a biblioteca em seu projeto, basta fazer o seguinte:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $preference = $sdk->getPreferenceInstance();
     
@@ -104,7 +106,7 @@ O parâmetro para consulta deve seguir o modelo abaixo:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $notification = $sdk->getNotificationInstance();
     
@@ -118,7 +120,7 @@ O parâmetro para consulta deve seguir o modelo abaixo:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $datadogEvent = $sdk->getDatadogEventInstance();
     
@@ -145,7 +147,7 @@ O parâmetro para consulta deve seguir o modelo abaixo:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $registerErrorLog = $sdk->getRegisterErrorLogInstance();
     
@@ -175,7 +177,7 @@ O parâmetro para consulta deve seguir o modelo abaixo:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $paymentMethods = $sdk->getPaymentMethodsInstance();
     
@@ -191,7 +193,7 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $paymentMethods = $sdk->getPaymentMethodsInstance();
     
@@ -213,7 +215,7 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
         echo "</pre>";
     }
 
-    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey' );
+    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope' );
 
     $merchantOrder = $sdk->getMerchantOrderInstance();
 
@@ -236,7 +238,7 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
         echo "</pre>";
     }
     
-    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey' );
+    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope' );
     
     $createSellerFunnelBase = $sdk->getCreateSellerFunnelBaseInstance();
     
@@ -268,7 +270,7 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
         echo "</pre>";
     }
 
-    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey' );
+    $sdk = new Sdk( 'accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope' );
 
     $updateSellerFunnelBase = $sdk->getUpdateSellerFunnelBaseInstance();
 
@@ -293,7 +295,7 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
 <?php
     require('vendor/autoload.php');
     
-    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey');
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
     
     $exchange = $sdk->getExchangeInstance();
     
@@ -309,7 +311,8 @@ Exemplo de requisição agrupando os meios de pagamento pelo campo id:
         'platformId',
         'productId',
         'integratorId',
-        'publicKey'
+        'publicKey',
+        'urisScope'
     );
 
     $onboarding = $sdk->getOnboardingInstance();

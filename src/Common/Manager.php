@@ -67,7 +67,8 @@ class Manager
     public function getEntityUri(AbstractEntity $entity, string $method, array $params = [], array $queryStrings = [])
     {
         if (method_exists($entity, 'getUris')) {
-            $uri = $entity->getUris()[$method];
+            $uris_scope = $this->config->__get('uris_scope');
+            $uri = $entity->getUris($uris_scope)[$method];
             $matches = [];
             preg_match_all('/\\:\\w+/', $uri, $matches);
 
