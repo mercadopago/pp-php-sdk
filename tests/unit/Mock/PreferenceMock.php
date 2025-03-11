@@ -110,7 +110,7 @@ class PreferenceMock
         ],
         "identification"=> [
           "type"=> "",
-          "number"=> 0
+          "number"=> "0"
         ],
         "registration_date"=> "2023-04-11T19=>18=>38.486Z",
         "registered_user"=> false,
