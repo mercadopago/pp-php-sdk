@@ -347,4 +347,55 @@ class PaymentTest extends TestCase
             "id" => "123",
         ))));
     }
+
+    private function generateSuperTokenCreditCardMaster()
+    {
+        $url = "https://api.mercadopago.com/v1/account-payment-methods?amount=100.00";
+        $configKeys = new ConfigKeys();
+        $envVars = $configKeys->loadConfigs();
+        $publicKey = $envVars['PUBLIC_KEY'] ?? null;
+        
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: ' . $envVars['SUPER_TOKEN_AUTHORIZATION_HEADER'] ?? null,
+            'X-Caller-Id: ' . $envVars['SUPER_TOKEN_PAYER_CALLER_ID'] ?? null,
+            'X-Client-Id: ' . $envVars['SUPER_TOKEN_CLIENT_ID'] ?? null,
+            'X-Caller-SiteId: ' . $envVars['SUPER_TOKEN_SITE_ID'] ?? null,
+            'X-Collector-Id: ' . $envVars['SUPER_TOKEN_COLLECTOR_ID'] ?? null,
+            'X-Auth-Type: ' . $envVars['SUPER_TOKEN_AUTH_TYPE'] ?? null,
+            'Content-Type: application/json',
+        ]);
+
+        $output = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'cURL error: ' . curl_error($ch);
+        }
+
+        curl_close($ch);
+        return json_decode($output)->data[2]->token;
+    }
+
+    public function testPaymentSuccessSuperToken()
+    {
+        $payment = $this->loadPayment();
+        $payment->installments = 1;
+        $payment->payment_method_id = "master";
+        $payment->external_reference = "ppcore-php-sdk";
+        $payment->payer->phone->area_code = "11";
+        $payment->payer->phone->number = "999999999";
+        $payment->payer->email = "test_user_9893440@testuser.com";
+        $superToken = $this->generateSuperTokenCreditCardMaster();
+        $paymentTypeId = 'credit_card';
+        $response = json_decode(json_encode($payment->saveWithSuperToken(
+            $superToken, $paymentTypeId
+        )));
+        $this->assertEquals($response->status, 'approved');
+        $this->assertEquals($response->payment_method_id, 'master');
+        $this->assertEquals($response->payment_type_id, 'credit_card');
+    }    
 }

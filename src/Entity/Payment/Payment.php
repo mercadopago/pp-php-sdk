@@ -390,4 +390,29 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
     ) {
         return parent::read($params, $queryStrings, $shouldTheExpectedResponseBeMappedOntoTheEntity);
     }
+
+    /**
+     * Creates a payment with super token using the Asgard Transaction service API.
+     *
+     * To execute this method, it is essential to provide the payment request payload and send:
+     * the super token and the payment type (credit_card, debit_card, account_money, etc.),
+     * referring to the payment method chosen by the payer.
+     *
+     * @return mixed The result of the createSuperTokenPayment operation, typically an instance of this Payment
+     * class populated with the created data.
+     * @throws \Exception Throws an exception if something goes wrong during the save operation.
+     */
+    public function saveWithSuperToken(string $superToken, string $paymentTypeId)
+    {
+        unset($this->id);
+        unset($this->status);
+        unset($this->transaction_details->total_paid_amount);
+        unset($this->transaction_details->installment_amount);
+        unset($this->transaction_details->external_resource_url);
+        unset($this->point_of_interaction->transaction_data->qr_code_base64);
+        unset($this->point_of_interaction->transaction_data->qr_code);
+        $this->setCustomHeaders(['x-super-token: ' . $superToken]);
+        $this->payment_type_id = $paymentTypeId;
+        return parent::save();
+    }
 }

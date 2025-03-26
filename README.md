@@ -53,6 +53,30 @@ Os parâmetros para instanciar a SDK são: Access Token, Platform ID, Product ID
     $payment->save();
 
 ```
+
+## Criando um pagamento com Super Token
+
+```php
+<?php
+    require('vendor/autoload.php');
+    
+    $sdk = new Sdk('accessToken', 'platformId', 'productId', 'integratorId', 'publicKey', 'urisScope');
+    
+    $payment = $sdk->getPaymentInstance();
+    
+    $payment->transaction_amount = 230;
+    $payment->description = "Ergonomic Silk Shirt";
+    $payment->installments = 1;
+    $payment->payment_method_id = "master";
+    $payment->payer->email = "test_user_98934401@testuser.com";
+
+    $superToken = "ST12345678ABC";
+    $paymentTypeId = "credit_card";
+    
+    $payment->saveWithSuperToken($superToken, $paymentTypeId);
+
+```
+
 ## Obtendo pagamento
 
 ```php

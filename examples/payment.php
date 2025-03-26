@@ -29,5 +29,8 @@
     debug(json_encode($payment->read(array(
         "id" => $payment->id,
     ))));
+
+    //Create Payment with Super Token
+    debug(json_encode($payment->saveWithSuperToken('ABC_TOKEN_123', 'credit_card')));
  ?>
  
