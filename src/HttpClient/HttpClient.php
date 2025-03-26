@@ -56,6 +56,11 @@ class HttpClient implements HttpClientInterface
 
     public function send(string $method, string $uri, array $headers = [], $body = null): Response
     {
+
+        if ($this->headersAreAssociative($headers)) {
+            $headers = $this->normalizeHeaders($headers);
+        }
+
         if (null !== $body && !is_string($body) &&
             !is_subclass_of($body, AbstractEntity::class) && !is_subclass_of($body, AbstractCollection::class)
         ) {
@@ -73,6 +78,27 @@ class HttpClient implements HttpClientInterface
         return $this->sendRequest(
             self::createRequest($method, $uri, $headers, $body)
         );
+    }
+
+    private function headersAreAssociative(array $headers): bool
+    {
+        foreach (array_keys($headers) as $key) {
+            if (is_string($key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function normalizeHeaders(array $headers): array
+    {
+        $normalized = [];
+    
+        foreach ($headers as $key => $value) {
+            $normalized[] = "{$key}: {$value}";
+        }
+    
+        return $normalized;
     }
 
     /**
