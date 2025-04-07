@@ -61,6 +61,7 @@ class PaymentTest extends TestCase
         $additionalInfoPayer = $additionalInfo->__get('payer');
         $additionalInfoPayerAddress = $additionalInfoPayer->__get('address');
         $phone = $additionalInfoPayer->__get('phone');
+        $location = $this->payment->point_of_interaction->__get('location');
 
         $shipments = $additionalInfo->__get('shipments');
         $receiverAddress = $shipments->__get('receiver_address');
@@ -77,6 +78,7 @@ class PaymentTest extends TestCase
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoPayer", $additionalInfoPayer);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\AdditionalInfoAddress", $additionalInfoPayerAddress);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Phone", $phone);
+        $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Location", $location);
 
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\Shipments", $shipments);
         $this->assertInstanceOf("MercadoPago\PP\Sdk\Entity\Payment\ReceiverAddress", $receiverAddress);

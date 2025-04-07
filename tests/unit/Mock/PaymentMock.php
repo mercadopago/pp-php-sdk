@@ -20,7 +20,11 @@ class PaymentMock
     "payment_method_id" => "pix",
     "date_of_expiration" => "2022-09-20T22:13:32.000+0000",
     "point_of_interaction" => [
-      "type" => "OPENPLATFORM"
+        "type" => "OPENPLATFORM",
+        "location" => [
+          "source" => "collector",
+          "state_id" => "BR-SP"
+        ]
     ],
     "payer" => [
       "email" => "test_user_15543629@testuser.com",

@@ -13,6 +13,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property string $linked_to
  * @property ApplicationData $application_data
  * @property TransactionData $transaction_data
+ * @property Location $location
  *
  * @package MercadoPago\PP\Sdk\Entity\Payment
  */
@@ -44,7 +45,12 @@ class PointOfInteraction extends AbstractEntity
     protected $transaction_data;
 
     /**
-     * Payer constructor.
+     * @var Location
+     */
+    protected $location;
+
+    /**
+     * PointOfInteraction constructor.
      *
      * @param Manager|null $manager
      */
@@ -53,5 +59,6 @@ class PointOfInteraction extends AbstractEntity
         parent::__construct($manager);
         $this->application_data = new ApplicationData($manager);
         $this->transaction_data = new TransactionData($manager);
+        $this->location = new Location($manager);
     }
 }

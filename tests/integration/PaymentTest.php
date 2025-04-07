@@ -2,6 +2,7 @@
 
 namespace MercadoPago\PP\Sdk\Tests\Integration;
 
+use MercadoPago\PP\Sdk\Entity\Payment\Location;
 use PHPUnit\Framework\TestCase;
 use MercadoPago\PP\Sdk\Sdk;
 
@@ -397,5 +398,32 @@ class PaymentTest extends TestCase
         $this->assertEquals($response->status, 'approved');
         $this->assertEquals($response->payment_method_id, 'master');
         $this->assertEquals($response->payment_type_id, 'credit_card');
-    }    
+    }
+
+    public function testPaymentSuccessWithLocation()
+    {
+        $payment = $this->loadPayment();
+        $location = new Location();
+        $location->source = "collector";
+        $location->state_id = "BR-SP";
+        $payment->point_of_interaction->location = $location;
+        $payment->payment_method_id = "pix";
+
+        $response = json_decode(json_encode($payment->save()));
+
+        $this->assertEquals($response->status, 'pending');
+        $this->assertEquals($response->payment_method_id, 'pix');
+        $this->assertEquals($response->point_of_interaction->location->source, 'collector');
+        $this->assertEquals($response->point_of_interaction->location->state_id, 'BR-SP');
+
+        $paymentInstance = $this->loadPaymentSdk();
+        $responseRead = json_decode(json_encode($paymentInstance->read(array(
+            "id" => $response->id,
+        ))));
+
+        $this->assertEquals($responseRead->id, $response->id);
+        $this->assertEquals($responseRead->status, $response->status);
+        $this->assertEquals($responseRead->point_of_interaction->location->source, $response->point_of_interaction->location->source);
+        $this->assertEquals($responseRead->point_of_interaction->location->state_id, $response->point_of_interaction->location->state_id);
+    }
 }
