@@ -17,7 +17,7 @@ class FreeMethodList extends AbstractCollection
      * @param array $entity
      * @param string|null $key
      */
-    public function add(array $entity, string $key = null)
+    public function add(array $entity, ?string $key = null)
     {
         $freeMethod = new FreeMethod($this->manager);
         $freeMethod->setEntity($entity);

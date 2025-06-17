@@ -17,7 +17,7 @@ class TransactionInfoList extends AbstractCollection
      * @param array $entity
      * @param string|null $key
      */
-    public function add(array $entity, string $key = null)
+    public function add(array $entity, ?string $key = null)
     {
         $transactionInfo = new TransactionInfo($this->manager);
         $transactionInfo->setEntity($entity);

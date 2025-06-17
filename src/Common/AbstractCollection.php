@@ -24,7 +24,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
      *
      * @param Manager|null $manager
      */
-    public function __construct(Manager $manager = null)
+    public function __construct(?Manager $manager = null)
     {
         $this->manager = $manager;
     }
@@ -35,7 +35,7 @@ abstract class AbstractCollection implements \IteratorAggregate, \Countable, \Js
      * @param AbstractEntity $entity
      * @param string|null $key
      */
-    public function addEntity(AbstractEntity $entity, string $key = null)
+    public function addEntity(AbstractEntity $entity, ?string $key = null)
     {
         if (is_null($key)) {
             $this->collection[] = $entity;

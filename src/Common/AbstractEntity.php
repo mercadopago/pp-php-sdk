@@ -27,7 +27,7 @@ abstract class AbstractEntity implements \JsonSerializable, EntityInterface
      *
      * @param Manager|null $manager
      */
-    public function __construct(Manager $manager = null)
+    public function __construct(?Manager $manager = null)
     {
         $this->manager = $manager;
         $this->setExcludedProperties();

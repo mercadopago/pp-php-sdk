@@ -1,7 +1,7 @@
 {
   "name": "mp-plugins/php-sdk",
   "description": "Mercado Pago Plugins PHP-SDK",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "type": "library",
   "scripts": {
     "lint": "./vendor/bin/phpcs -q --report=checkstyle --standard=PSR2 src",

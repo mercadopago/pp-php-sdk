@@ -17,7 +17,7 @@ class TrackList extends AbstractCollection
      * @param array $entity
      * @param string|null $key
      */
-    public function add(array $entity, string $key = null)
+    public function add(array $entity, ?string $key = null)
     {
         $track = new Track($this->manager);
         $track->setEntity($entity);

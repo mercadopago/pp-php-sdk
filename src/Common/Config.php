@@ -50,12 +50,12 @@ class Config
      * @param string|null $uris_scope
      */
     public function __construct(
-        string $access_token = null,
-        string $platform_id = null,
-        string $product_id = null,
-        string $integrator_id = null,
-        string $public_key = null,
-        string $uris_scope = null
+        ?string $access_token = null,
+        ?string $platform_id = null,
+        ?string $product_id = null,
+        ?string $integrator_id = null,
+        ?string $public_key = null,
+        ?string $uris_scope = null
     ) {
         $this->access_token = $access_token;
         $this->platform_id = $platform_id;

@@ -17,7 +17,7 @@ class ExcludedPaymentMethodList extends AbstractCollection
      * @param array $entity
      * @param string|null $key
      */
-    public function add(array $entity, string $key = null)
+    public function add(array $entity, ?string $key = null)
     {
         $excludedPaymentMethod = new ExcludedPaymentMethod($this->manager);
         $excludedPaymentMethod->setEntity($entity);
