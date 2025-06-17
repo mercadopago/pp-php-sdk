@@ -307,7 +307,7 @@ class Payment extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(string $uris_scope = null): array
+    public function getUris(?string $uris_scope = null): array
     {
         $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'v1';
 

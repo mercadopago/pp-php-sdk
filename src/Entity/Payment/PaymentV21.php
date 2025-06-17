@@ -9,7 +9,7 @@ class PaymentV21 extends Payment
      *
      * @return array
      */
-    public function getUris(string $uris_scope = null): array
+    public function getUris(?string $uris_scope = null): array
     {
         $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'prod';
 

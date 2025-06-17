@@ -17,7 +17,7 @@ class FinancialInstitutionList extends AbstractCollection
      * @param array $entity
      * @param string|null $key
      */
-    public function add(array $entity, string $key = null)
+    public function add(array $entity, ?string $key = null)
     {
         $item = new FinancialInstitution($this->manager);
         $item->setEntity($entity);

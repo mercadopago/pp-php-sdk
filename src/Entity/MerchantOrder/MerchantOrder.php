@@ -214,7 +214,7 @@ class MerchantOrder extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(string $uris_scope = null): array
+    public function getUris(?string $uris_scope = null): array
     {
         return array(
             'get' => '/merchant_orders/:id'
@@ -254,7 +254,7 @@ class MerchantOrder extends AbstractEntity implements RequesterEntityInterface
      *
      * @throws \Exception Throws an exception if something goes wrong during the read operation.
      */
-    public function getMerchantOrder(string $id = null)
+    public function getMerchantOrder(?string $id = null)
     {
         $response = parent::read(['id' => $id], [], true);
 

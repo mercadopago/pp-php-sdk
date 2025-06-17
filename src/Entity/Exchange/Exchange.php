@@ -78,7 +78,7 @@ class Exchange extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
      */
-    public function getUris(string $uris_scope = null): array
+    public function getUris(?string $uris_scope = null): array
     {
         $scope_ppcore = $uris_scope === 'beta' ? 'beta' : 'prod';
 
@@ -94,7 +94,7 @@ class Exchange extends AbstractEntity implements RequesterEntityInterface
      *
      * @return Exchange the list with the payment methods
      */
-    public function getExchangeRate(string $currencyId = null) : Exchange
+    public function getExchangeRate(?string $currencyId = null) : Exchange
     {
         $queryStrings = array('currency.id' => $currencyId);
         $response = parent::read([], $queryStrings, true);

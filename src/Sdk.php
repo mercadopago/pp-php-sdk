@@ -53,12 +53,12 @@ class Sdk
      * @param String $uris_scope
      */
     public function __construct(
-        string $access_token = null,
-        string $platform_id = null,
-        string $product_id = null,
-        string $integrator_id = null,
-        string $public_key = null,
-        string $uris_scope = null
+        ?string $access_token = null,
+        ?string $platform_id = null,
+        ?string $product_id = null,
+        ?string $integrator_id = null,
+        ?string $public_key = null,
+        ?string $uris_scope = null
     ) {
         $this->requester = new CurlRequester();
         $this->config = new Config();

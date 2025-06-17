@@ -83,7 +83,7 @@ class Application extends AbstractEntity implements RequesterEntityInterface
      *
      * @return array
     */
-    public function getUris(string $uris_scope = null): array
+    public function getUris(?string $uris_scope = null): array
     {
         return array(
             'get' => '/applications/:application_id',
