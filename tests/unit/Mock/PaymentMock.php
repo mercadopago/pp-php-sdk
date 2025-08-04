@@ -91,7 +91,8 @@ class PaymentMock
           "register_updated_at"=> "2023-04-11T19=>18=>38.486Z",
           "user_email"=> "test@test.com",
           "authentication_type"=> "",
-          "last_purchase"=> ""
+          "last_purchase"=> "",
+          "is_prime_user"=> true
         ],
         "seller"=> [
           "id"=> "",
@@ -234,7 +235,8 @@ class PaymentMock
           "register_updated_at"=> "2023-04-11T19=>18=>38.486Z",
           "user_email"=> "test@test.com",
           "authentication_type"=> "",
-          "last_purchase"=> ""
+          "last_purchase"=> "",
+          "is_prime_user"=> true
         ],
         "seller"=> [
           "id"=> "",

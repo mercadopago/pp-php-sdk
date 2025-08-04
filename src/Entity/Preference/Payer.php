@@ -19,6 +19,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property Address $address
  * @property Phone $phone
  * @property string $date_created
+ * @property bool $is_prime_user
  *
  * @package MercadoPago\PP\Sdk\Entity\Preference
  */
@@ -78,6 +79,11 @@ class Payer extends AbstractEntity
      * @var string
      */
     protected $date_created;
+
+    /**
+     * @var bool
+     */
+    protected $is_prime_user;
 
     /**
      * Payer constructor.

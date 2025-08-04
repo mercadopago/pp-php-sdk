@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## V3.4.0
+### Added
+- Add the new `is_prime_user` field to the `Preference\Payer` entity to identify the primary user
+- Add the new `is_prime_user` field to the `Payment\AdditionalInfoPayer` entity to identify the primary user in additional information
+
 ## V3.3.2
 ### Changed 
 - Making explicit the nullity of parameters with the default value null, as Adobe's MarketPlace started validating PHP version 8.4.

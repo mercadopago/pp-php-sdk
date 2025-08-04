@@ -18,6 +18,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
  * @property string $user_email
  * @property string $authentication_type
  * @property string $last_purchase
+ * @property bool $is_prime_user
  * @property AdditionalInfoAddress $address
  * @property Phone $phone
  * @property Phone $mobile
@@ -76,6 +77,11 @@ class AdditionalInfoPayer extends AbstractEntity
      * @var string
      */
     protected $last_purchase;
+
+    /**
+     * @var bool
+     */
+    protected $is_prime_user;
 
      /**
      * @var AdditionalInfoAddress

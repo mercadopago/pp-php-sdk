@@ -45,7 +45,7 @@ class PreferenceTest extends TestCase
         $preference->items = $items;
         $preference->notification_url = $notificationUrl;
         $preference->external_reference = "external_reference";
-
+        $preference->payer->is_prime_user = true;
         return $preference;
     }
 
