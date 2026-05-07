@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## V3.4.1
+### Added
+- Claude Code configuration via claudify: `CLAUDE.md` with project architecture and conventions, architectural rules (`entity.md`, `httpclient.md`), and skills (`run-tests`, `fix-lint`, `create-spec`, `commit`, `review-changes`) to support AI-assisted development workflows
+
 ## V3.4.0
 ### Added
 - Add the new `is_prime_user` field to the `Preference\Payer` entity to identify the primary user

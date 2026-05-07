@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch*)",
+      "Bash(git show*)",
+      "Bash(composer install*)",
+      "Bash(composer test*)",
+      "Bash(composer lint*)",
+      "Bash(vendor/bin/phpunit*)",
+      "Bash(vendor/bin/phpcs*)",
+      "Bash(php -l *)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git commit*)",
+      "Bash(git add*)",
+      "Bash(rm -rf *)"
+    ]
+  }
+}
