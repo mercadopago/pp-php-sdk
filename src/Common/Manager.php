@@ -2,6 +2,7 @@
 
 namespace MercadoPago\PP\Sdk\Common;
 
+use MercadoPago\PP\Sdk\Exceptions\ApiException;
 use MercadoPago\PP\Sdk\HttpClient\HttpClientInterface;
 use MercadoPago\PP\Sdk\HttpClient\Response;
 
@@ -190,6 +191,7 @@ class Manager
      * @param AbstractEntity|null $entity
      *
      * @return mixed
+     * @throws ApiException
      * @throws \Exception
      */
     public function handleResponse(Response $response, string $method, ?AbstractEntity $entity = null)
@@ -201,9 +203,7 @@ class Manager
             }
             return $response->getData();
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
-            $message = $response->getData()['message'] ?? 'No message for Multipayment scenario in v1!';
-
-            throw new \Exception($message);
+            throw $this->buildApiException((array) $response->getData());
         } else {
             throw new \Exception("Internal API Error");
         }
@@ -213,10 +213,9 @@ class Manager
      * Handle response
      *
      * @param Response $response
-     * @param string $method
-     * @param AbstractEntity|null $entity
      *
-     * @return mixed
+     * @return Response
+     * @throws ApiException
      * @throws \Exception
      */
     public function handleResponseWithHeaders(Response $response)
@@ -224,11 +223,27 @@ class Manager
         if ($response->getStatus() == '200' || $response->getStatus() == '201') {
             return $response;
         } elseif (intval($response->getStatus()) >= 400 && intval($response->getStatus()) < 500) {
-            $message = $response->getData()['message'] ?? 'No message for Multipayment scenario in v1!';
-            throw new \Exception($message);
+            throw $this->buildApiException((array) $response->getData());
         } else {
             throw new \Exception("Internal API Error");
         }
+    }
+
+    /**
+     * Build an ApiException from a raw failed response payload.
+     *
+     * @param array $data
+     *
+     * @return ApiException
+     */
+    private function buildApiException(array $data): ApiException
+    {
+        $message = $data['message'] ?? 'No message for Multipayment scenario in v1!';
+        $errorCode = $data['error'] ?? null;
+        $apiStatus = isset($data['status']) ? \intval($data['status']) : null;
+        $originalMessage = $data['original_message'] ?? null;
+
+        return new ApiException($message, $errorCode, $apiStatus, $originalMessage);
     }
 
     /**

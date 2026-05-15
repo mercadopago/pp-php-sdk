@@ -6,6 +6,7 @@ use MercadoPago\PP\Sdk\Common\Manager;
 use MercadoPago\PP\Sdk\Common\Config;
 use MercadoPago\PP\Sdk\Entity\Payment\Payer;
 use MercadoPago\PP\Sdk\Entity\Preference\Preference;
+use MercadoPago\PP\Sdk\Exceptions\ApiException;
 use MercadoPago\PP\Sdk\HttpClient\HttpClient;
 use MercadoPago\PP\Sdk\HttpClient\Response;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -170,8 +171,97 @@ class ManagerTest extends TestCase
         $this->responseMock->expects(self::any())->method('getStatus')->willReturn(400);
         $this->responseMock->expects(self::any())->method('getData')->willReturn($data);
 
+        $this->expectException(ApiException::class);
         $this->expectExceptionMessage('Error');
         $this->manager->handleResponse($this->responseMock, 'get');
+    }
+
+    function testHandleResponseFailureExposesAllApiFields()
+    {
+        $data = array(
+            'message'          => 'It was not possible to complete the payment. Please use another method to complete the purchase.',
+            'error'            => 'CPP_AT_0103016',
+            'status'           => 400,
+            'original_message' => '418 I_AM_A_TEAPOT "ErrorOrderClientCreateRequest | errors: [code: forbidden]"',
+        );
+
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(400);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($data);
+
+        try {
+            $this->manager->handleResponse($this->responseMock, 'post');
+            $this->fail('Expected ApiException was not thrown');
+        } catch (ApiException $e) {
+            $this->assertSame(
+                'It was not possible to complete the payment. Please use another method to complete the purchase.',
+                $e->getMessage()
+            );
+            $this->assertSame('CPP_AT_0103016', $e->getErrorCode());
+            $this->assertSame(400, $e->getApiStatus());
+            $this->assertSame(
+                '418 I_AM_A_TEAPOT "ErrorOrderClientCreateRequest | errors: [code: forbidden]"',
+                $e->getOriginalMessage()
+            );
+        }
+    }
+
+    function testHandleResponseFailureWithoutOptionalFieldsReturnsNulls()
+    {
+        $data = array('message' => 'No message for Multipayment scenario in v1!');
+
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(422);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($data);
+
+        try {
+            $this->manager->handleResponse($this->responseMock, 'post');
+            $this->fail('Expected ApiException was not thrown');
+        } catch (ApiException $e) {
+            $this->assertNull($e->getErrorCode());
+            $this->assertNull($e->getApiStatus());
+            $this->assertNull($e->getOriginalMessage());
+        }
+    }
+
+    function testHandleResponseWithHeadersFailureExposesAllApiFields()
+    {
+        $data = array(
+            'message'          => 'No se pudo validar el pago',
+            'error'            => 'CPP_AT_0103004',
+            'status'           => 400,
+            'original_message' => 'ErrorOrderClientCreateRequest | errors: [code: auth_error]',
+        );
+
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(400);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($data);
+
+        try {
+            $this->manager->handleResponseWithHeaders($this->responseMock);
+            $this->fail('Expected ApiException was not thrown');
+        } catch (ApiException $e) {
+            $this->assertSame('No se pudo validar el pago', $e->getMessage());
+            $this->assertSame('CPP_AT_0103004', $e->getErrorCode());
+            $this->assertSame(400, $e->getApiStatus());
+            $this->assertSame(
+                'ErrorOrderClientCreateRequest | errors: [code: auth_error]',
+                $e->getOriginalMessage()
+            );
+        }
+    }
+
+    function testHandleResponseFailureUsesDefaultMessageWhenAbsent()
+    {
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(422);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn([]);
+
+        try {
+            $this->manager->handleResponse($this->responseMock, 'post');
+            $this->fail('Expected ApiException was not thrown');
+        } catch (ApiException $e) {
+            $this->assertSame('No message for Multipayment scenario in v1!', $e->getMessage());
+            $this->assertNull($e->getErrorCode());
+            $this->assertNull($e->getApiStatus());
+            $this->assertNull($e->getOriginalMessage());
+        }
     }
 
     function testHandleResponseFailureInternalApiError()
@@ -181,6 +271,32 @@ class ManagerTest extends TestCase
 
         $this->expectExceptionMessage('Internal API Error');
         $this->manager->handleResponse($this->responseMock, 'get');
+    }
+
+    function testHandleResponseWithHeadersFailureWithoutOptionalFieldsReturnsNulls()
+    {
+        $data = array('message' => 'No message for Multipayment scenario in v1!');
+
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(422);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn($data);
+
+        try {
+            $this->manager->handleResponseWithHeaders($this->responseMock);
+            $this->fail('Expected ApiException was not thrown');
+        } catch (ApiException $e) {
+            $this->assertNull($e->getErrorCode());
+            $this->assertNull($e->getApiStatus());
+            $this->assertNull($e->getOriginalMessage());
+        }
+    }
+
+    function testHandleResponseWithHeadersFailureInternalApiError()
+    {
+        $this->responseMock->expects(self::any())->method('getStatus')->willReturn(500);
+        $this->responseMock->expects(self::any())->method('getData')->willReturn(null);
+
+        $this->expectExceptionMessage('Internal API Error');
+        $this->manager->handleResponseWithHeaders($this->responseMock);
     }
 
     function testIsHeadersAsKeyAndValueMapTrue()

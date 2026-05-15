@@ -17,6 +17,7 @@ composer install
 - **Entity pattern**: one class per domain concept in `src/Entity/{Domain}/` — data-only classes mirroring JSON structures with typed properties. No business logic.
 - **HTTP layer**: `src/HttpClient/HttpClient.php` wraps `RequesterInterface`. `CurlRequester` is the default implementation. To mock in tests, inject a custom `RequesterInterface`.
 - **Shared base**: `src/Common/` — abstract entities, config, constants, manager
+- **Exceptions**: `src/Exceptions/` — SDK-specific exceptions. `ApiException extends \Exception` is thrown on failed API responses and exposes `getErrorCode()` (CPP_AT), `getApiStatus()`, and `getOriginalMessage()` (@internal, server-side logging only). Backward compatible with existing `catch (\Exception $e)` blocks.
 - **Contracts**: `src/Interfaces/` — SDK interface contracts
 
 ## Key Rules
