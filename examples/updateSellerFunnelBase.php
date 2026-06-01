@@ -25,6 +25,7 @@
     $updateSellerFunnelBase->is_deleted = false;
     $updateSellerFunnelBase->accepted_payments = ["bolbradesco", "pix"];
     $updateSellerFunnelBase->is_disabled = false;
+    $updateSellerFunnelBase->is_subscription_enabled = true;
 
     debug(json_encode($updateSellerFunnelBase->update()));
  ?>

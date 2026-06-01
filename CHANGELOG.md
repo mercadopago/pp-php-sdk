@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## V3.6.0
+### Added
+- Add `is_subscription_enabled` (nullable boolean) field to `UpdateSellerFunnelBase` entity, allowing the WooCommerce team to persist whether the subscription feature is enabled for a given seller via the `update-integration` endpoint
+
 ## V3.5.0
 ### Added
 - Add `ApiException` class that extends `\Exception` and preserves `error` (CPP_AT code), `status`, and `original_message` fields from API 4xx response payloads. `Manager::handleResponse()` and `handleResponseWithHeaders()` now throw `ApiException` instead of `\Exception`, enabling consumers to access the full error context via `getErrorCode()`, `getApiStatus()`, and `getOriginalMessage()` while remaining backward compatible with existing `catch (\Exception $e)` blocks

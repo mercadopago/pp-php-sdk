@@ -81,6 +81,16 @@ class UpdateSellerFunnelBaseTest extends TestCase
         $this->assertContains('/beta/eplatforms/core/identification/seller-configuration/update-integration', $actual);
     }
 
+    function testIsSubscriptionEnabledIsPresentInPayload()
+    {
+        $this->updateSellerFunnelBase->is_subscription_enabled = true;
+
+        $actual = $this->updateSellerFunnelBase->toArray();
+
+        $this->assertArrayHasKey('is_subscription_enabled', $actual);
+        $this->assertSame(true, $actual['is_subscription_enabled']);
+    }
+
     function testSaveSuccess()
     {
         $this->responseMock->expects(self::any())->method('getStatus')->willReturn(201);

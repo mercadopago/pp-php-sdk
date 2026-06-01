@@ -25,6 +25,7 @@ class SellerFunnelBaseMock
         "acceptedPayments" => [
             "bolbradesco",
             "pix"
-        ]
+        ],
+        "is_subscription_enabled" => true
     ];
 }

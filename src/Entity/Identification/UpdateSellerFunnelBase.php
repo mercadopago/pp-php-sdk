@@ -18,6 +18,7 @@ use MercadoPago\PP\Sdk\Common\AbstractEntity;
  * @property string[] $accepted_payments
  * @property string $cpp_token
  * @property bool $is_disabled
+ * @property bool|null $is_subscription_enabled
  *
  * @package MercadoPago\PP\Sdk\Entity\Identification
  */
@@ -71,6 +72,10 @@ class UpdateSellerFunnelBase extends AbstractEntity
      * @var string
      */
     protected $site_id;
+    /**
+     * @var bool|null
+     */
+    protected $is_subscription_enabled;
 
 
     /**

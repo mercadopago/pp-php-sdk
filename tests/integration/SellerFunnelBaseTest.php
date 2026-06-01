@@ -81,4 +81,24 @@ class SellerFunnelBaseTest extends TestCase
         $this->assertEquals($responseCreate->id, $responseUpdate->id);
         $this->assertTrue($responseUpdate->success_update);
     }
+
+    public function testUpdateSellerFunnelBaseWithSubscriptionEnabledSuccess()
+    {
+        $createSellerFunnelBase = $this->loadCreateSellerFunnelBase();
+
+        $updateSellerFunnelBase = $this->loadUpdateSellerFunnelBase();
+
+        $responseCreate = $createSellerFunnelBase->save();
+
+        $updateSellerFunnelBase->id = $responseCreate->id;
+        $updateSellerFunnelBase->cpp_token = $responseCreate->cpp_token;
+        $updateSellerFunnelBase->is_subscription_enabled = true;
+
+        $responseUpdate = json_decode(json_encode($updateSellerFunnelBase->update()));
+
+        $this->assertNotNull($responseCreate->id);
+        $this->assertNotNull($responseUpdate->id);
+        $this->assertEquals($responseCreate->id, $responseUpdate->id);
+        $this->assertTrue($responseUpdate->success_update);
+    }
 }
